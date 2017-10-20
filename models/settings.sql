@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS Settings (
+	ID INT AUTO_INCREMENT,
+	Key_Name TEXT,
+	Key_Value TEXT,
+	
+
+	PRIMARY KEY(ID)
+);

@@ -1,0 +1,77 @@
+<?php
+	/**
+	  * Class to read and update settings in the database.
+	*/
+	class Settings {
+		/**
+		  * Function used to get a setting from the database.
+		  * @param $key The settings key ID
+		  * @return $value The value of the key
+		*/
+		public static function get($key){
+			$db = new Db();
+			$db = $db->get();
+
+			if(isset($key)){
+				try{
+					$query = $db->prepare("SELECT * FROM Settings WHERE Key_Name = '$key'");
+					$query->execute();
+				}
+				catch(PDOException $e){
+					die($e->getMessage());
+				}
+
+				// Close the database connection.
+				$db = null;
+
+				// Check if the key has been found.
+				$results = $query->fetchAll();
+				if(count($results) > 0){
+					$value = $results[0]['Key_Value'];
+					return $value;
+				}
+				else{
+					return false;
+				}
+			}
+		}
+
+		/**
+		  * Function used to set a settings value in
+		  * the database.
+		  * @param $key The Settings Key Name
+		  * @param $value The value of the settings key
+		*/
+		public static function set($key, $value){
+			if(isset($key) && isset($value)){
+				// Check if the key already exists
+				$db = new Db();
+				try{
+					$query = $db->prepare("SELECT * FROM Settings WHERE Key_Name = '$key'");
+					$query->execute();
+				}
+				catch(PDOException $e){
+					die($e->getMessage());
+				}
+
+				if(count($query->fetchAll()) > 0){
+					// Update the existing key value
+					try{
+						$db->exec("UPDATE Settings SET Key_Value = '$value' WHERE Key_Name = '$key'");
+					}
+					catch(PDOException $e){
+						die($e->getMessage());
+					}				
+				}
+				else{
+					// Create the new key in the database.
+					try{
+						$db->exec("INSERT INTO Settings (Key_Name, Key_Value) VALUES ('$key', '$value')");
+					}
+					catch(PDOException $e){
+						die($e->getMessage());
+					}
+				}
+			}
+		}
+	}
