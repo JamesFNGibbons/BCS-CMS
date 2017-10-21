@@ -1,6 +1,7 @@
 <h2>What is the site called?</h2>
 <div class='row'>
 	<form action='index.php'>
+		<input type='hidden' name='step' value='2'>
 		<div class='col-md-6'>
 			<div class='form-group'>
 				<lable>Site Title</lable>

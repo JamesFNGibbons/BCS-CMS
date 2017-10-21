@@ -46,6 +46,7 @@
 			if(isset($key) && isset($value)){
 				// Check if the key already exists
 				$db = new Db();
+				$db = $db->get();
 				try{
 					$query = $db->prepare("SELECT * FROM Settings WHERE Key_Name = '$key'");
 					$query->execute();
@@ -61,7 +62,7 @@
 					}
 					catch(PDOException $e){
 						die($e->getMessage());
-					}				
+					}
 				}
 				else{
 					// Create the new key in the database.

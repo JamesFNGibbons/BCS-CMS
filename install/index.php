@@ -1,4 +1,11 @@
 <?php
+	/**
+	  * This handles the installation process,
+		* from displaying the correct html views,
+		* to running the install and populating the
+		* database.
+	*/
+
 	require_once "../lib/bootstrap.php";
 	require_once('partials/header.php');
 
@@ -25,6 +32,11 @@
 
 	// Get the step of the install process.
 	switch($_GET['step']){
+		/**
+		  * The first step of the installer. This step
+		  * is responsible for creating the config.php
+		  * file, and populating the models in the database.
+		*/
 		case('1'):
 			// Work out if the config file is writable
 			if(is_writable('../config/config.php')){
@@ -56,7 +68,7 @@
 				file_put_contents('../config/config.php', $conf);
 
 				/**
-				  * Loop through the models in the models 
+				  * Loop through the models in the models
 				  * directory. And then close the db connection.
 				*/
 				$db = new Db();
@@ -86,6 +98,11 @@
 
 		break;
 
+		/**
+		  * The second step. This step is for getting the
+		  * site information and using the built in settings
+		  * API to set them in stone.
+		*/
 		case('2'):
 			if(isset($_GET['title']) && isset($_GET['subtitle'])){
 				$title = $_GET['title'];
@@ -96,11 +113,40 @@
 				Settings::set('subtitle', $subtitle);
 
 				// Take the user to the next step
-				$_SESSION['current_step'] = 2;
-				header('Location: index.php?step=2');
+				$_SESSION['current_step'] = 3;
+				header('Location: index.php?step=3');
 			}
 			else{
 				include('html/step2.php');
+			}
+		break;
+
+		/**
+		  * The third step. This step us used for setting
+		  * up the users account that they will use to login
+		  * to there admin panel.
+		*/
+		case('3'):
+			if(
+				isset($_GET['username']) &&
+				isset($_GET['password']) &&
+				isset($_GET['name']) &&
+				isset($_GET['email'])
+			){
+				// Create the new user account using the User class.
+				User::create_user(
+					$_GET['name'],
+					$_GET['email'],
+					$_GET['username'],
+					$_GET['password']
+				);
+
+				// Take the user to the admin page
+				header('Location: ../admin');
+			}
+			else{
+				// render the view
+				include('html/step3.php');
 			}
 		break;
 
