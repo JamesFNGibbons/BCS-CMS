@@ -1,4 +1,4 @@
-<div class='col-md-2 col-md-offset-5'>
+<div class='col-md-4 col-md-offset-4'>
   <form action='index.php' method='post'>
     <h2>Welcome
       <span style='font-size: 17px'>

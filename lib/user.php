@@ -53,7 +53,100 @@
 			}
 			else{
 				// Get the users info from the database.
-				$db = null;
+				$db = new Db();
+				$db = $db->get();
+
+				try{
+					$query = $db->prepare("SELECT * FROM Users WHERE Username = '$username'");
+					$query->execute();
+				}
+				catch(PDOException $e){
+					die($e->getMessage());
+				}
+
+				$results = $query->fetchAll();
+				if(count($results) > 0){
+					$result = $results[0];
+					$this->name = $result['Name'];
+					$this->email = $result['Email'];
+					$this->username = $result['Username'];
+					$this->id = $result['ID'];
+				}
+				else{
+					die("Invalid user with username '$username'");
+				}
+			}
+		}
+
+		/**
+		  * Function used to check if any given
+			* usernames or emails are in use.
+			* @param $email The email
+			* @param $password The password;
+			* @return false - If not in use.
+			* @return 'email' if the email is in use;
+			* @return 'username' if the username is in use;
+		*/
+		public static function email_or_username_in_use($email, $username){
+			if(isset($email) && isset($username)){
+				$db = new Db();
+				$db = $db->get();
+
+				// Check if the email is in use.
+				try{
+					$query = $db->prepare("SELECT * FROM Users WHERE Email = '$email'");
+					$query->execute();
+				}
+				catch(PDOException $e){
+					die($e->getMessage());
+				}
+				$results = $query->fetchAll();
+				if(count($results) > 0){
+					return 'email';
+				}
+				
+				// Check if the username is in use
+				try{
+					$query = $db->prepare("SELECT * FROM Users WHERE Username = '$username'");
+					$query->execute();
+				}
+				catch(PDOException $e){
+					die($e->getMessage());
+				}
+				$results = $query->fetchAll();
+				if(count($results) > 0){
+					return 'username';
+				}
+
+				// All is good. Return the default value.
+				return false;
+			}
+		}
+
+		/**
+		  * Function used to get all the users
+			* that have been created from the
+			* database, or it will return false if
+			* no users where found.
+		*/
+		public static function get_users(){
+			$db = new Db();
+			$db = $db->get();
+
+			try{
+				$query = $db->prepare("SELECT * FROM Users");
+				$query->execute();
+			}
+			catch(PDOException $e){
+				die($e->getMessage());
+			}
+
+			$result = $query->fetchAll();
+			if(count($result) > 0){
+				return $result;
+			}
+			else{
+				return false;
 			}
 		}
 
@@ -78,7 +171,7 @@
 			* @return the users username;
 		*/
 		public function get_username(){
-			return $this->usernam;
+			return $this->username;
 		}
 
 		/**

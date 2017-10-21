@@ -1,12 +1,17 @@
 <?php
-	
+
 	/**
-	  * This class is used to auto include classes 
+	  * This class is used to auto include classes
 	  * as and when they are required.
 	*/
 
 	/** Start the session */
 	session_start();
+
+	/**
+	  * Include any of the standalone helpers.
+	*/
+	require_once "auth-helpers.php";
 
 	/**
 	  * Function called when a class instance

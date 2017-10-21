@@ -9,8 +9,20 @@
   require_once 'html/partials/header.php';
 
   // Check if the user is loggedin
-  if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']){
+  if(is_loggedin()){
+    /**
+      * Gets the recent blog posts from the
+      * bespoke computer software website, and
+      * puts them into an array to be displayed.
+    */
+    ini_set("allow_url_fopen", 1);
+    $wp_bcs_posts = file_get_contents('http://bespokecomputersoftware.co.uk/wp-json/wp/v2/posts');
+    $recent_news = json_decode($wp_bcs_posts, true);
 
+    // Load up the users data
+    $user = new User($_SESSION['username']);
+    include('html/partials/sidebar.php');
+    include('html/home.php');
   }
   else{
     // Check if there is a login request
