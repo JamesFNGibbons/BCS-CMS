@@ -104,7 +104,7 @@
 				if(count($results) > 0){
 					return 'email';
 				}
-				
+
 				// Check if the username is in use
 				try{
 					$query = $db->prepare("SELECT * FROM Users WHERE Username = '$username'");

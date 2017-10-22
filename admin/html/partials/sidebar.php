@@ -5,6 +5,10 @@
         <i class='fa fa-home'></i>
         Home
       </a>
+      <a href='pages.php' class='list-group-item'>
+        <i class='fa fa-book'></i>
+        Pages
+      </a>
       <a href='users.php' class='list-group-item'>
         <i class='fa fa-user'></i>
         Users
