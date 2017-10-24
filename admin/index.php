@@ -22,6 +22,11 @@
     $wp_bcs_posts = file_get_contents('http://bespokecomputersoftware.co.uk/wp-json/wp/v2/posts');
     $recent_news = json_decode($wp_bcs_posts, true);
 
+    // Checks if there is a version splash landing page
+    if(file_exists('../lib/version/splash.php')){
+      include('../lib/version/splash.php');
+    }
+
     // Load up the users data
     $user = new User($_SESSION['username']);
     include('html/partials/sidebar.php');

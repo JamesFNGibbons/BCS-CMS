@@ -16,20 +16,7 @@
         </div>
       </div>
     </div>
-    <div class='col-md-4'>
-      <div class='panel panel-default'>
-        <div class='panel-heading'>
-          About your website
-        </div>
-        <div class='panel-body'>
-          <p>This website is running BCS Cms: </p>
-          <p>Software Version: <?php print $software_version; ?></p>
-          <p>Last Updated: <?php print $last_updated; ?></p>
-          <a class='btn btn-primary' href='update.php'>Check for updates</a>
-        </div>
-      </div>
-    </div>
-    <div class='col-md-4'>
+    <div class='col-md-5'>
       <div class='panel panel-default'>
         <div class='panel-heading'>
           Recent news from Bespoke Computer Software
@@ -42,6 +29,23 @@
               </a>
             </div>
           <?php endforeach; ?>
+        </div>
+      </div>
+    </div>
+    <div class='col-md-3'>
+      <div class='panel panel-default'>
+        <div class='panel-heading'>
+          About your website
+        </div>
+        <div class='panel-body'>
+          <img src='../dist/bcs-cp/bcs-cp-logo.png' width='100%'>
+          <br><br>
+          <p>Software Version: <?php print $software_version; ?></p>
+          <p>Last Updated: <?php print $last_updated; ?></p>
+          <a class='btn btn-primary' href='update.php'>
+            <i class='fa fa-wrench'></i>
+            Check for updates
+          </a>
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@
       </a>
       <a href='users.php' class='list-group-item'>
         <i class='fa fa-user'></i>
-        Users
+        Admin Users
       </a>
       <a href='setting.php' class='list-group-item'>
         <i class='fa fa-cog'></i>

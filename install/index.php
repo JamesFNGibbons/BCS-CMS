@@ -141,6 +141,9 @@
 					$_GET['password']
 				);
 
+				// Install Complete
+				Settings::set('install_status', '1');
+
 				// Take the user to the admin page
 				header('Location: ../admin');
 			}

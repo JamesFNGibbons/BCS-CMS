@@ -33,5 +33,9 @@
   $date = $dt->format('Y-m-d H:i:s');
   Settings::set('last_updated', $date);
 
+  // Update the .htaccess file from the default.
+  $htaccess_contents = file_get_contents('../lib/defaults/.htaccess.default');
+  file_put_contents('../.htaccess', $htaccess_contents);
+
   // Redirect back to the homepage.
   header('Location: index.php');

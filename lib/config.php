@@ -13,7 +13,7 @@
 		public static function get($key){
 			if(isset($key)){
 				/* Load up the config.php file */
-				require_once('../config/config.php');
+				require_once('config/config.php');
 				$config_file = new ConfigFile();
 				$value = $config_file->get()[$key];
 
