@@ -33,7 +33,7 @@
     $author_name = $user->get_name();
 
     $created = Page::create_page(
-      $title,
+      $_POST['title'],
       '',
       $_POST['uri'],
       $author_id,

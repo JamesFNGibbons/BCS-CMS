@@ -13,6 +13,10 @@
         <i class='fa fa-user'></i>
         Users
       </a>
+      <a href='setting.php' class='list-group-item'>
+        <i class='fa fa-cog'></i>
+        Settings
+      </a>
     </div>
   </div>
 </div>

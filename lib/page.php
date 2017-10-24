@@ -7,6 +7,47 @@
   require_once "bootstrap.php";
 
   class Page {
+    public $title;
+    public $content;
+    public $author_name;
+    public $author_id;
+    public $created;
+    public $uri;
+    public $updated;
+    public $id;
+
+    /**
+      * Constructor used to get the data of the
+      * page from the database.
+      * @param $id The ID of the page.
+    */
+    public function __construct($id){
+      if(isset($id)){
+        $db = new Db();
+        $db = $db->get();
+
+        try{
+          $query->prepare("SELECT * FROM Pages WHERE ID = '$id'");
+          $query->execute();
+          $result = $query->fetchAll();
+          if(count($result) > 0){
+            $result = $result[0];
+            $this->title = $result['Title'];
+            $this->content = $result['Content'];
+            $this->author_name = $result['Author_Name'];
+            $this->author_id = $result['Author_ID'];
+            $this->created = $result['Created'];
+            $this->uri = $result['URI'];
+            $this->updated = $result['Updated'];
+            $this->id = $id;
+          }
+        }
+        catch(PDOException $e){
+          die($e->getMessage());
+        }
+      }
+    }
+
     /**
       * Function used to create a new page.
       * @param $title The page title
@@ -17,7 +58,7 @@
       * @return false if the uri was in use.
       * @return the ID of the new page, if the page was created.
     */
-    public static function create_page($title, $content, $author_id, $author_name){
+    public static function create_page($title, $content, $uri, $author_id, $author_name){
         $db = new Db();
         $db = $db->get();
 
@@ -54,8 +95,9 @@
         try{
           $query = $db->prepare("SELECT * FROM Pages WHERE URI = '$uri'");
           $query->execute();
-          if(count($query->fetchAll()) > 0){
-            return $query[0]['ID'];
+          $result = $query->fetchAll();
+          if(count($result) > 0){
+            return $result[0]['ID'];
           }
           else{
             return false;

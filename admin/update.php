@@ -25,5 +25,13 @@
   }
   $db = null;
 
+  // Get the current software version
+  Settings::set('software_version', '1.2.2');
+
+  // Update the last_updated value in the database.
+  $dt = new DateTime('now');
+  $date = $dt->format('Y-m-d H:i:s');
+  Settings::set('last_updated', $date);
+
   // Redirect back to the homepage.
   header('Location: index.php');

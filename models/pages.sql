@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS Pages (
   Updated DATE,
   Author_ID INT,
   Author_Name TEXT,
-  URI TEXT
+  URI TEXT,
 
   PRIMARY KEY(ID)
 )

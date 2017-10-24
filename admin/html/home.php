@@ -22,7 +22,10 @@
           About your website
         </div>
         <div class='panel-body'>
-
+          <p>This website is running BCS Cms: </p>
+          <p>Software Version: <?php print $software_version; ?></p>
+          <p>Last Updated: <?php print $last_updated; ?></p>
+          <a class='btn btn-primary' href='update.php'>Check for updates</a>
         </div>
       </div>
     </div>
@@ -35,7 +38,7 @@
           <?php foreach($recent_news as $news): ?>
             <div class='list-group'>
               <a class='list-group-item'>
-                
+
               </a>
             </div>
           <?php endforeach; ?>

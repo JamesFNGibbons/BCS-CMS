@@ -8,6 +8,9 @@
   require_once "../lib/bootstrap.php";
   require_once 'html/partials/header.php';
 
+  $last_updated = Settings::get('last_updated');
+  $software_version = Settings::get('software_version');
+
   // Check if the user is loggedin
   if(is_loggedin()){
     /**
