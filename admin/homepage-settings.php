@@ -5,6 +5,12 @@
   require_once "html/partials/sidebar.php";
   require_login();
 
+  // Get the last time the homepage was updats
+  $last_updated = Settings::get('homepage-last-updated');
+  if(empty($last_updated)){
+    $last_updated = 'Never Updated';
+  }
+
   // Check if we need to update any settings
   if(isset($_POST['action']) && $_POST['action'] == 'update'){
     // The required url params
@@ -41,6 +47,7 @@
       }
 
       Settings::set("display-homepage-section-$value_name", $value_value);
+      Settings::set("homepage-last-updated", date());
       header('Location: homepage-settings.php');
     }
   }

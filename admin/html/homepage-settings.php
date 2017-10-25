@@ -3,6 +3,7 @@
     <div class='container'>
       <h2>Homepage Settings</h2>
       <p>Choose what sections should be displayed on the homepage</p>
+      <span>Last Updated (<?php print $last_updated; ?>)</span>
     </div>
   </div>
   <form method='post'>
