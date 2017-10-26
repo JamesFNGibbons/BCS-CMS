@@ -16,9 +16,6 @@ if(!Install::is_complete()){
 	header('Location: install');
 }
 
-// Include the template helpers
-require_once "lib/template.php";
-
 // Set the error mode based of the config in the db
 if(Settings::get('running_mode')) $running_mode = Settings::get('running_mode');
 else $running_mode = 'production';
@@ -29,24 +26,10 @@ else{
 	error_reporting(E_ALL);
 }
 
-
-// Check if to include the emergancy header.
-if(!file_exists('template/header.php')){
-	include('system-views/partials/emergancy-header.php');
-}
-
 // Check if the .htaccess file exists, if not, create it.
 if(!file_exists('.htaccess')){
 	$default_contents = file_get_contents('lib/defaults/.htaccess.default');
 	file_put_contents('.htacces', $default_contents) or include('system-views/alerts/htaccess-writable.php');
-}
-
-// Check if the header exists and render it
-if(file_exists('template/header.php')){
-	include('template/header.tpl.php');
-}
-else{
-	include('system-views/alerts/header-exists-error.php');
 }
 
 // Check if the website is in maitence mode
@@ -54,10 +37,27 @@ if(Settings::get('maintenance')){
 	include('system-views/maintence.php');
 }
 else{
-	if(file_exists('template/index.tpl.php')){
-		include('template/index.tpl.php');
+	// Check if there is a specific page request
+	if(isset($_GET['page'])){
+		$page = new Page(Page::get_id_from_uri($_GET['page']));
+		if($page->exists){
+			// Setup the page template helpers.
+			$the_page = $page;
+			require_once "lib/template.php";
+			include('template/header.tpl.php');
+			include "template/page.tpl.php";
+		}
+		else{
+			// Display the 404 error
+			if(file_exists('template/404.tpl.php')){
+				include 'template/404.tpl.php';
+			}
+			else{
+				print "404. Page not found.";
+			}
+		}
 	}
 	else{
-		include('system-views/alerts/index-exists-error.php');
+		include('template/index.tpl.php');
 	}
 }

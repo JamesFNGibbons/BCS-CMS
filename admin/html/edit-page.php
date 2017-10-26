@@ -1,0 +1,37 @@
+<div class='col-md-9'>
+  <div class='jumbotron'>
+    <div class='container'>
+      <h2>Edit Page <i>'<?php print $page->title; ?>'</i></h2>
+    </div>
+  </div>
+  <form method='post'>
+    <div class='page-header'>
+      <a onclick='window.location.assign("pages.php")' class='btn btn-primary'>
+        <i class='fa fa-chevron-left'></i>
+        Go Back
+      </a>
+      <input type='submit' class='btn btn-success pull-right' value='Save Changes'>
+      <br><br>
+    </div>
+    <div class='row'>
+      <div class='col-md-9'>
+        <input class='form-control input-lg' value='<?php print $page->title; ?>'>
+      </div>
+      <div class='col-md-3'>
+        <div class='panel panel-default'>
+          <div class='panel-heading'>Page SEO Options</div>
+          <div class='panel-body'>
+            <div class='form-group'>
+              <lable>SEO Meta Title</lable>
+              <input class='form-control' name='seo.title' value='<?php print $page->get_seo("title"); ?>'>
+            </div>
+            <div class='form-group'>
+              <lable>SEO Meta Description</lable>
+              <textarea class='form-control' name='seo.description'><?php print $page->get_seo('description'); ?></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

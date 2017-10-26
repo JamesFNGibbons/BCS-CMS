@@ -13,6 +13,8 @@
   // Check if the page is valid and get the data.
   if(isset($_GET['id'])){
     $page = new Page($_GET['id']);
+    // Render the view
+    include('html/edit-page.php');
   }
   else{
     header('Location: index.php');

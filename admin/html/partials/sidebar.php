@@ -15,7 +15,7 @@
           </a>
           <?php if(Homepage::display('top-banner')): ?>
             <a href='homepage-top-banner.php' class='list-group-item'>
-              <i class='fa fa-page'></i>
+              <i class='fa fa-bars'></i>
               Homepage Top Banner
             </a>
           <?php endif; ?>

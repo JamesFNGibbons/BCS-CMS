@@ -13,6 +13,24 @@
 
   // Check if the user is loggedin
   if(is_loggedin()){
+    // defines the warnings array
+    $warnings = array();
+
+    // Check if the .htaccess on the frontend is writable
+    if(!is_writable('../.htaccess')) array_push($warnings, ".htaccess file is not writable.");
+    if(!file_exists('../template/header.tpl.php')) array_push($warnings, "The theme does not have a header file.");
+    if(!file_exists('../template/footer.tpl.php')) array_push($warnings, "The theme does not have a footer file.");
+    if(!file_exists('../template/index.tpl.php')) array_push($warnings, "The theme does not have a homepage template.");
+    if(!file_exists('../template/page.tpl.php')) array_push($warnings, "The theme does not have a page template.");
+
+    // Check if the site has any warnings
+    if(count($warnings) > 0){
+      $has_warnings = true;
+    }
+    else{
+      $has_warnings = false;
+    }
+
     /**
       * Gets the recent blog posts from the
       * bespoke computer software website, and

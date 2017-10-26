@@ -8,6 +8,28 @@
   require_once '../lib/bootstrap.php';
   require_login();
 
+  /**
+    * Function used to get the base URL from
+    * of the server.
+    * @return The URL
+  */
+  function getBaseUrl(){
+    // output: /myproject/index.php
+    $currentPath = $_SERVER['PHP_SELF'];
+    // output: Array ( [dirname] => /myproject [basename] => index.php [extension] => php [filename] => index )
+    $pathInfo = pathinfo($currentPath);
+    // output: localhost
+    $hostName = $_SERVER['HTTP_HOST'];
+    // output: http://
+    $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https'?'https':'http';
+    // return: http://localhost/myproject/
+    $url = $protocol.'://'.$hostName.$pathInfo['dirname']."/";
+    return str_replace('admin/', '', $url);
+  }
+
+  // Update the website URL
+  Settings::set('url', getBaseUrl());
+
   // Run all the models in the models directory.
   $db = new Db();
   $db = $db->get();

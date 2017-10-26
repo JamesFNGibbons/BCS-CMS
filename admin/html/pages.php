@@ -32,6 +32,16 @@
                 <tr>
                   <td><?php print $page['Title']; ?></td>
                   <td>/<?php print $page['URI']; ?></td>
+                  <td>
+                    <a href='edit-page.php?id=<?php print $page["ID"]; ?>'>
+                      Edit Page
+                    </a>
+                  </td>
+                  <td>
+                    <a class='text-danger' href='pages.php?delete=<?php print $page["ID"]; ?>'>
+                      Delete Page
+                    </a>
+                  </td>
                 </tr>
               <?php endforeach; ?>
             </table>

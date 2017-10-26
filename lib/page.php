@@ -15,6 +15,7 @@
     public $uri;
     public $updated;
     public $id;
+    public $exists;
 
     /**
       * Constructor used to get the data of the
@@ -27,7 +28,7 @@
         $db = $db->get();
 
         try{
-          $query->prepare("SELECT * FROM Pages WHERE ID = '$id'");
+          $query = $db->prepare("SELECT * FROM Pages WHERE ID = $id");
           $query->execute();
           $result = $query->fetchAll();
           if(count($result) > 0){
@@ -40,10 +41,188 @@
             $this->uri = $result['URI'];
             $this->updated = $result['Updated'];
             $this->id = $id;
+            $this->exists = true;
+          }
+          else{
+            $this->exists = false;
           }
         }
         catch(PDOException $e){
           die($e->getMessage());
+        }
+      }
+    }
+
+    /**
+      * Function used to get the pages SEO
+      * data from the database.
+      * @return $seo
+      * @return false if nothing was found.
+    */
+    public function get_seo_array(){
+      $db = new Db();
+      $db = $db->get();
+      try{
+        $query = $db->prepare("SELECT * FROM Page_SEO WHERE Page_ID = '$this->id'");
+        $query->execute();
+        $result = $query->fetchAll();
+      }
+      catch(PDOException $e){
+        die($e->getMessage());
+      }
+
+      // Check if any SEO data was found
+      if(count($result) > 0){
+        $seo = $result;
+        return $seo;
+      }
+      else{
+        return false;
+      }
+    }
+
+    /**
+      * Function used to set the SEO of a page
+      * @param $key_name The SEO key name
+      * @param $value The new value
+    */
+    public function set_seo($key_name, $value){
+      $db = new Db();
+      $db = $db->get();
+
+      $id = $this->id;
+
+      // Check if the key already exists
+      try{
+        $query = $db->prepare("SELECT * FROM Page_SEO WHERE Name = '$key_name' and Page_ID = $id");
+        $query->execute();
+        $result = $query->fetchAll();
+
+        if(count($result) > 0){
+          // update the existing value
+          $db->exec("UPDATE Page_SEO WHERE Name = '$key_name' AND Page_ID = $id SET Value = '$value'; ");
+        }
+        else{
+          // Add the value.
+          $db->exec("INSERT INTO Page_SEO (Name, Value, Page_ID) VALUES (
+            '$key_name',
+            '$value',
+            '$id'
+          )");
+        }
+      }
+      catch(PDOException $e){
+        die($e->getMessage());
+      }
+    }
+
+    /**
+      * Function used to delete the page.
+    */
+    public function delete(){
+      $db = new Db();
+      $db = $db->get();
+      try{
+        $db->exec("DELETE FROM Pages WHERE ID = $this->id");
+      }
+      catch(PDOException $e){
+        die($e->getMessage());
+      }
+
+      // Delete the pages SEO from the Page_SEO table.
+      try{
+        $db->exec("DELETE FROM Page_SEO WHERE Page_ID = $this->id");
+      }
+      catch(PDOException $e){
+        die($e->getMessage());
+      }
+    }
+
+    /**
+      * Function used to get the pages SEO
+      * @param $key_name
+      * @return $value
+      * @return False if nothing was found.
+    */
+    public function get_seo($key_name){
+      $db = new Db();
+      $db = $db->get();
+      try{
+        $query = $db->prepare("SELECT * FROM Page_SEO WHERE Page_ID = $this->id AND Name = '$key_name'");
+        $query->execute();
+      }
+      catch(PDOException $e){
+        die($e->getMessage());
+      }
+      $db = null;
+
+      // Check if anuthing was found.
+      $result = $query->fetchAll();
+      if(!count($result) > 0){
+        return false;
+      }
+      else{
+        $value = $result[0]['Value'];
+        return $value;
+      }
+    }
+
+    /**
+      * Function used to get the page ID from the URI
+      * @param $uri The URI of the requested page
+      * @return $id The ID of the page
+      * @return null If the page was not found.
+    */
+    public static function get_id_from_uri($uri){
+      if(isset($uri)){
+        $db = new Db();
+        $db = $db->get();
+        try{
+          $query = $db->prepare("SELECT * FROM Pages WHERE URI = '$uri'");
+          $query->execute();
+          $result = $query->fetchAll();
+        }
+        catch(PDOException $e){
+          die($e->getMessage());
+        }
+        $db = null;
+
+        // Check if the page exists
+        if(count($result) > 0){
+          return $result[0]['ID'];
+        }
+        else{
+          return null;
+        }
+      }
+    }
+
+    /**
+      * Function used to get the page ID from title
+      * @param $title The page title
+      * @return $id The ID
+      * @return null If the page does not exist.
+    */
+    public static function get_id($title){
+      if(isset($title)){
+        $db = new Db();
+        $db = $db->get();
+        try{
+          $query = $db->prepare("SELECT * FROM Pages WHERE Title = '$title'");
+          $query->execute();
+          $result = $query->fetchAll();
+        }
+        catch(PDOException $e){
+          die($e->getMessage());
+        }
+        $db = null;
+
+        // Check if the page exists
+        if(count($result) > 0){
+          return $result[0]['ID'];
+        }
+        else{
+          return null;
         }
       }
     }
@@ -97,7 +276,7 @@
           $query->execute();
           $result = $query->fetchAll();
           if(count($result) > 0){
-            return $result[0]['ID'];
+            $id = $result[0]['ID'];
           }
           else{
             return false;
@@ -106,6 +285,26 @@
         catch(PDOException $e){
           die($e->getMessage());
         }
+
+        // Set the default SEO tags of the page
+        $title = Settings::get('title');
+        $page = new Page($id);
+        $page->set_seo('title', $page->title);
+        $page->set_seo('description', "$page->title - $title");
+        $page->set_seo('keywords', '');
+        $page->set_seo('og:type', 'article');
+        $page->set_seo('og:title', $page->title);
+        $page->set_seo('og:description', '');
+        $page->set_seo('og:url', $page->uri);
+        $page->set_seo('og:site_name', Settings::get('title'));
+        $page->set_seo('article:publisher', Settings::get('url'));
+        $page->set_seo('og:image', '');
+        $page->set_seo('og:image:width', '310');
+        $page->set_seo('og:image:height', '310');
+
+        // Return the page ID
+        return $id;
+
     }
 
     /**

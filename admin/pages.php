@@ -18,6 +18,19 @@
     $has_pages = false;
   }
 
+  // Check if we are to delete a page
+  if(isset($_GET['delete'])){
+    $page_id = $_GET['delete'];
+    $page = new Page($page_id);
+    if($page->exists){
+      $page->delete();
+      header('Location: pages.php');
+    }
+    else{
+      die('Error. The page does not exist.');
+    }
+  }
+
   // Check if there is a page creation error
   if(isset($_GET['create_error'])){
     $creation_error = true;
