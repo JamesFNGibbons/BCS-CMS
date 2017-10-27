@@ -5,6 +5,10 @@
         <i class='fa fa-home'></i>
         Home
       </a>
+      <a href='media.php' class='list-group-item'>
+        <i class='fa fa-file'></i>
+        Media Center
+      </a>
       <br>
       <div class='panel panel-default'>
         <div class='panel-heading'>Homepage Options</div>

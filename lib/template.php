@@ -34,8 +34,29 @@
   }
 
   /**
+    * Function used to get the site title
+    * @return $title;
+  */
+  function get_site_title(){
+    $title = Settings::get('title');
+    return $title;
+  }
+
+  /**
+    * Function used to display the site title
+    * @return $title;
+  */
+  function the_site_title(){
+    $title = Settings::get('title');
+    print $title;
+  }
+
+  /**
     * Function used to display the site title
   */
   function the_title(){
-    print Settings::get('title');
+    global $the_page;
+    if(isset($the_page)){
+      print $the_page->title;
+    }
   }

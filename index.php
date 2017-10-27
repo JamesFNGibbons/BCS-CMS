@@ -43,8 +43,11 @@ else{
 		if($page->exists){
 			// Setup the page template helpers.
 			$the_page = $page;
-			require_once "lib/template.php";
-			include('template/header.tpl.php');
+
+			die($_SERVER['DOCUMENT_ROOT']);
+
+			require "lib/template.php";
+			include "template/header.tpl.php";
 			include "template/page.tpl.php";
 		}
 		else{

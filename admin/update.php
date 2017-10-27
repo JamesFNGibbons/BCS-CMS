@@ -59,5 +59,24 @@
   $htaccess_contents = file_get_contents('../lib/defaults/.htaccess.default');
   file_put_contents('../.htaccess', $htaccess_contents);
 
+  // Add the new filetype uploads to the database.
+  $file_types = array(
+    'jpg',
+    'jpeg',
+    'mp4',
+    'mp3',
+    'png',
+    'gif',
+    'svg',
+    'pdf',
+    'psd'
+  );
+  foreach($file_types as $type){
+    // Set there default value if they are not already defined.
+    if(!Settings::get('allow-filetype-' . $type)){
+      Settings::set('allow-filetype-' . $type, 'true');
+    }
+  }
+
   // Redirect back to the homepage.
   header('Location: index.php');
