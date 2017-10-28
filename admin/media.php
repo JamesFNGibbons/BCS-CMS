@@ -18,7 +18,7 @@
   // Check if we need to upload a file
   if(isset($_FILES['to_upload'])){
     // Upload the new file using the Media API
-    $upload = Media::upload_file($_FILES['to_upload']);
+    $upload = Media::upload_file($_FILES['to_upload'], $_POST['shortname']);
     if($upload){
       // Check if a return path was sent
       if(isset($_POST['return'])){

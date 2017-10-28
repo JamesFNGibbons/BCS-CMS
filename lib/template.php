@@ -26,6 +26,43 @@
   }
 
   /**
+    * Function used to check if there is
+    * a logo set.
+    * @return $has_logo If there is a logo.
+  */
+  function has_logo(){
+    if(Settings::get('branding-logo')){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  /**
+    * Function used to render the logo
+    * @param $width The width of the logo
+    * @param $height The height of the logo.
+  */
+  function the_logo($width = '100%', $height = null){
+    if(has_logo()){
+      $logo_url = Settings::get('branding-logo');
+      print "<img src='$logo_url' width='$width' height='$height'>"
+    }
+  }
+
+  /**
+    * Function used to get the logo URL
+    * @return $logo_url The logo URL
+  */
+  function get_logo_url(){
+    if(has_logo()){
+      $logo_url - Settings::get('branding-logo');
+      return $logo_url;
+    }
+  }
+
+  /**
     * Function used to get the site title
     * @return The site title;
   */

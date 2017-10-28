@@ -91,7 +91,7 @@
       * @param $return_path If true, return the path of the new file.
       * @return false The upload was blocked.
     */
-    public static function upload_file($file, $return_path = false){
+    public static function upload_file($file, $shortname, $return_path = false){
       // Check if the filetype is allowed
       $filetype = explode('.', $file['name'])[1];
       if(Settings::get("allow-filetype-$filetype") !== 'true'){
@@ -127,7 +127,7 @@
       try{
         $db->exec("INSERT INTO Media (File_Name, File_Path, Uploader, Upload_Date)
         VALUES (
-          '$file_name',
+          '$shortname',
           '$file_path',
           '$username',
           now()

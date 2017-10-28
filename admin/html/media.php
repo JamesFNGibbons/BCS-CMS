@@ -20,7 +20,9 @@
             <?php foreach($files as $file): ?>
               <tr>
                 <td><?php print $file['File_Name']; ?></td>
-                <td><?php print $file['File_Path']; ?></td>
+                <td>
+                  <a target="_blank" href='<?php print Settings::get('url'); ?><?php print $file["File_Path"]; ?>'>
+                  <?php print $file['File_Path']; ?></td>
                 <td><?php print $file['Uploader']; ?></td>
                 <td>
                   <form method='post'>
@@ -43,8 +45,12 @@
         <div class='panel-body'>
           <form method='post' enctype="multipart/form-data">
             <div class='form-group'>
+              <lable>File Shortname</lable>
+              <input type='text' name='shortname' class='form-control' required>
+            </div>
+            <div class='form-group'>
               <lable>Select file</lable>
-              <input type='file' class='form-control' name='to_upload'>
+              <input type='file' class='form-control' name='to_upload' required>
             </div>
             <div class='form-group'>
               <input type='submit' class='btn btn-primary' value='Upload'>
