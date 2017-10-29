@@ -9,7 +9,11 @@
     <nav class='navbar navbar-default'>
       <div class='container'>
         <a class='navbar-band'>
-          <?php the_logo(); ?>
+          <?php if(has_logo()): ?>
+            <?php the_logo('', '75px'); ?>
+          <?php else: ?>
+            <?php the_title(); ?>
+          <?php endif; ?>
         </a>
       </div>
     </nav>

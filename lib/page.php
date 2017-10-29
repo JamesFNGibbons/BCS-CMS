@@ -16,6 +16,8 @@
     public $updated;
     public $id;
     public $exists;
+    public $is_homepage;
+    public $is_dummy = false;
 
     /**
       * Constructor used to get the data of the
@@ -32,6 +34,14 @@
           $query->execute();
           $result = $query->fetchAll();
           if(count($result) > 0){
+            // Check if the page is the homepage
+            if($id == Settings::get('homepage-page')){
+              $this->is_homepage = true;
+            }
+            else{
+              $this->is_homepage = false;
+            }
+
             $result = $result[0];
             $this->title = $result['Title'];
             $this->content = $result['Content'];
@@ -51,6 +61,27 @@
           die($e->getMessage());
         }
       }
+    }
+
+    /**
+      * Function used to get the homepage object
+      * @return $page The homepage instance.
+    */
+    public static function get_homepage(){
+      // Check if the homepage has been defined.
+      if(Settings::get('homepage-page')){
+        $page = new Page(Settings::get('homepage-page'));
+      }
+      else{
+        // No homepage. Use a placeholder.
+        $page = new Page(null);
+        $page->title = 'Default Page';
+        $page->content = 'Please select a homepage in the admin portal';
+        $page->is_dummy = true;
+        $page->exists = true;
+      }
+
+      return $page;
     }
 
     /**

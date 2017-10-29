@@ -7,7 +7,9 @@
   require_once "bootstrap.php";
 
   /* The current page object */
-  if(!isset($the_page)) $the_page = null;
+  if(!isset($the_page)){
+    $the_page = null;
+  }
 
   /**
     * Function used to generate the SEO tags
@@ -15,12 +17,14 @@
   function the_seo_tags(){
     global $the_page;
     if(isset($the_page)){
-      $seo = $the_page->get_seo_array();
-      foreach($seo as $tag){
-        $tag_name = $tag['Name'];
-        $tag_value = $tag['Value'];
+      if(!$the_page->is_dummy){
+        $seo = $the_page->get_seo_array();
+        foreach($seo as $tag){
+          $tag_name = $tag['Name'];
+          $tag_value = $tag['Value'];
 
-        print "<meta name='$tag_name' value='$tag_value'>";
+          print "<meta name='$tag_name' value='$tag_value'>";
+        }
       }
     }
   }
@@ -47,7 +51,7 @@
   function the_logo($width = '100%', $height = null){
     if(has_logo()){
       $logo_url = Settings::get('branding-logo');
-      print "<img src='$logo_url' width='$width' height='$height'>"
+      print "<img src='$logo_url' width='$width' height='$height'>";
     }
   }
 
@@ -68,15 +72,6 @@
   */
   function get_site_title(){
     return Settings::get('title');
-  }
-
-  /**
-    * Function used to get the site title
-    * @return $title;
-  */
-  function get_site_title(){
-    $title = Settings::get('title');
-    return $title;
   }
 
   /**

@@ -1,7 +1,7 @@
 <div class='col-md-9'>
   <div class='jumbotron'>
     <div class='container'>
-      <h2>Homepage Settings</h2>
+      <h2>Theme Customizer</h2>
       <p>Choose what sections should be displayed on the homepage</p>
       <span>Last Updated (<?php print $last_updated; ?>)</span>
     </div>

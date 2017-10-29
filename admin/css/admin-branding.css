@@ -1,0 +1,52 @@
+html, body
+{
+  background-color: white !important;
+}
+
+nav.navbar.navbar-custom
+{
+  background-color: #15262b !important;
+  color: #ff6d2c;
+}
+
+nav.navbar .navbar-brand
+{
+  color: #ff6d2c;
+}
+
+div.jumbotron
+{
+  background-color: rgba(21,38,43, 0.9) !important;
+}
+div.jumbotron h2
+{
+  color: #ff6d2c;
+}
+
+.alert .alert-danger
+{
+  background-color: transparent !important;
+}
+
+.panel-default {border-style: solid;}
+.panel > .panel-heading {
+  background-color: red !important;
+}
+.panel-default > .panel-body
+{
+  background-color: white !important;
+}
+
+.list-group { background-color: transparent; }
+.list-group-item
+{
+  border-style: none;
+  border-left-style: solid;
+  border-left-color: #ff6d2c;
+  border-left-width: 5px;
+  margin-top: 10px;
+}
+.thumbnail {
+  background-color: transparent;
+  border-style: none;
+}
