@@ -7,6 +7,11 @@ require_login();
 // Array of views to Render
 $to_render = array();
 
+// Load the themes functions.php file for the customizer
+if(file_exists('../template/functions.php')){
+  include "../template/functions.php";
+}
+
 // Check if any settings have been saved.
 if(isset($_GET['saved'])){
   $settings_saved = true;
