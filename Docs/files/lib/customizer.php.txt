@@ -1,0 +1,54 @@
+<?php
+
+  require_once "bootstrap.php";
+
+  // Load up the default sections.
+  global $customizer_sections;
+  $customizer_sections = array();
+
+  class Customizer {
+    /**
+      * Function used to create a new section
+      * @return $id The section ID
+      * @param $section_name, $section_title
+    */
+    public static function create_section($section_name, $section_title){
+      global $customizer_sections;
+      array_push($customizer_sections, array(
+        'Name' => $section_name,
+        'Title' => $section_title
+      ));
+    }
+
+    /**
+     * Function used to get the sections.
+     * @return $customizer_sections
+    */
+    public static function get_sections(){
+      global $customizer_sections;
+      return $customizer_sections;
+    }
+
+    /**
+      * Function used to get the options associated with
+      * a given section.
+      * @param $section_name The section name
+      * @return $options The array of options.
+    */
+    public static function get_options($section_name){
+      $db = new Db();
+      $db = $db->get();
+      try{
+        $query = $db->prepare("SELECT * FROM Theme_Options WHERE Section_Name = '$section_name'");
+        $query->execute();
+        $result = $query->fetchAll();
+      }
+      catch(PDOException $e){
+        die($e->getMessage());
+      }
+
+      $options = $result;
+      return $options;
+    }
+  }
+

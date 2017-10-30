@@ -17,6 +17,7 @@ nav.navbar .navbar-brand
 div.jumbotron
 {
   background-color: rgba(21,38,43, 0.9) !important;
+  color: white;
 }
 div.jumbotron h2
 {

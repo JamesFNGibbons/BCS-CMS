@@ -2,7 +2,9 @@ create table if not exists Theme_Options (
   ID int auto_increment,
   Name text,
   Value text,
-  Section_ID int,
+  Label text,
+  Type text,
+  Section_Name text,
 
   primary key(ID)
 )

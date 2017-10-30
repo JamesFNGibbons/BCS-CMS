@@ -30,6 +30,16 @@
   }
 
   /**
+    * Function used to get a theme option.
+    * @param $option_name The option name
+    * @return $value The option value.
+  */
+  function get_theme_option($option_name){
+    $value = Customizer::get_option_value($option_name);
+    return $value;
+  }
+
+  /**
     * Function used to check if there is
     * a logo set.
     * @return $has_logo If there is a logo.

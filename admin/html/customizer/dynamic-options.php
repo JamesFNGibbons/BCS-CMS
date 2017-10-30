@@ -1,0 +1,23 @@
+<div class='list-group'>
+  <?php foreach($sub_sections as $sect): ?>
+    <a href='theme-customizer.php?section=<?php print $sect["Name"]; ?>' class='list-group-item'>
+      <?php print $sect['Title']; ?>
+    </a>
+  <?php endforeach; ?>
+</div>
+
+<form action='theme-customizer.php?section=<?php print $section; ?>' method='post'>
+  <input type='hidden' name='action' value='update'>
+  <?php foreach($options as $option): ?>
+    <div class='form-group'>
+      <lable><?php print $option['Label']; ?></lable>
+      <?php if($option['Type'] == 'text'): ?>
+        <input class='form-control' name='<?php print $option["Name"]; ?>' value='<?php print $option["Value"]; ?>'>
+      <?php endif; ?>
+      <?php if($option['Type'] == 'Image'): ?>
+
+      <?php endif; ?>
+    </div>
+  <?php endforeach; ?>
+  <input type='submit' class='btn btn-primary pull-right' value='Save Changes'>
+</form>

@@ -57,6 +57,46 @@ if(isset($_GET['section'])){
     $section_title = 'Website Branding';
     array_push($to_render, "html/customizer/branding.php");
   }
+  else{
+    // Check if the name is valid
+    $is_section_name_valid = false;
+    foreach($customizer_sections as $sect){
+      if($sect['Name'] == $section){
+        $is_section_name_valid = true;
+        $the_section = $sect;
+      }
+    }
+
+    // Ensure the section is valid.
+    if(!$is_section_name_valid){
+      die('Invalid customizer section name.');
+    }
+
+    // Set the section title based on the registered section title.
+    $section_title = $the_section['Title'];
+
+    // Get the sub-sections
+    $sub_sections = array();
+    foreach($customizer_sections as $sect){
+      if($sect['Parent'] == $the_section['Name']){
+        array_push($sub_sections, $sect);
+      }
+    }
+
+    // Get the dynamic options associated with the section.
+    $options = Customizer::get_options($the_section['Name']);
+    array_push($to_render, 'html/customizer/dynamic-options.php');
+
+    // Check if the have been saved
+    if(isset($_POST['action']) && $_POST['action'] == 'update'){
+      foreach($options as $option){
+        Customizer::update_option($option['Name'], $_POST[$option["Name"]]);
+      }
+
+      // Redirect the user back to the options page
+      header("Location: theme-customizer.php?section=$section&saved");
+    }
+  }
 }
 else{
   $section_title = 'Main Menu';
@@ -71,7 +111,9 @@ else{
 
   // Get the sections from the database, and render the view.
   foreach(Customizer::get_sections() as $section){
-    array_push($sections, $section);
+    if(empty($section['Parent'])){
+      array_push($sections, $section);
+    }
   }
   array_push($to_render, "html/customizer/sections.php");
 }

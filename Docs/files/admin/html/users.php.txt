@@ -1,0 +1,66 @@
+<div class='col-md-9'>
+  <div class='jumbotron'>
+    <div class='container'>
+      <h2>User Accounts</h2>
+      <span>
+        Quickly create, delete or modify user accounts who can access this admin portal.
+      </span>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-md-9'>
+      <div class='panel panel-default'>
+        <div class='panel-heading'>
+          Current users
+        </div>
+        <div class='panel-body'>
+          <table class='table table-default'>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <?php foreach($users as $user): ?>
+              <tr>
+                <td><?php print $user['Name']; ?></td>
+                <td><?php print $user['Username']; ?></td>
+                <td><?php print $user['Email']; ?></td>
+              </tr>
+            <?php endforeach; ?>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class='col-md-3'>
+      <div class='panel panel-default'>
+        <div class='panel-heading'>
+          Quick create new user
+        </div>
+        <div class='pane-body'>
+          <div class='well'>
+            <form method='post'>
+              <div class='form-group'>
+                <lable>Name</lable>
+                <input type='text' name='name' class='form-control' required>
+              </div>
+              <div class='form-group'>
+                <lable>Email</lable>
+                <input type='email' name='email' class='form-control' required>
+              </div>
+              <div class='form-group'>
+                <lable>Username</lable>
+                <input type='text' name='username' class='form-control' required>
+              </div>
+              <div class='form-group'>
+                <lable>Password</lable>
+                <input type='password' name='password' class='form-control' required>
+              </div>
+              <div class='form-group'>
+                <input type='submit' class='btn btn-primary form-control' value='Create User'>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

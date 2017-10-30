@@ -78,6 +78,7 @@
         $page->title = 'Default Page';
         $page->content = 'Please select a homepage in the admin portal';
         $page->is_dummy = true;
+        $page->is_homepage = true;
         $page->exists = true;
       }
 
