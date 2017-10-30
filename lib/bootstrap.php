@@ -19,5 +19,6 @@
 	  * @param $className The name of the class.
 	*/
 	function __autoload($className){
+		$className = strtolower($className);
 		require_once($className . '.php');
 	}

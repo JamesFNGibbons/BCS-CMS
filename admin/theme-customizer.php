@@ -7,6 +7,8 @@ require_login();
 // Array of views to Render
 $to_render = array();
 
+include "../lib/customizer.php";
+
 // Load the themes functions.php file for the customizer
 if(file_exists('../template/functions.php')){
   include "../template/functions.php";

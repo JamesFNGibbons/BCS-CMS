@@ -63,10 +63,10 @@
 				$conf = str_replace('%password%', $password, $conf);
 				$conf = str_replace('%hostname%', $hostname, $conf);
 				$conf = str_replace('%database%', $database, $conf);
-
+				
 				// Write to the real config file.
 				file_put_contents('../config/config.php', $conf);
-
+	
 				/**
 				  * Loop through the models in the models
 				  * directory. And then close the db connection.
@@ -86,7 +86,7 @@
 					}
 				}
 				$db = null;
-
+	
 				// Move onto the next step
 				$_SESSION['current_step'] = 2;
 				header('Location: index.php?step=' . $_SESSION['current_step']);
