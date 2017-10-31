@@ -2,6 +2,7 @@
   /**
     * This class is used to handle the pages
     * on the website.
+    * @class Page
   */
 
   require_once "bootstrap.php";
@@ -121,7 +122,6 @@
     public function set_seo($key_name, $value){
       $db = new Db();
       $db = $db->get();
-
       $id = $this->id;
 
       // Check if the key already exists
@@ -258,7 +258,24 @@
         }
       }
     }
-
+  
+    /**
+     * Function used to update the page in the database.
+     * with the changed values.
+    */
+    public function update(){
+      $db = new Db();
+      $db = $db->get();
+      try{
+        $db->exec("UPDATE Pages SET Title = '$this->title', Content = '$this->content', Updated = now()
+        WHERE ID = '$this->id'; ");
+      }
+      catch(PDOException $e){
+        die($e->getMessage());
+      }
+      $db = null;
+    }
+  
     /**
       * Function used to create a new page.
       * @param $title The page title

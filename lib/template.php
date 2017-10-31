@@ -64,7 +64,7 @@
       print "<img src='$logo_url' width='$width' height='$height'>";
     }
   }
-
+  
   /**
     * Function used to get the logo URL
     * @return $logo_url The logo URL
@@ -101,4 +101,14 @@
     if(isset($the_page)){
       print $the_page->title;
     }
+  }
+  
+    
+  /**
+   * Function used to display the pages content
+   * @return $content The page content.
+  */
+  function the_content(){
+    global $the_page;
+    print $the_page->content;
   }

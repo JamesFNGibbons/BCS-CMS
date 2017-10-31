@@ -10,9 +10,11 @@
 
   $last_updated = Settings::get('last_updated');
   $software_version = Settings::get('software_version');
-
+  
   // Check if the user is loggedin
   if(is_loggedin()){
+    // Check if we need to display the 
+    
     // defines the warnings array
     $warnings = array();
 
@@ -22,14 +24,6 @@
     if(!file_exists('../template/footer.tpl.php')) array_push($warnings, "The theme does not have a footer file.");
     if(!file_exists('../template/index.tpl.php')) array_push($warnings, "The theme does not have a homepage template.");
     if(!file_exists('../template/page.tpl.php')) array_push($warnings, "The theme does not have a page template.");
-
-    // Check if the site has any warnings
-    if(count($warnings) > 0){
-      $has_warnings = true;
-    }
-    else{
-      $has_warnings = false;
-    }
 
     /**
       * Gets the recent blog posts from the
@@ -61,6 +55,8 @@
       }
       else{
         $login_error = true;
+        // Re-render the login page
+        include('html/login.php');
       }
     }
     else{

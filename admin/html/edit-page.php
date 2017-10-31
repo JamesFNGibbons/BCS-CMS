@@ -1,10 +1,12 @@
 <div class='col-md-9'>
   <div class='jumbotron'>
     <div class='container'>
-      <h2>Edit Page <i>'<?php print $page->title; ?>'</i></h2>
+      <h2>Edit Page <i>'<font color='white'><?php print $page->title; ?></font>'</i></h2>
     </div>
   </div>
-  <form method='post'>
+  <form method='post' action='edit-page.php'>
+    <input type='hidden' name='id' value='<?php print $page->id; ?>'>
+    <input type='hidden' name='action' value='update'>
     <div class='page-header'>
       <a onclick='window.location.assign("pages.php")' class='btn btn-primary'>
         <i class='fa fa-chevron-left'></i>
@@ -15,7 +17,11 @@
     </div>
     <div class='row'>
       <div class='col-md-9'>
-        <input class='form-control input-lg' value='<?php print $page->title; ?>'>
+        <input class='form-control input-lg' name='title' value='<?php print $page->title; ?>'>
+        <br>
+        <textarea style='height: 300px;' name='content' class='form-control editor'>
+          <?php print $page->content; ?>
+        </textarea>
       </div>
       <div class='col-md-3'>
         <div class='panel panel-default'>

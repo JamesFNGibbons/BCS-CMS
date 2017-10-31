@@ -1,0 +1,18 @@
+<?php
+
+  $banner = Customizer::create_section('homepage-banner', 'Homepage Banner');
+  new Option(
+      'homepage-banner-title',
+      'Banner Title',
+      '',
+      'text',
+      $banner
+  );
+  new Option(
+      'homepage-banner-content',
+      'Banner Content',
+      '',
+      'text',
+      $banner
+  );
+

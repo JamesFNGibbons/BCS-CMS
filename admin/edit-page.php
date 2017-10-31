@@ -17,5 +17,16 @@
     include('html/edit-page.php');
   }
   else{
-    header('Location: index.php');
+    // Check if there is an update request.
+    if(isset($_POST['action']) && $_POST['action'] == 'update'){
+      $page = new Page($_POST['id']);
+      $page->title = $_POST['title'];
+      $page->content = $_POST['content'];
+      $page->update();
+      
+      header("Location: edit-page.php?id=$page->id");
+    }
+    else{
+      header('Location: index.php'); 
+    }
   }
