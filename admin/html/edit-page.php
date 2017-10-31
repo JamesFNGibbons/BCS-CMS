@@ -25,6 +25,22 @@
       </div>
       <div class='col-md-3'>
         <div class='panel panel-default'>
+          <div class='panel-heading'>Feature Image</div>
+          <div class='panel-body'>
+            <div class='form-group'>
+              <lable>Site Logo</lable>
+              <div class='form-control' style='height: 43px;'>
+                <span style='line-height: 30px;' class='pull-left'>
+                  <?php print $logo; ?>
+                </span>
+                <span data-toggle='modal' data-target='.modal.select_media' class='btn btn-primary btn-sm pull-right'>
+                  Choose Image
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='panel panel-default'>
           <div class='panel-heading'>Page SEO Options</div>
           <div class='panel-body'>
             <div class='form-group'>

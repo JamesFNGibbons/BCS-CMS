@@ -29,7 +29,27 @@
 
   // Update the website URL
   Settings::set('url', getBaseUrl());
-
+  
+  // Run all the single excutables in the models directory.
+  $db = new Db();
+  $db = $db->get();
+  foreach(glob('../models/run-once/*') as $file){
+    if(!is_dir($file)){
+      try{
+        $filename = basename($file);
+        $sql = file_get_contents('../models/run-once/' . $filename);
+        $db->exec($sql);
+      }
+      catch(PDOException $e){
+        die($e->getMessage());
+      }
+      
+      // Delete the single run file after
+      unlink('../models/run-once/' . $filename);
+    }
+  }
+  $db = null;
+  
   // Run all the models in the models directory.
   $db = new Db();
   $db = $db->get();

@@ -19,6 +19,7 @@
     public $exists;
     public $is_homepage;
     public $is_dummy = false;
+    public $feature_image;
 
     /**
       * Constructor used to get the data of the
@@ -53,6 +54,7 @@
             $this->updated = $result['Updated'];
             $this->id = $id;
             $this->exists = true;
+            $this->feature_image = $result['Feature_Image'];
           }
           else{
             $this->exists = false;
@@ -304,7 +306,7 @@
 
         // Create the new page in the database.
         try{
-          $db->exec("INSERT INTO Pages (Title, Content, Created, Updated, Author_ID, Author_Name, URI) VALUES
+          $db->exec("INSERT INTO Pages (Title, Content, Created, Updated, Author_ID, Author_Name, URI, Feature_Image) VALUES
           (
             '$title',
             '$content',
@@ -312,7 +314,8 @@
             now(),
             '$author_id',
             '$author_name',
-            '$uri'
+            '$uri',
+            ''
           )");
         }
         catch(PDOException $e){
@@ -353,7 +356,6 @@
 
         // Return the page ID
         return $id;
-
     }
 
     /**

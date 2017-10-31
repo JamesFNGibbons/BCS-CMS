@@ -103,12 +103,13 @@
     }
   }
   
-    
   /**
    * Function used to display the pages content
-   * @return $content The page content.
+   * @return $the_page->content The page content.
   */
   function the_content(){
     global $the_page;
-    print $the_page->content;
+    if(isset($the_page)){
+      print $the_page->content; 
+    }
   }

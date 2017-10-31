@@ -13,6 +13,18 @@
   // Check if the page is valid and get the data.
   if(isset($_GET['id'])){
     $page = new Page($_GET['id']);
+    
+    // Load the media selector for the feature image.
+    $select_media_action = 'edit-page.php';
+    $select_media_param = 'id=' . $_GET['id'];
+    include("html/modals/select-media.php");
+    
+    // Update the pages feature image if it is selected.
+    if(isset($_GET['selected_media'])){
+      $page->feature_image = $_GET['selected_media'];
+      $page->update();
+    }
+    
     // Render the view
     include('html/edit-page.php');
   }
