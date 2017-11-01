@@ -14,8 +14,9 @@
       <?php if($option['Type'] == 'text'): ?>
         <input class='form-control' name='<?php print $option["Name"]; ?>' value='<?php print $option["Value"]; ?>'>
       <?php endif; ?>
-      <?php if($option['Type'] == 'Image'): ?>
-
+      <?php if($option['Type'] == 'image'): ?>
+        <?php $selector = new DynamicImageSelector('theme-customizer.php', "section=$section", $option); ?>
+        <?php $selector->get_selector(); ?>
       <?php endif; ?>
     </div>
   <?php endforeach; ?>

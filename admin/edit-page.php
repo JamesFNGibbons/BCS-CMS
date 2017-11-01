@@ -19,6 +19,11 @@
     $select_media_param = 'id=' . $_GET['id'];
     include("html/modals/select-media.php");
     
+    // Check if there is a valid feature image
+    if(empty($page->feature_image)){
+      $no_feature_image = true;
+    }
+
     // Update the pages feature image if it is selected.
     if(isset($_GET['selected_media'])){
       $page->feature_image = $_GET['selected_media'];

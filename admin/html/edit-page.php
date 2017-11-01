@@ -31,7 +31,11 @@
               <lable>Site Logo</lable>
               <div class='form-control' style='height: 43px;'>
                 <span style='line-height: 30px;' class='pull-left'>
-                  <?php print $logo; ?>
+                  <?php if(!$no_feature_image): ?>
+                    <?php print $page->feature_image; ?>
+                  <?php else: ?>
+                    No Image
+                  <?php endif; ?>
                 </span>
                 <span data-toggle='modal' data-target='.modal.select_media' class='btn btn-primary btn-sm pull-right'>
                   Choose Image

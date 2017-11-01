@@ -90,11 +90,19 @@ if(isset($_GET['section'])){
     // Check if the have been saved
     if(isset($_POST['action']) && $_POST['action'] == 'update'){
       foreach($options as $option){
-        Customizer::update_option($option['Name'], $_POST[$option["Name"]]);
+        if($option['Type'] == 'text'){
+          Customizer::update_option($option['Name'], $_POST[$option["Name"]]);
+        }
       }
 
       // Redirect the user back to the options page
       header("Location: theme-customizer.php?section=$section&saved");
+    }
+
+    // Handle an image control being submitted
+    if(isset($_GET['selected_media']) && isset($_GET['option'])){
+      Customizer::update_option($_GET['option'], $_GET['selected_media']);
+      header("Location: theme-customizer.php?section=$section");
     }
   }
 }
