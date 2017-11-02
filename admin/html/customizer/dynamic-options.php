@@ -18,6 +18,9 @@
         <?php $selector = new DynamicImageSelector('theme-customizer.php', "section=$section", $option); ?>
         <?php $selector->get_selector(); ?>
       <?php endif; ?>
+      <?php if($option['Type'] == 'textarea'): ?>
+        <textarea name='<?php print $option["Name"]; ?>' class='form-control'><?php print $option['Value']; ?></textarea>
+      <?php endif; ?>
     </div>
   <?php endforeach; ?>
   <input type='submit' class='btn btn-primary pull-right' value='Save Changes'>

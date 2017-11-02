@@ -46,6 +46,7 @@
                     }
                 }
                 else{
+                  // Get the options values.
                   try{
                       $query = $db->prepare("SELECT * FROM Theme_Options WHERE Name = '$option_name'");
                       $query->execute();
@@ -53,6 +54,19 @@
                   }
                   catch(PDOException $e){
                       die($e->getMessage());
+                  }
+
+                  // Check if we need to update the option type.
+                  if(!$result[0]['Type'] == $option_type){
+                    try{
+                      $db->exec("UPDATE Theme_Options SET Type = '$option_type' WHERE Name = '$option_name'");
+                    }
+                    catch(PDOException $e){
+                      die($e->getMessage());
+                    }
+
+                    // Change the result type in the found object
+                    $result[0]['Type'] = $option_type;
                   }
                 }
                 $db = null;

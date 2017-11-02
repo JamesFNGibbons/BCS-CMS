@@ -1,0 +1,6 @@
+{
+  "Name": "Contact Form Plugin",
+  "Author": "Bespoke Computer Software",
+  "Description": "Used to display and handle the contact form.",
+  "Main_Class": "Conatct_Plugin"
+}

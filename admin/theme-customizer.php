@@ -90,7 +90,7 @@ if(isset($_GET['section'])){
     // Check if the have been saved
     if(isset($_POST['action']) && $_POST['action'] == 'update'){
       foreach($options as $option){
-        if($option['Type'] == 'text'){
+        if($option['Type'] == 'text' || $option['Type'] == 'textarea'){
           Customizer::update_option($option['Name'], $_POST[$option["Name"]]);
         }
       }

@@ -15,17 +15,32 @@
       'text',
       $banner
   );
-  new Option(
-      'homepage-banner-image',
-      'Banner Background Image',
+
+  // Create the services section and options
+  $services = Customizer::create_section('homepage:services', 'Homepage Services');
+
+  for($i = 1; $i < 4; $i++){
+    new Option(
+      "homepage:service:$i:title",
+      "Service $i Title",
+      '',
+      'text',
+      $services
+    );
+
+    new Option(
+      "homepage:service:$i:content",
+      "Service $i Content",
+      '',
+      'textarea',
+      $services
+    );
+
+    new Option(
+      "homepage:service:$i:image",
+      "Service $i Image",
       '',
       'image',
-      $banner
-  );
-  new Option(
-      'homepage-banner-overlay-image',
-      'Banner Overlay Image',
-      '',
-      'image',
-      $banner
-  );
+      $services
+    );
+  }

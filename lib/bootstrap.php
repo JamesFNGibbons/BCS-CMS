@@ -19,6 +19,12 @@
 	  * @param $className The name of the class.
 	*/
 	function __autoload($className){
-		$className = strtolower($className);
-		require_once($className . '.php');
+		if(!class_exists($className)){
+			$className = strtolower($className);
+			include_once($className . '.php');
+		}
 	}
+
+	// Load the plugins
+	$plugin_manager = new PluginManager();
+	$plugin_manager->load_plugins();

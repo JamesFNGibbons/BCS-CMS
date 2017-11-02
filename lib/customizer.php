@@ -60,7 +60,7 @@
         return $result[0]['Value'];
       }
       else{
-        die("Option `$option_name` does not exist.");
+        return false;
       }
     }
 
