@@ -3,8 +3,8 @@
 		public function __construct(){
 			$this->config = array(
 				"db_hostname" => 'localhost',
-				"db_username" => 'jgibbons',
-				"db_password" => '',
+				"db_username" => 'root',
+				"db_password" => 'jimbob11',
 				"db_database" => 'cms'
 			);
 		}
