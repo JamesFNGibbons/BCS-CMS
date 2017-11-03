@@ -12,6 +12,12 @@
 		  * @return $completed Boolean if the install has been completed.
 		*/
 		public static function is_complete(){
+			// Check if the config file is empty
+			$config_file = file_get_contents('../config/config.php');
+			if(empty($config_file)){
+				return false;
+			}
+
 			if(Settings::get('install_status') == '1'){
 				return true;
 			}
