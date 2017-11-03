@@ -21,7 +21,7 @@
             <td><?php print $plugin['Info']->Name; ?></td>
             <td><?php print $plugin['Info']->Description; ?></td>
             <td>
-              <a href='<?php print $plguin["Info"]->Author_Uri; ?>'>
+              <a target='_blank'  href='<?php print $plugin["Info"]->Author_Url; ?>'>
                 <?php print $plugin['Info']->Author; ?></td>
               </a>
             </td>

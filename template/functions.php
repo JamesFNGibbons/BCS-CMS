@@ -44,3 +44,24 @@
       $services
     );
   }
+  
+  /**
+   * The about us section on the homepage
+  */
+  $services = Customizer::create_section('homepage:about', 'Homepage About Us');
+  new Option(
+    'homepage:about:title',
+    'Section Title',
+    'About Our Company',
+    'text',
+    $services
+  );
+  
+  new Option(
+    'homepage:about:image',
+    'Image',
+    '',
+    'image',
+    $services
+  );
+  
