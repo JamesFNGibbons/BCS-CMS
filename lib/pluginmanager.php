@@ -1,6 +1,11 @@
 <?php
 
   class PluginManager {
+    
+    /**
+     * Define the two arrays that will contain the 
+     * plugins that have been processed.
+    */
     public $active_plugins;
     public $error_plugins;
 
@@ -37,7 +42,7 @@
                 array_push($this->active_plugins, array(
                   "Info" => $pluginInfo,
                   "Plugin" => $plugin,
-                  "Loaded" => new DataTime()
+                  "Loaded" => Time()
                 ));
               }
               else{

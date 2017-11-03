@@ -14,12 +14,20 @@
         <th>Plugin Name</th>
         <th>Plugin Description</th>
         <th>Plugin Author</th>
+        <th>Plugin Status</th>
 
         <?php foreach($plugin_manager->active_plugins as $plugin): ?>
           <tr>
             <td><?php print $plugin['Info']->Name; ?></td>
             <td><?php print $plugin['Info']->Description; ?></td>
-            <td><?php print $plugin['Info']->Author; ?></td>
+            <td>
+              <a href='<?php print $plguin["Info"]->Author_Uri; ?>'>
+                <?php print $plugin['Info']->Author; ?></td>
+              </a>
+            </td>
+            <td class='text-success'>
+              Loaded OK
+            </td>
           </tr>
         <?php endforeach; ?>
       </table>

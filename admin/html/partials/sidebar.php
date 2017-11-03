@@ -21,6 +21,10 @@
         <i class='fa fa-user'></i>
         User Accounts
       </a>
+      <a href='plugins.php' class='list-group-item'>
+        <i class='fa fa-cubes'></i>
+        Plugins
+      </a>
       <a href='setting.php' class='list-group-item'>
         <i class='fa fa-cog'></i>
         Global Settings
