@@ -12,7 +12,7 @@
   if(!Settings::get('software_version')){
     Settings::set('software_version', $_software_version);
   }
-
+  
   /**
     * Check if the version of the software
   */

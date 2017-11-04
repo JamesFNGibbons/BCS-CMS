@@ -17,7 +17,7 @@
     if(Settings::get('force-update') == 'true'){
       header('Location: update.php');
     }
-
+    
     // Check if the version has recently been updated
     if(Settings::get('version-change') == 'true'){
       $version_change = true;

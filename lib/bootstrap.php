@@ -11,7 +11,6 @@
 
 	/** Start the session */
 	session_start();
-
 	/**
 	  * Include any of the standalone helpers.
 	*/
@@ -31,9 +30,19 @@
 	}
 
 	/**
+		* Checks if a update check is needed
+	*/
+	$last_update_date = new DateTime(Settings::get('last_update'));
+	$next_update_date = $last_update_date->add(new DateInterval('P1D'));
+	$the_date = new DateTime();
+	if($next_update_date <= $the_date){
+		Settings::set('force-update', 'true');
+	}
+
+	/**
 	  * Ommit the powered by header
 	*/
-	header('x-powered-by', 'Bespoke Computer Software Web PRO');
+	header('x-powered-by', 'Bespoke Computer Software Website Studio');
 
 	// Load the plugins
 	$plugin_manager = new PluginManager();
