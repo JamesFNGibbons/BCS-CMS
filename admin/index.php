@@ -13,7 +13,19 @@
 
   // Check if the user is loggedin
   if(is_loggedin()){
-    // Check if we need to display the
+    // Check if a forced update is required
+    if(Settings::get('force-update') == 'true'){
+      header('Location: update.php');
+    }
+
+    // Check if the version has recently been updated
+    if(Settings::get('version-change') == 'true'){
+      $version_change = true;
+      Settings::set('version-change', 'false');
+    }
+    else{
+      $version_change = false;
+    }
 
     // defines the warnings array
     $warnings = array();
