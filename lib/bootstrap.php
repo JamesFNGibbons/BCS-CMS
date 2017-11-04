@@ -11,11 +11,17 @@
 
 	/** Start the session */
 	session_start();
+
 	/**
 	  * Include any of the standalone helpers.
 	*/
 	require_once "auth-helpers.php";
 	require_once "adminsidebar.php";
+
+	/**
+	  * Allow php to use more memory
+	*/
+	ini_set('memory_limit', '1024M');
 
 	/**
 	  * Function called when a class instance
