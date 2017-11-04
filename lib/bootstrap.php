@@ -9,6 +9,12 @@
 	session_start();
 
 	/**
+	  * Defines the connection URL to our servers.
+		* The software will not work without this.
+	*/
+	define("BCS_LM_URL", "http://localhost/cms-lm");
+
+	/**
 	  * Include any of the standalone helpers.
 	*/
 	require_once "auth-helpers.php";
