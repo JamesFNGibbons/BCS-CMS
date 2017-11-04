@@ -15,12 +15,6 @@
 	require_once "adminsidebar.php";
 
 	/**
-		* Defines the connection URL to our servers.
-		* The software will not work without this.
-	*/
-	define("BCS_LM_URL", "http://localhost/cms-lm");
-
-	/**
 	  * Function called when a class instance
 	  * is created.
 	  * @param $className The name of the class.

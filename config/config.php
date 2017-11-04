@@ -4,8 +4,8 @@
 			$this->config = array(
 				"db_hostname" => 'localhost',
 				"db_username" => 'root',
-				"db_password" => 'jimbob11',
-				"db_database" => 'cms'
+				"db_password" => '',
+				"db_database" => 'bcs-cms'
 			);
 		}
 

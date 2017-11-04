@@ -9,6 +9,36 @@
   require_login();
 
   /**
+    * Check if the version of the software
+  */
+  if(Licence::needs_update() !== false){
+    $new_version = Licence::needs_update();
+
+    // Create a folder for the new version to be stored in.
+    if(!file_exists('../dist/update')) mkdir('../dist/update');
+    if(!file_exists('../dist/update/' . $new_version)){
+      mkdir('../dist/update/' . $new_version);
+    }
+    // Download the new version from the server.
+    file_put_contents("../dist/update/$new_version/core.zip", Licence::get_update());
+
+    $zip = new ZipArchive;
+    if($zip->open("../dist/update/$new_version/core.zip") === TRUE) {
+        $zip->extractTo('../');
+        $zip->close();
+
+        // Update the database to say the latest version.
+        Settings::set('software_version', $new_version);
+        
+        // Delete the update zip file to save space
+        unlink("../dist/update/$new_version/core.zip");
+
+    } else {
+        die('Update has failed.');
+    }
+  }
+
+  /**
     * Function used to get the base URL from
     * of the server.
     * @return The URL
@@ -29,7 +59,7 @@
 
   // Update the website URL
   Settings::set('url', getBaseUrl());
-  
+
   // Run all the single excutables in the models directory.
   $db = new Db();
   $db = $db->get();
@@ -43,13 +73,13 @@
       catch(PDOException $e){
         die($e->getMessage());
       }
-      
+
       // Delete the single run file after
       unlink('../models/run-once/' . $filename);
     }
   }
   $db = null;
-  
+
   // Run all the models in the models directory.
   $db = new Db();
   $db = $db->get();
