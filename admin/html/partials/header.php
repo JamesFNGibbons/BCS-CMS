@@ -17,5 +17,13 @@
           <?php print Settings::get('title'); ?>
            :: <font color='white'>BCS Website Studio</font>
         </a>
+        <ul class='nav navbar-nav pull-right'>
+          <li>
+            <a href='logout.php'>
+              Logout
+              <i class='fa fa-exit'></i>
+            </a>
+          </li>
+        </div>
       </div>
     </nav>

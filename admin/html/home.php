@@ -14,7 +14,7 @@
   <?php endif; ?>
   <div class='well'>
     <div class='row'>
-      <div class='col-md-11'>
+      <div class='col-md-12'>
         <h4 class='pull-left'>Do you want to quickly change your website?</h4>
         <a href='theme-customizer.php' class='btn btn-success btn-lg pull-right'>
           Go To Customizer
@@ -27,17 +27,14 @@
     <div class='col-md-4'>
       <div class='panel panel-default'>
         <div class='panel-heading'>
-          What do you want to do?
+          About this page
         </div>
         <div class='panel-body'>
-          <div class='list-group'>
-            <div class='list-group-item'>
-              <img src='static/images/wm-login.png' width='100%'>
-            </div>
-            <div class='list-group-item'>
-              <img src='static/images/cp-login.png' width='100%'>
-            </div>
-          </div>
+          <h3 style='margin: 0; padding: 0;'>Welcome to BCS Web Studio</h3>
+          This is your main administration page for your website. From here,
+          you can customize your site, update the content and upload new images
+          / video files. You can also use the User Accounts tab to add other people
+          who can work with you.
         </div>
       </div>
     </div>
