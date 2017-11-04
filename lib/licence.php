@@ -6,7 +6,7 @@
 		* Defines the connection URL to our servers.
 		* The software will not work without this.
 	*/
-	define("BCS_LM_URL", "http://localhost/cms-lm/");
+	define("BCS_LM_URL", "http://wm-lm-s1.bespokecomputersoftware.com/");
 
   class Licence {
     /**
