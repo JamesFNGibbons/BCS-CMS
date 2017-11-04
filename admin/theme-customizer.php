@@ -37,7 +37,7 @@ if(isset($_GET['section'])){
       Settings::set('title', $title);
       header('Location: theme-customizer.php?saved');
     }
-
+  
     /**
       * Setup the select media modal for the site logo, and
       * append the selected section param to the end of the

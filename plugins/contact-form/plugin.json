@@ -1,6 +1,7 @@
 {
   "Name": "Contact Form Plugin",
   "Author": "Bespoke Computer Software",
+  "Author_Url": "http://bespokecomputersoftware.co.uk", 
   "Description": "Used to display and handle the contact form.",
-  "Main_Class": "Conatct_Plugin"
+  "Main_Class": "Contact_Plugin"
 }

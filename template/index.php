@@ -19,4 +19,9 @@
       </div>
     <?php endfor; ?>
   </div>
+  
+  <div class='well'>
+    <h2><?php print get_theme_option('homepage:about:title'); ?></h2>
+    <img src='<?php print get_theme_option("homepage:about:image"); ?>'>
+  </div>
 </div>

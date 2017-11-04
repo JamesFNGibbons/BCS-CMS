@@ -1,6 +1,11 @@
 <?php
 
   class PluginManager {
+    
+    /**
+     * Define the two arrays that will contain the 
+     * plugins that have been processed.
+    */
     public $active_plugins;
     public $error_plugins;
 
@@ -11,7 +16,24 @@
       $this->active_plugins = array();
       $this->error_plugins = array();
     }
-
+    
+    /**
+      * Function used to check if a plugin has
+      * been loaded OK.
+      * @param $plugin_name
+      * @return $loaded
+    */
+    public function is_loaded($plugin_name){
+      $loaded = true;
+      foreach($this->active_plugins as $plugin){
+        if($plugin['Info']->Name == $plugin_name){
+          $loaded = true;
+        }
+      }
+      
+      return $loaded;
+    }
+  
     /**
       * Function used to load and activate the plugins.
     */
@@ -37,8 +59,11 @@
                 array_push($this->active_plugins, array(
                   "Info" => $pluginInfo,
                   "Plugin" => $plugin,
-                  "Loaded" => new DataTime()
+                  "Loaded" => Time()
                 ));
+                
+                // Run the plugin
+                $plugin->Run();
               }
               else{
                 array_push($this->error_plugins, array(

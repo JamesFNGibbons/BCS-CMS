@@ -12,6 +12,7 @@
 	  * Include any of the standalone helpers.
 	*/
 	require_once "auth-helpers.php";
+	require_once "adminsidebar.php";
 
 	/**
 	  * Function called when a class instance
@@ -24,6 +25,11 @@
 			include_once($className . '.php');
 		}
 	}
+
+	/**
+	  * Ommit the powered by header
+	*/
+	header('x-powered-by', 'Bespoke Computer Software Web PRO');
 
 	// Load the plugins
 	$plugin_manager = new PluginManager();
