@@ -12,6 +12,7 @@
 	  * Include any of the standalone helpers.
 	*/
 	require_once "auth-helpers.php";
+	require_once "adminsidebar.php";
 
 	/**
 	  * Function called when a class instance
