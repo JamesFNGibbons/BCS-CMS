@@ -5,6 +5,10 @@
 	  * as and when they are required.
 	*/
 
+	/** ============================ **/
+	/** === The Software Version === */
+	$_software_version = "1.2.3";
+
 	/** Start the session */
 	session_start();
 

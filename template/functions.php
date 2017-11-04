@@ -44,7 +44,7 @@
       $services
     );
   }
-  
+
   /**
    * The about us section on the homepage
   */
@@ -56,7 +56,7 @@
     'text',
     $services
   );
-  
+
   new Option(
     'homepage:about:image',
     'Image',
@@ -64,4 +64,3 @@
     'image',
     $services
   );
-  

@@ -8,6 +8,11 @@
   require_once '../lib/bootstrap.php';
   require_login();
 
+  // Set the default software version if not set
+  if(!Settings::get('software_version')){
+    Settings::set('software_version', $_software_version);
+  }
+
   /**
     * Check if the version of the software
   */
@@ -29,7 +34,7 @@
 
         // Update the database to say the latest version.
         Settings::set('software_version', $new_version);
-        
+
         // Delete the update zip file to save space
         unlink("../dist/update/$new_version/core.zip");
 
@@ -96,9 +101,6 @@
     }
   }
   $db = null;
-
-  // Get the current software version
-  Settings::set('software_version', '1.2.2');
 
   // Update the last_updated value in the database.
   $dt = new DateTime('now');
