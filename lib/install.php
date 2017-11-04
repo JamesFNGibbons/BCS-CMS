@@ -12,6 +12,10 @@
 		  * @return $completed Boolean if the install has been completed.
 		*/
 		public static function is_complete(){
+			if(!file_exists("../config/config.php") || empty(file_get_contents('../config/config.php'))){
+				return false;
+			}
+
 			if(Settings::get('install_status') == '1'){
 				return true;
 			}

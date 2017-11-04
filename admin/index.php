@@ -8,6 +8,7 @@
   require_once "../lib/bootstrap.php";
   require_once 'html/partials/header.php';
 
+  // Get the software versions from the database.
   $last_updated = Settings::get('last_updated');
   $software_version = Settings::get('software_version');
 
@@ -17,7 +18,7 @@
     if(Settings::get('force-update') == 'true'){
       header('Location: update.php');
     }
-    
+
     // Check if the version has recently been updated
     if(Settings::get('version-change') == 'true'){
       $version_change = true;

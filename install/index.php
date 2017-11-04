@@ -9,6 +9,11 @@
 	require_once "../lib/bootstrap.php";
 	require_once('partials/header.php');
 
+	// Check that the installer has not already been run
+	if(Install::is_complete()){
+		header('Location: ../');
+	}
+
 	// Set the default current_step variable.
 	if(!isset($_SESSION['current_step'])){
 		$_SESSION['current_step'] = 1;
@@ -143,6 +148,7 @@
 
 				// Install Complete
 				Settings::set('install_status', '1');
+				$_SESSION['current_step'] = 1;
 
 				/**
 				  * Run the updater, that will redirect the user

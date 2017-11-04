@@ -32,11 +32,13 @@
 	/**
 		* Checks if a update check is needed
 	*/
-	$last_update_date = new DateTime(Settings::get('last_update'));
-	$next_update_date = $last_update_date->add(new DateInterval('P1D'));
-	$the_date = new DateTime();
-	if($next_update_date <= $the_date){
-		Settings::set('force-update', 'true');
+	if(Install::is_complete()){
+		$last_update_date = new DateTime(Settings::get('last_update'));
+		$next_update_date = $last_update_date->add(new DateInterval('P1D'));
+		$the_date = new DateTime();
+		if($next_update_date <= $the_date){
+			Settings::set('force-update', 'true');
+		}
 	}
 
 	/**
