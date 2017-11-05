@@ -47,11 +47,6 @@
 		}
 	}
 
-	/**
-	  * Ommit the powered by header
-	*/
-	header('x-powered-by', 'Bespoke Computer Software Website Studio');
-
 	// Load the plugins
 	$plugin_manager = new PluginManager();
 	$plugin_manager->load_plugins();

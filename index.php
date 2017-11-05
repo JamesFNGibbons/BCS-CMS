@@ -13,7 +13,7 @@ require_once "lib/bootstrap.php";
 
 // Check if the install has been completed
 if(!Install::is_complete()){
-	header('Location: install');
+	header('Location: install?step=1');
 }
 
 // Check if a page is requested
