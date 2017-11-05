@@ -30,7 +30,7 @@
 	*/
 	if(Install::is_complete()){
 		if(Settings::get('error-reporting') == 'true')){
-			error_reporting(E_ALL);
+			error_reporting(E_ALL & ~E_NOTICE);
 		}
 		else{
 			error_reporting(false);
@@ -38,7 +38,7 @@
 	}
 	else{
 		// For the installation process.
-		error_reporting(E_ALL);
+		error_reporting(E_ALL & ~E_NOTICE);
 	}
 
 	/**
