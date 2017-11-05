@@ -24,6 +24,22 @@
 	ini_set('memory_limit', '-1');
 
 	/**
+	  * Setup error reporting
+	*/
+	if(Install::is_complete()){
+		if(Settings::get('error-reporting') == 'true')){
+			error_reporting(E_ALL);
+		}
+		else{
+			error_reporting(false);
+		}
+	}
+	else{
+		// For the installation process.
+		error_reporting(E_ALL);
+	}
+
+	/**
 	  * Function called when a class instance
 	  * is created.
 	  * @param $className The name of the class.
