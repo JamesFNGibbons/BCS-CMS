@@ -21,7 +21,7 @@
 	/**
 	  * Allow php to use more memory
 	*/
-	ini_set('memory_limit', '1024M');
+	ini_set('memory_limit', '-1');
 
 	/**
 	  * Function called when a class instance
