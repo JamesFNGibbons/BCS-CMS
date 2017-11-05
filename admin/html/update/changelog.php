@@ -4,4 +4,5 @@
   <li>Plugins - You can now install plugins to improve the software.</li>
   <li>Website Customizer - An easy way to change your website</li>
   <li>Page Manager - Create and update the pages on your website.</li>
+  <li>Media Center - Upload and manage files</li>
 </ul>
