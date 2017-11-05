@@ -29,7 +29,7 @@
 	  * Setup error reporting
 	*/
 	if(Install::is_complete()){
-		if(Settings::get('error-reporting') == 'true')){
+		if(Settings::get('error-reporting') == 'true'){
 			error_reporting(E_ALL & ~E_NOTICE);
 		}
 		else{
