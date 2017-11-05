@@ -37,6 +37,27 @@
 		}
 
 		/**
+		  * Function used to get all the settings in the
+			* database.
+			* @return $settings;
+		*/
+		public static function get_all(){
+			$db = new Db();
+			$db = $db->get();
+			try{
+				$query = $db->prepare("SELECT * FROM Settings");
+				$query->execute();
+				$result = $query->fetchAll();
+			}
+			catch(PDOException $e){
+				die($e->getMessage());
+			}
+
+			$settings = $result;
+			return $settings;
+		}
+
+		/**
 		  * Function used to set a settings value in
 		  * the database.
 		  * @param $key The Settings Key Name

@@ -33,6 +33,10 @@
       case('LINUX'):
         $cmd = "curl -o ../dist/update/$new_version/core.zip http://wm-lm-s1.bespokecomputersoftware.com/update/$new_version/core.zip";
       break;
+      default:
+        $os = PHP_OS;
+        die("Your OS ($os) is not supported, and so an automatic update cannot be run. <br> <a href='index.php'>Go Back</a>");
+      break;
     }
     if(isset($cmd)){
       exec($cmd);

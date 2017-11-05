@@ -5,6 +5,14 @@
   require_once "html/partials/sidebar.php";
   require_login();
 
+  // Get the allowed file types from the database.
+  $file_types = array();
+  foreach(Settings::get_all() as $setting){
+    if(substr($setting['Key_Name'], 0, 14) == 'allow-filetype'){
+      array_push($file_types, $setting);
+    }
+  }
+
   // Check if we need to update any of the settings.
   if(isset($_POST['action']) && $_POST['action'] = 'update'){
     // Check if all the required setting keys are present.
