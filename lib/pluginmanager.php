@@ -1,9 +1,9 @@
 <?php
 
   class PluginManager {
-    
+
     /**
-     * Define the two arrays that will contain the 
+     * Define the two arrays that will contain the
      * plugins that have been processed.
     */
     public $active_plugins;
@@ -16,24 +16,50 @@
       $this->active_plugins = array();
       $this->error_plugins = array();
     }
-    
+
+    /**
+      * Function used to get the plugin class.
+      * @return $the_plugin The plugin instance.
+      * @param $plugin_name The name of the plugin.
+    */
+    public static function get_plugin($plugin_name){
+      if(self::is_loaded($plugin_name)){
+        $the_plugin = null;
+        foreach($plugin_manager->active_plugins as $plugin){
+          if($plugin['Info']->Name == $plugin_name){
+            $the_plugin = $plugin['Plugin'];
+          }
+        }
+
+        if(empty($the_plugin)){
+          die("Could not locate the plugin instance for `$plugin_name`");
+        }
+        else{
+          return $the_plugin;
+        }
+      }
+      else{
+        die("Cannot load plugin `$plugin_name`, as it is not loaded.");
+      }
+    }
+
     /**
       * Function used to check if a plugin has
       * been loaded OK.
       * @param $plugin_name
       * @return $loaded
     */
-    public function is_loaded($plugin_name){
+    public static function is_loaded($plugin_name){
       $loaded = true;
-      foreach($this->active_plugins as $plugin){
+      foreach($plugin_manager->active_plugins as $plugin){
         if($plugin['Info']->Name == $plugin_name){
           $loaded = true;
         }
       }
-      
+
       return $loaded;
     }
-  
+
     /**
       * Function used to load and activate the plugins.
     */
@@ -61,7 +87,7 @@
                   "Plugin" => $plugin,
                   "Loaded" => Time()
                 ));
-                
+
                 // Run the plugin
                 $plugin->Run();
               }
