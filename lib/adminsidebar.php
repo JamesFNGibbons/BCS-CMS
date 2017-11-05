@@ -22,6 +22,11 @@
       "Icon" => 'fa fa-book'
     ),
     array(
+      "Title" => 'Navbar Menu',
+      "Link" => 'navigation.php',
+      "Icon" => 'fa fa-bars'
+    ),
+    array(
       "Title" => 'User Accounts',
       "Link" => 'users.php',
       "Icon" => 'fa fa-users'

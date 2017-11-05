@@ -14,6 +14,16 @@
   }
 
   /**
+	  * Setup the default error reporting, if
+		* it has not already been set.
+	*/
+	if(Install::is_complete()){
+		if(!Settings::get('error-reporting')){
+      Settings::set('error-reporting', 'true');
+    }
+	}
+
+  /**
     * Check if the version of the software
   */
   if(Licence::needs_update() !== false){
@@ -24,36 +34,22 @@
     if(!file_exists('../dist/update/' . $new_version)){
       mkdir('../dist/update/' . $new_version);
     }
+    // Download the new version from the server.
+    file_put_contents("../dist/update/$new_version/core.zip", Licence::get_update());
 
-    // Use the os specific command to download the new version file.
-    switch(strtoupper(PHP_OS)){
-      case('DARWIN'):
-        $cmd = "curl -o ../dist/update/$new_version/core.zip http://wm-lm-s1.bespokecomputersoftware.com/update/$new_version/core.zip";
-      break;
-      case('LINUX'):
-        $cmd = "curl -o ../dist/update/$new_version/core.zip http://wm-lm-s1.bespokecomputersoftware.com/update/$new_version/core.zip";
-      break;
-      default:
-        $os = PHP_OS;
-        die("Your OS ($os) is not supported, and so an automatic update cannot be run. <br> <a href='index.php'>Go Back</a>");
-      break;
-    }
-    if(isset($cmd)){
-      exec($cmd);
-    }
-
-    // Extract the contents of the new update file.
     $zip = new ZipArchive;
-    $res = $zip->open("../dist/update/$new_version/core.zip");
-    if ($res === TRUE) {
-      $zip->extractTo('../');
-      $zip->close();
+    if($zip->open("../dist/update/$new_version/core.zip") === TRUE) {
+        $zip->extractTo('../');
+        $zip->close();
 
-      // Update the software version in the database.
-      Settings::set('software_version', $new_version);
+        // Update the database to say the latest version.
+        Settings::set('software_version', $new_version);
+
+        // Delete the update zip file to save space
+        unlink("../dist/update/$new_version/core.zip");
 
     } else {
-      die('The core update could not extract.');
+        die('Update has failed.');
     }
   }
 

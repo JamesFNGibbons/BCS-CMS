@@ -260,7 +260,7 @@
         }
       }
     }
-  
+
     /**
      * Function used to update the page in the database.
      * with the changed values.
@@ -277,7 +277,7 @@
       }
       $db = null;
     }
-  
+
     /**
       * Function used to create a new page.
       * @param $title The page title
@@ -376,11 +376,6 @@
       }
 
       $result = $query->fetchAll();
-      if(count($result) > 0){
-        return $result;
-      }
-      else{
-        return false;
-      }
+      return $result;
     }
   }
