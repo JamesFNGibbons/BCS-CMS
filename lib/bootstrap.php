@@ -7,7 +7,9 @@
 
 	/** ============================ **/
 	/** === The Software Version === */
-	$_software_version = "1.2.3";
+	if(file_exists('../.version')){
+		$_software_version = file_get_contents('../.version');
+	}
 
 	/** Start the session */
 	session_start();
