@@ -113,3 +113,52 @@
       print $the_page->content; 
     }
   }
+  
+  /**
+   * Function used to render the navigation items for a bootstrap navbar.
+  */
+  function the_bootstrap_nav($open_tag = '<ul class="nav navbar-nav">', $close_tag = "</ul>"){
+    global $the_page;
+    
+    // Render the container open tag.
+    print $open_tag;
+      
+    $nav_items = Nav::get_nav_items();
+    foreach($nav_items as $item){
+      // Do not render the item if it has a parent
+      if(empty($item['Parent']) && empty($item['Sub_Items'])){
+        // Check if the navbar item should be active
+        print "<li>";
+        
+        // Render the link tag.
+        $link = $item['Link'];
+        print "<a href='$link '>";
+        print $item['Title'];
+        print "</a>";
+        
+        // Close the tag
+        print "</li>"; 
+      }
+      
+      else if(isset($item['Sub_Items'])){
+       ?> 
+       <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href='<?php print $item["Link"]; ?>'><?php print $item['Title']; ?>
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <?php foreach($item['Sub_Items'] as $sub_item): ?>
+              <li>
+                <a href='<?php print $sub_item["Link"]; ?>'>
+                  <?php print $sub_item["Title"]; ?>
+                </a>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        </li>
+      <?php
+      }
+    }
+    
+    // Render the container closing tag.
+    print $close_tag;
+  }

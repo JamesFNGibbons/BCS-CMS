@@ -23,7 +23,41 @@
 
       return $result;
     }
-
+  
+    /**
+     * Function used to get the navigation items
+     * that have been sorted into a more usable array.
+     * @return $items The navigation items array.
+    */
+    public static function get_nav_items(){
+      // Get the navbar items.
+      $items = array();
+      foreach(self::get_items() as $item){
+        if(empty($item['Parent'])){
+          array_push($items, $item);
+        }
+        else{
+          // Check if the parent item exists in the items array.
+          foreach($items as $parent_item){
+            if($item['Parent'] == $parent_item['ID']){
+              // Get the index of the item in the nav items array
+              $index = array_search($item, $items);
+    
+              // Define the sub items array if is null
+              if(empty($items[$index]['Sub_Items'])){
+                $items[$index]['Sub_Items'] = array();
+              }
+              // Add the new item to the sub array.
+              array_push($items[$index]['Sub_Items'], $item);
+            }
+          }
+        }
+      }
+      
+      // Return the items.
+      return $items;
+    }
+  
     /**
       * Function used to add a new nav item
       * @param $title The item title

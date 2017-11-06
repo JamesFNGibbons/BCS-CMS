@@ -6,7 +6,9 @@
 
     <?php the_seo_tags(); ?>
 
-    <link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   </head>
   <body>
     <nav class='navbar navbar-default'>
@@ -18,5 +20,7 @@
             <?php the_site_title(); ?>
           <?php endif; ?>
         </a>
+        
+        <?php the_bootstrap_nav("<ul class='nav navbar-nav pull-right'>"); ?>
       </div>
     </nav>
