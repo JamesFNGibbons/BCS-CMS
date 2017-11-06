@@ -34,9 +34,20 @@
     if(!file_exists('../dist/update/' . $new_version)){
       mkdir('../dist/update/' . $new_version);
     }
-    // Download the new version from the server.
-    file_put_contents("../dist/update/$new_version/core.zip", Licence::get_update());
-
+  
+    // Use the os specific command to download the new version file.
+    switch(strtoupper(PHP_OS)){
+      case('DARWIN'):
+        $cmd = "curl -o ../dist/update/$new_version/core.zip http://wm-lm-s1.bespokecomputersoftware.com/update/$new_version/core.zip";
+      break;
+      case('LINUX'):
+        $cmd = "curl -o ../dist/update/$new_version/core.zip http://wm-lm-s1.bespokecomputersoftware.com/update/$new_version/core.zip";
+      break;
+    }
+    if(isset($cmd)){
+      exec($cmd);
+    }
+  
     $zip = new ZipArchive;
     if($zip->open("../dist/update/$new_version/core.zip") === TRUE) {
         $zip->extractTo('../');

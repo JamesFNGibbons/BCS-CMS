@@ -3,9 +3,9 @@
 		public function __construct(){
 			$this->config = array(
 				"db_hostname" => 'localhost',
-				"db_username" => 'root',
+				"db_username" => 'jgibbons',
 				"db_password" => '',
-				"db_database" => 'tvc-cms'
+				"db_database" => 'cms'
 			);
 		}
 
