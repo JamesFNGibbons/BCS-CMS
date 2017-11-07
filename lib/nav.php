@@ -2,6 +2,18 @@
 
   require_once "bootstrap.php";
 
+  /**
+    * Function used to sort the items array by the priority.
+  */
+  function array_sort_by_column(&$arr, $col, $dir = SORT_ASC) {
+    $sort_col = array();
+    foreach ($arr as $key=> $row) {
+        $sort_col[$key] = $row[$col];
+    }
+
+    array_multisort($sort_col, $dir, $arr);
+  }
+
   class Nav {
     /**
       * Function used to get the navigation
@@ -21,9 +33,12 @@
       }
       $db = null;
 
+      // Sort the items based on their priority
+      array_sort_by_column($result, 'priority');
+
       return $result;
     }
-  
+
     /**
      * Function used to get the navigation items
      * that have been sorted into a more usable array.
@@ -42,7 +57,7 @@
             if($item['Parent'] == $parent_item['ID']){
               // Get the index of the item in the nav items array
               $index = array_search($item, $items);
-    
+
               // Define the sub items array if is null
               if(empty($items[$index]['Sub_Items'])){
                 $items[$index]['Sub_Items'] = array();
@@ -53,11 +68,11 @@
           }
         }
       }
-      
+
       // Return the items.
       return $items;
     }
-  
+
     /**
       * Function used to add a new nav item
       * @param $title The item title
@@ -80,15 +95,15 @@
       $db = $db->get();
       try{
         $query = $db->prepare("SELECT * FROM Nav_Items");
-        $query->fetchAll();
+        $query->execute();
         $result = $query->fetchAll();
       }
       catch(PDOException $e){
         die($e->getMessage());
       }
       $db = null;
-      $priority = count($result);
-      $priotiry += 1;
+      $priority = count($result) + 1;
+      //die(var_dump($priority));
 
       if(isset($title) && isset($link)){
         $db = new Db();
@@ -98,7 +113,7 @@
             '$title',
             '$link',
             '$parent',
-            $priotiry,
+            '$priority',
             '$type',
             '$page_id'
           )");
@@ -141,7 +156,7 @@
         $db = new Db();
         $db = $db->get();
         try{
-          $db->exec("UPDATE Nav_Items SET Priority = $priotiry WHERE ID = $item_id");
+          $db->exec("UPDATE Nav_Items SET Priority = '$priority' WHERE ID = $item_id");
         }
         catch(PDOException $e){
           die($e->getMessage());

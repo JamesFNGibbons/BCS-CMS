@@ -98,6 +98,12 @@
           header('Location: navigation.php');
         }
       break;
+      case('update_priority'):
+        if(isset($_POST['id']) && isset($_POST['priority'])){
+          Nav::set_item_priority($_POST['id'], $_POST['priority']);
+          header('Location: navigation.php');
+        }
+      break;
       case('update-autoadd-setting'):
         if(isset($_POST['auto_add_pages'])){
           Settings::set('navbar-auto-add-pages', $_POST['auto_add_pages']);

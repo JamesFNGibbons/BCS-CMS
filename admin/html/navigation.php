@@ -1,3 +1,8 @@
+<script>
+$('.priotiry').change(function() {
+  $(this).closest('form').submit();
+});
+</script>
 <div class='col-md-9'>
   <div class='jumbotron'>
     <div class='container'>
@@ -128,6 +133,21 @@
                   </span>
                 </div>
                 <div class='panel-body collapse <?php print $item["ID"]; ?>'>
+                  <div class='row'>
+                    <div class='col-md-4'>
+                      <table>
+                        <td>Order Priority</td>
+                        <td>
+                          <form method='post'>
+                            <input type='hidden' name='id' value='<?php print $item["ID"]; ?>'>
+                            <input type='hidden' name='action' value='update_priority'>
+                            <input type='text' name='priority' class='prioritry pull-right' value='<?php print $item["Priority"]; ?>' style='width: 20px;' class='pull-right'>
+                          </form>
+                        </td>
+                      </table>
+                    </div>
+                  </div>
+                  <br>
                   <div class='form-group'>
                     <form method='post'>
                       <input type='hidden' name='action' value='update'>
