@@ -48,20 +48,16 @@
       exec($cmd);
     }
   
-    $zip = new ZipArchive;
-    if($zip->open("../dist/update/$new_version/core.zip") === TRUE) {
-        $zip->extractTo('../');
-        $zip->close();
-
-        // Update the database to say the latest version.
-        Settings::set('software_version', $new_version);
-
-        // Delete the update zip file to save space
-        unlink("../dist/update/$new_version/core.zip");
-
-    } else {
-        die('Update has failed.');
+    // Extract the new core.zip update using native commands.
+    $_os = strtoupper(PHP_OS);
+    if($_os == 'DARWIN' or $_os == 'LINUX'){
+      exec("unzip ../dist/update/$new_version/core.zip -d ../");
     }
+    
+    // Update the database to say the latest version, and then delete the core.zip file.
+    Settings::set('software_version', $new_version);
+    $version_change = true;
+    unlink("../dist/update/$new_version/core.zip");
   }
 
   /**

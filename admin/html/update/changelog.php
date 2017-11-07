@@ -4,4 +4,5 @@
   <li>The navigation manager</li>
   <li>The navigation frontend API</li>
   <li>Direct support for the bootstrap navigation bar</li>
+  <li>A more practical system updater</li>
 </ul>

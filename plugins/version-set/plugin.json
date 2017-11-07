@@ -1,0 +1,7 @@
+{
+  "Name": "Version Updater",
+  "Author": "Bespoke Computer Software",
+  "Author_Url": "http://bespokecomputersoftware.co.uk", 
+  "Description": "Used to change the software version in the database.",
+  "Main_Class": "Version_Set"
+}
