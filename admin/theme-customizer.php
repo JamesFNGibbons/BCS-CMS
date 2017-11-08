@@ -37,7 +37,7 @@ if(isset($_GET['section'])){
       Settings::set('title', $title);
       header('Location: theme-customizer.php?saved');
     }
-  
+
     /**
       * Setup the select media modal for the site logo, and
       * append the selected section param to the end of the
@@ -90,7 +90,7 @@ if(isset($_GET['section'])){
     // Check if the have been saved
     if(isset($_POST['action']) && $_POST['action'] == 'update'){
       foreach($options as $option){
-        if($option['Type'] == 'text' || $option['Type'] == 'textarea'){
+        if($option['Type'] == 'text' || $option['Type'] == 'textarea' || $option['Type'] == 'select'){
           Customizer::update_option($option['Name'], $_POST[$option["Name"]]);
         }
       }

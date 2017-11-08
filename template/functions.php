@@ -1,5 +1,21 @@
 <?php
 
+  $nav = Customizer::create_section('nav', 'Navigation Bar');
+  new Option(
+    'nav-bg-colour',
+    'Background Colour',
+    '#000',
+    'text',
+    $nav
+  );
+  new Option(
+    'nav-text-colour',
+    'Text Colour',
+    '#6d9dbd',
+    'text',
+    $nav
+  );
+
   $banner = Customizer::create_section('homepage-banner', 'Homepage Banner');
   new Option(
       'homepage-banner-title',
