@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS Pages (
   Author_Name TEXT,
   URI TEXT,
   Feature_Image TEXT,
+  Template TEXT,
 
   PRIMARY KEY(ID)
 )

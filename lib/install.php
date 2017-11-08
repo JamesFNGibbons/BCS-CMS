@@ -12,16 +12,16 @@
 		  * @return $completed Boolean if the install has been completed.
 		*/
 		public static function is_complete(){
-			if(!file_exists('config/config.php')){
+			if(!@file_exists('config/config.php')){
 				if(empty(file_get_contents('../config/config.php'))){
 					return false;
-				}	
+				}
 				else{
 					return true;
 				}
 			}
 			else{
-				if(empty(file_get_contents('config/config.php'))){
+				if(empty(@file_get_contents('config/config.php'))){
 					return false;
 				}
 				else{
@@ -31,7 +31,7 @@
 					else{
 						return false;
 					}
-				}	
+				}
 			}
 		}
 	}

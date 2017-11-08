@@ -10,6 +10,7 @@ _  /_/ //  __/(__  )__  /_/ / /_/ /  ,<  /  __/     / /___  / /_/ /  / / / / /_ 
 	*/
 
 require_once "lib/bootstrap.php";
+global $the_page;
 
 // Check if the install has been completed
 if(!Install::is_complete()){
@@ -18,16 +19,8 @@ if(!Install::is_complete()){
 
 // Check if a page is requested
 if(isset($_GET['page'])){
-	$page_id = Page::get_id_from_uri($_GET['page']);
-	if(empty($page_id)){
-		// The page does not exist
-		if(file_exists('template/404.php')){
-			include 'template/404.php';
-		}
-		else{
-			die('404! Page not found. <br> <a href="index.php">Go Back</a>');
-		}
-	}
+	// Render the correct page template.
+	PageTemplate::get_template(Page::get_id_from_uri($_GET['page']));
 	$the_page = new Page($page_id);
 }
 else{

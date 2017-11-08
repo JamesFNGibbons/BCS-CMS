@@ -20,6 +20,7 @@
     public $is_homepage;
     public $is_dummy = false;
     public $feature_image;
+    public $template;
 
     /**
       * Constructor used to get the data of the
@@ -55,6 +56,7 @@
             $this->id = $id;
             $this->exists = true;
             $this->feature_image = $result['Feature_Image'];
+            $this->template = $result['Template'];
           }
           else{
             $this->exists = false;
@@ -269,7 +271,7 @@
       $db = new Db();
       $db = $db->get();
       try{
-        $db->exec("UPDATE Pages SET Title = '$this->title', Content = '$this->content', Updated = now()
+        $db->exec("UPDATE Pages SET Title = '$this->title', Content = '$this->content', Template = '$this->template', Updated = now()
         WHERE ID = '$this->id'; ");
       }
       catch(PDOException $e){

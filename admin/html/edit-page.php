@@ -57,6 +57,29 @@
             </div>
           </div>
         </div>
+        <?php if($has_templates): ?>
+          <div class='panel panel-default'>
+            <div class='panel-heading'>Page Template</div>
+            <div class='panel-body'>
+              <div class='form-group'>
+                <select class='form-control' name='template'>
+                  <option value='null'>No Template</option>
+                  <?php foreach($templates as $template): ?>
+                    <?php if($page->template == $template): ?>
+                      <option selected="selected" value='<?php print $template; ?>'>
+                        <?php print $template; ?>
+                      </option>
+                    <?php else: ?>
+                      <option value='<?php print $template; ?>'>
+                        <?php print $template; ?>
+                      </option>
+                    <?php endif; ?>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+            </div>
+          </div>
+        <?php endif; ?>
       </div>
     </div>
   </form>

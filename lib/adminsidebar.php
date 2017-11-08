@@ -65,16 +65,9 @@ function add_admin_sidebar_item($item){
  * Function used to add a new acton item to the navigation.
  * @param $item, @param $action
 */
-function add_admin_sidebar_action_item($item, $action){
-  if(isset($item) && isset($action)){
+function add_admin_sidebar_action_item($item){
+  if(isset($item)){
     global $admin_sidebar_items;
-    
-    // Generate an action ID
-    $action_id = uniqid();
-    $item['Action_ID'] = $action_id;
-    $item['Type'] = 'action-link';
-    $item['Action'] = $action;
-    
     array_push($admin_sidebar_items, $item);
   }
 }
