@@ -24,7 +24,6 @@
         </a>
       </div>
     </nav>
-
     <nav class='navbar navbar-inverse navbar-theNav'>
       <div class='container'>
         <?php the_bootstrap_nav(); ?>

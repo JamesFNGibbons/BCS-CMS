@@ -44,17 +44,6 @@
                     catch(PDOException $e){
                         die($e->getMessage());
                     }
-
-                    // Add the navbar select options if it is a selector
-                    if($option_type == 'select'){
-                      if(empty($option_options)){
-                        die("Invalid number of options for select type.");
-                      }
-
-                      try{
-                        $query = $db->prepare("SELECT * FROM Select_Options");
-                      }
-                    }
                 }
                 else{
                   // Get the options values.
@@ -80,6 +69,59 @@
                     $result[0]['Type'] = $option_type;
                   }
                 }
+
+                // Add the customizer select options if it is a selector
+                if($option_type == 'select'){
+                  if(empty($option_options)){
+                    die("Invalid number of options given for select type.");
+                  }
+
+                  // Get the option ID
+                  $option_id = null;
+                  try{
+                    $query = $db->prepare("SELECT * FROM Theme_Options WHERE Name = '$option_name'");
+                    $query->execute();
+                    $result = $query->fetchAll();
+                    if(!count($result) > 0){
+                      die("Internal server error. Please contact support.");
+                    }
+                    $option_id = $result[0]['ID'];
+                  }
+                  catch(PDOException $e){
+                    die($e->getMessage());
+                  }
+
+                  // Create the selector options.
+                  foreach($option_options as $option){
+                    try{
+                      $title = $option['Title'];
+                      $query = $db->prepare("SELECT * FROM Select_Options WHERE Option_ID = '$option_id' and Option_Title = '$title'");
+                      $query->execute();
+                      $result = $query->fetchAll();
+                    }
+                    catch(PDOException $e){
+                      die($e->getMessage());
+                    }
+
+                    // Check if the optivon exists
+                    if(count($result) == 0){
+                      try{
+                        $title = $option['Title'];
+                        $value = $option['Value'];
+
+                        $db->exec("INSERT INTO Select_Options (Option_ID, Option_Title, Option_Value) VALUES (
+                          '$option_id',
+                          '$title',
+                          '$value'
+                        )");
+                      }
+                      catch(PDOException $e){
+                        die($e->getMessage());
+                      }
+                    }
+                  }
+                }
+
                 $db = null;
 
                 $this->value = $result[0]['Value'];

@@ -27,7 +27,7 @@
           // Get the options for the selector.
           try{
             $query = $db->prepare("SELECT * FROM Select_Options WHERE Option_ID = $option_id");
-            $query->prepare();
+            $query->execute();
             $result = $query->fetchAll();
           }
           catch(PDOException $e){

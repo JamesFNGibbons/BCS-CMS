@@ -20,7 +20,17 @@
     'Use the navbar inverse theme',
     'true',
     'select',
-    $nav
+    $nav,
+    array( // The select options
+      array(
+        "Title" => 'True',
+        "Value" => 'true'
+      ),
+      array(
+        "Title" => 'False',
+        "Value" => 'false'
+      )
+    )
   );
 
   $banner = Customizer::create_section('homepage-banner', 'Homepage Banner');
