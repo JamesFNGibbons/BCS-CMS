@@ -3,7 +3,6 @@
     <title><?php the_site_title(); ?> :: <?php the_title(); ?></title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <?php the_seo_tags(); ?>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -25,8 +24,9 @@
         </a>
       </div>
     </nav>
+
     <nav class='navbar navbar-inverse navbar-theNav'>
       <div class='container'>
-        <?php the_bootstrap_nav("<ul class='nav navbar-nav pull-right'>"); ?>
+        <?php the_bootstrap_nav(); ?>
       </div>
     </nav>

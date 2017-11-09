@@ -23,7 +23,11 @@
       <?php endif; ?>
       <?php if($option['Type'] == 'select'): ?>
         <select name='<?php print $option["Name"]; ?>' class='form-control'>
-
+          <?php foreach(SelectOption::get_options($option["ID"]) as $select_option): ?>
+            <option value='<?php print $select_option["Option_Value"]; ?>'>
+              <?php print $select_option["Option_Title"]; ?>
+            </option>
+          <?php endforeach; ?>
         </select>
       <?php endif; ?>
     </div>

@@ -15,6 +15,13 @@
     'text',
     $nav
   );
+  new Option(
+    'navbar-inverse',
+    'Use the navbar inverse theme',
+    'true',
+    'select',
+    $nav
+  );
 
   $banner = Customizer::create_section('homepage-banner', 'Homepage Banner');
   new Option(

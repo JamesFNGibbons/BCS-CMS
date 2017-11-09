@@ -17,7 +17,7 @@
          * @param $option_type The options type
          * @param $section_name The name (ID) of the customizer section.
         */
-        public function __construct($option_name, $option_label, $default_value = '', $option_type, $section_name){
+        public function __construct($option_name, $option_label, $default_value = '', $option_type, $section_name, $option_options = array()){
             if(isset($option_name) && isset($section_name)){
                 $db = new Db();
                 $db = $db->get();
@@ -43,6 +43,17 @@
                     }
                     catch(PDOException $e){
                         die($e->getMessage());
+                    }
+
+                    // Add the navbar select options if it is a selector
+                    if($option_type == 'select'){
+                      if(empty($option_options)){
+                        die("Invalid number of options for select type.");
+                      }
+
+                      try{
+                        $query = $db->prepare("SELECT * FROM Select_Options");
+                      }
                     }
                 }
                 else{
