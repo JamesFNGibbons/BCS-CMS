@@ -104,7 +104,7 @@
             $option['Value'] = $result[0]['Value'];
           }
           else die('Invalid option given.');
-
+          
           // Add the option to the found options.
           array_push($options, $option);
         }

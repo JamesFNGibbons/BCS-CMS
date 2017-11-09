@@ -24,7 +24,11 @@
         </a>
       </div>
     </nav>
-    <nav class='navbar navbar-inverse navbar-theNav'>
+    <?php if(get_theme_option('nav:inverse') == 'true'): ?>
+      <nav class='navbar navbar-inverse navbar-theNav'>
+    <?php else: ?>
+      <nav class='navbar navbar-default navbar-theNav'>
+    <?php endif; ?>
       <div class='container'>
         <?php the_bootstrap_nav(); ?>
       </div>

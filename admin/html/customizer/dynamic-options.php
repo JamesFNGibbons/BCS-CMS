@@ -23,14 +23,14 @@
       <?php endif; ?>
       <?php if($option['Type'] == 'select'): ?>
         <select name='<?php print $option["Name"]; ?>' class='form-control'>
-          <?php foreach(SelectOption::get_options($option["ID"]) as $select_option): ?>
-            <?php if($select_option['Option_Value'] == $option['Value']): ?>
-              <option selected='selected' value='<?php print $select_option["Option_Value"]; ?>'>
-                <?php print $select_option["Option_Title"]; ?>
+          <?php foreach(SelectOption::get_options($option["Name"]) as $select_option): ?>
+            <?php if($select_option['Value'] == $option['Value']): ?>
+              <option selected='selected' value='<?php print $select_option["Value"]; ?>'>
+                <?php print $select_option["Title"]; ?>
               </option>
             <?php else: ?>
-              <option value='<?php print $select_option["Option_Value"]; ?>'>
-                <?php print $select_option["Option_Title"]; ?>
+              <option value='<?php print $select_option["Value"]; ?>'>
+                <?php print $select_option["Title"]; ?>
               </option>
             <?php endif; ?>
           <?php endforeach; ?>
