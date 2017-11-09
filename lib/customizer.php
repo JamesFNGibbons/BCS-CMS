@@ -80,18 +80,36 @@
       * @return $options The array of options.
     */
     public static function get_options($section_name){
-      $db = new Db();
-      $db = $db->get();
-      try{
-        $query = $db->prepare("SELECT * FROM Theme_Options WHERE Section_Name = '$section_name'");
-        $query->execute();
-        $result = $query->fetchAll();
-      }
-      catch(PDOException $e){
-        die($e->getMessage());
+      global $option_manager;
+      $options = array();
+
+      foreach($option_manager->options as $option){
+        if($option['Section'] == $section_name){
+          // Get the options value
+          $option_name = $option['Name'];
+
+          $db = new Db();
+          $db = $db->get();
+          try{
+            $query = $db->prepare("SELECT * FROM Theme_Options WHERE Name = '$option_name'");
+            $query->execute();
+            $result = $query->fetchAll();
+          }
+          catch(PDOException $e){
+            die($e->getMessage());
+          }
+
+          // Check that the option is valid, and set its value to that from the db.
+          if(count($result) > 0){
+            $option['Value'] = $result[0]['Value'];
+          }
+          else die('Invalid option given.');
+
+          // Add the option to the found options.
+          array_push($options, $option);
+        }
       }
 
-      $options = $result;
       return $options;
     }
   }

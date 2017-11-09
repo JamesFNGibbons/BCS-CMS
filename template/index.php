@@ -1,9 +1,11 @@
-<div class='container'>
-  <div class='jumbotron'>
-    <h2><?php print get_theme_option('homepage-banner-title'); ?></h2>
-    <p><?php print get_theme_option('homepage-banner-content'); ?></p>
+<div class='homepage-banner'>
+  <div class='overlay'>
+    <div class='container'>
+      <h1><?php print get_theme_option('homepage:banner:title'); ?></h1>
+    </div>
   </div>
-
+</div>
+<div class='container'>
   <!-- The Homepage Services Section -->
   <div class='row'>
     <?php for($i = 1; $i < 4; $i++): ?>
@@ -19,7 +21,7 @@
       </div>
     <?php endfor; ?>
   </div>
-  
+
   <div class='well'>
     <h2><?php print get_theme_option('homepage:about:title'); ?></h2>
     <img src='<?php print get_theme_option("homepage:about:image"); ?>'>

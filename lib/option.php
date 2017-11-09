@@ -17,8 +17,12 @@
          * @param $option_type The options type
          * @param $section_name The name (ID) of the customizer section.
         */
-        public function __construct($option_name, $option_label, $default_value = '', $option_type, $section_name, $option_options = array()){
-            if(isset($option_name) && isset($section_name)){
+        public function __construct($option){
+            if(isset($option)){
+                $option_name = $option['Name'];
+                $default_value = $option['Default'];
+                $section_name = $option['Section'];
+
                 $db = new Db();
                 $db = $db->get();
                 try{
@@ -33,12 +37,9 @@
                 // Create the option if not exists
                 if(!count($result) > 0){
                     try{
-                        $db->exec("INSERT INTO Theme_Options (Name, Label, Value, Type, Section_Name) VALUES (
+                        $db->exec("INSERT INTO Theme_Options (Name, Value) VALUES (
                             '$option_name',
-                            '$option_label',
-                            '$default_value',
-                            '$option_type',
-                            '$section_name'
+                            '$default_value'
                         );");
                     }
                     catch(PDOException $e){
@@ -54,19 +55,6 @@
                   }
                   catch(PDOException $e){
                       die($e->getMessage());
-                  }
-
-                  // Check if we need to update the option type.
-                  if(!$result[0]['Type'] == $option_type){
-                    try{
-                      $db->exec("UPDATE Theme_Options SET Type = '$option_type' WHERE Name = '$option_name'");
-                    }
-                    catch(PDOException $e){
-                      die($e->getMessage());
-                    }
-
-                    // Change the result type in the found object
-                    $result[0]['Type'] = $option_type;
                   }
                 }
 
@@ -124,11 +112,22 @@
 
                 $db = null;
 
-                $this->value = $result[0]['Value'];
+                $this->value = $option['Value'];
                 $this->name = $option_name;
-                $this->type = $result[0]['Type'];
-                $this->label = $result[0]['Label'];
+                $this->type = $option['Type'];
+                $this->label = $option['Label'];
                 $this->section = $section_name;
+
+                /**
+                  * Append this instance to the option
+                  * as it is registered with the option
+                   * manager.
+                */
+                $option['Option'] = $this;
+
+                // Add the option to the option manager
+                global $option_manager;
+                $option_manager->register_option($option);
             }
         }
     }

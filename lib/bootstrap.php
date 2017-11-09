@@ -66,5 +66,10 @@
 	}
 
 	// Load the plugins
+	global $plugin_manager;
 	$plugin_manager = new PluginManager();
 	$plugin_manager->load_plugins();
+
+	// Load the option manager
+	global $option_manager;
+	$option_manager = new OptionManager();
