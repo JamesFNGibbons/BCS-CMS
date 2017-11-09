@@ -1,7 +1,7 @@
 <html>
   <head>
     <link rel='stylesheet' type='text/css' href='../dist/bootstrap/bootstrap.min.css'>
-    <link rel='stylesheet' type='text/css' href='../dist/bootstrap/bootstrap-theme.min.css'>
+    <!-- <link rel='stylesheet' type='text/css' href='../dist/bootstrap/bootstrap-theme.min.css'> -->
     <link rel='stylesheet' type='text/css' href='../dist/font-awesome/css/font-awesome.min.css'>
     <link rel='stylesheet' type='text/css' href='css/admin-branding.css'>
 

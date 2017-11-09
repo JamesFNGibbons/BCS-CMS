@@ -23,6 +23,14 @@
               </a>
             <?php endif; ?>
           <?php endforeach; ?>
+          <a href='media.php'>
+            <div class='col-md-3'>
+              <div class='well'>
+                <img src='img/upload.png' width='100%'>
+                <p class='text-center'>Upload File</p>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@
   div.overlay {
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.7);
   }
 
   /* The homepage banner */
@@ -28,6 +28,8 @@
     width: 100%;
     height: 500px;
     margin-top: -40px;
+    background-size: 100% 100%;
+    background-attachment: fixed;
 
     <?php if(get_theme_option('homepage:banner:bgimage')): ?>
       background-image: url(<?php print get_theme_option('homepage:banner:bgimage'); ?>);
@@ -38,5 +40,15 @@
 
   div.homepage-banner h1 {
     color: white;
+    font-size: 70px;
+  }
+
+  div.homepage-banner h2 {
+    color: grey;
+  }
+
+  div.homepage-banner div.wrap
+  {
+    margin-top: 100px;
   }
 </style>

@@ -1,7 +1,10 @@
 <div class='homepage-banner'>
   <div class='overlay'>
     <div class='container'>
-      <h1><?php print get_theme_option('homepage:banner:title'); ?></h1>
+      <div class='wrap'>
+        <h1><?php print get_theme_option('homepage:banner:title'); ?></h1>
+        <h2><?php print get_theme_option('homepage:banner:subtitle'); ?></h2>
+      </div>
     </div>
   </div>
 </div>

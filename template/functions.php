@@ -35,9 +35,27 @@
   new Option(
     array(
       "Name" => 'homepage:banner:title',
-      "Label" => 'Banner Title',
+      "Label" => 'Title',
       "Default" => 'Your homepage banner',
       "Type" => 'text',
+      "Section" => $banner
+    )
+  );
+  new Option(
+    array(
+      "Name" => 'homepage:banner:subtitle',
+      "Label" => 'Subtitle',
+      "Default" => 'Banner subtitle',
+      "Type" => 'text',
+      "Section" => $banner
+    )
+  );
+  new Option(
+    array(
+      "Name" => 'homepage:banner:bgimage',
+      "Label" => 'Background Image',
+      "Default" => '',
+      "Type" => 'image',
       "Section" => $banner
     )
   );

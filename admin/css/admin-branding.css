@@ -4,6 +4,23 @@ html, body
   font-family: "Helvetica Neue",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans",sans-serif;
 }
 
+/** The custom Buttons **/
+.btn.btn-primary {
+  transition: all .3s linear;
+  display: inline-block;
+  text-align: center;
+  border-bottom: 3px solid;
+  background-color: #ff6d2c !important;
+  color: white;
+  border-color: #15262b !important;
+  text-decoration: none;
+}
+
+.btn.btn-primary:hover {
+  transition: all .3s linear;
+  border-bottom: 5px solid;
+}
+
 nav.navbar.navbar-custom
 {
   background-color: #15262b !important;
@@ -32,7 +49,9 @@ div.jumbotron h2
 
 .panel-default {border-style: solid;}
 .panel > .panel-heading {
-  background-color: red !important;
+  background-color: #15262b;
+  color: white;
+  font-style:oblique;
 }
 .panel-default > .panel-body
 {
