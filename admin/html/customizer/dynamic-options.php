@@ -24,9 +24,15 @@
       <?php if($option['Type'] == 'select'): ?>
         <select name='<?php print $option["Name"]; ?>' class='form-control'>
           <?php foreach(SelectOption::get_options($option["ID"]) as $select_option): ?>
-            <option value='<?php print $select_option["Option_Value"]; ?>'>
-              <?php print $select_option["Option_Title"]; ?>
-            </option>
+            <?php if($select_option['Option_Value'] == $option['Value']): ?>
+              <option selected='selected' value='<?php print $select_option["Option_Value"]; ?>'>
+                <?php print $select_option["Option_Title"]; ?>
+              </option>
+            <?php else: ?>
+              <option value='<?php print $select_option["Option_Value"]; ?>'>
+                <?php print $select_option["Option_Title"]; ?>
+              </option>
+            <?php endif; ?>
           <?php endforeach; ?>
         </select>
       <?php endif; ?>
