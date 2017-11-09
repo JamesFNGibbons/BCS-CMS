@@ -59,3 +59,65 @@
       "Section" => $banner
     )
   );
+
+  // The homepage services section
+  $services = Customizer::create_section('homepage:services', 'Homepage services');
+  for($i = 1; $i < 4; $i++){
+    new Option(
+      array(
+        "Name" => "homepage:service:$i:title",
+        "Label" => "Service $i Title",
+        "Default" => "Service $i",
+        "Type" => 'text',
+        "Section" => $services
+      )
+    );
+    new Option(
+      array(
+        "Name" => "homepage:service:$i:content",
+        "Label" => "Service $i Content",
+        "Default" => "Some information about a service that your business offers.",
+        "Type" => 'textarea',
+        "Section" => $services
+      )
+    );
+    new Option(
+      array(
+        "Name" => "homepage:service:$i:image",
+        "Label" => "Service $i Image",
+        "Default" => "",
+        "Type" => 'image',
+        "Section" => $services
+      )
+    );
+  }
+
+  // The homepage about us section
+  $about = Customizer::create_section('homepage:about', 'Homepage About Us');
+  new Option(
+    array(
+      "Name" => "homepage:about:title",
+      "Label" => "Section Title",
+      "Default" => "About Our Company",
+      "Type" => 'text',
+      "Section" => $about
+    )
+  );
+  new Option(
+    array(
+      "Name" => "homepage:about:content",
+      "Label" => "Section Content",
+      "Default" => "",
+      "Type" => 'textarea',
+      "Section" => $about
+    )
+  );
+  new Option(
+    array(
+      "Name" => "homepage:about:image",
+      "Label" => "Image",
+      "Default" => "",
+      "Type" => 'image',
+      "Section" => $about
+    )
+  );

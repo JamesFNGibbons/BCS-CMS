@@ -26,7 +26,7 @@
   /* The homepage banner */
   div.homepage-banner {
     width: 100%;
-    height: 500px;
+    height: 400px;
     margin-top: -40px;
     background-size: 100% 100%;
     background-attachment: fixed;
@@ -50,5 +50,34 @@
   div.homepage-banner div.wrap
   {
     margin-top: 100px;
+  }
+
+  /** The homepage about */
+  div.homepage-about
+  {
+    <?php if(get_theme_option('homepage:about:bgimage')): ?>
+      background-image: url("<?php print get_theme_option('homepage:about:bgimage'); ?>");
+    <?php else: ?>
+        background-color: #00387d;
+    <?php endif; ?>
+    width: 100%;
+    height: 500px;
+  }
+
+  div.homepage-about h1
+  {
+    font-size: 70px;
+    color: white;
+  }
+
+  div.homepage-about div.wrap
+  {
+    margin-top: 100px;
+  }
+
+  div.homepage-about h4
+  {
+    font-weight: normal;
+    color: white;
   }
 </style>

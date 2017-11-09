@@ -9,6 +9,7 @@
   </div>
 </div>
 <div class='container'>
+  <br><br>
   <!-- The Homepage Services Section -->
   <div class='row'>
     <?php for($i = 1; $i < 4; $i++): ?>
@@ -19,14 +20,24 @@
           <img src='http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png' width='100%'>
         <?php endif; ?>
 
-        <h2><?php print get_theme_option("homepage:service:$i:title"); ?></h2>
-        <p><?php print get_theme_option("homepage:service:$i:content"); ?></p>
+        <h2 class='text-center'><?php print get_theme_option("homepage:service:$i:title"); ?></h2>
+        <p class='text-center'><?php print get_theme_option("homepage:service:$i:content"); ?></p>
       </div>
     <?php endfor; ?>
   </div>
 
-  <div class='well'>
-    <h2><?php print get_theme_option('homepage:about:title'); ?></h2>
-    <img src='<?php print get_theme_option("homepage:about:image"); ?>'>
+  <br><br>
+</div>
+<div class='homepage-about'>
+  <div class='container'>
+    <div class='wrap'>
+      <div class='col-md-4'>
+        <img width='100%' src='<?php print get_theme_option("homepage:about:image"); ?>'>
+      </div>
+      <div class='col-md-8'>
+        <h1><?php print get_theme_option('homepage:about:title'); ?></h1>
+        <h4><?php print get_theme_option('homepage:about:content'); ?></h4>
+      </div>
+    </div>
   </div>
 </div>
