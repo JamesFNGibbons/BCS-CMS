@@ -25,6 +25,21 @@
       </div>
       <div class='col-md-3'>
         <div class='panel panel-default'>
+          <div class='panel-heading'>
+            Quick Actions
+          </div>
+          <div class='panel-body'>
+            <div class='list-group'>
+              <a class='list-group-item' target='_blank' href='../<?php print $page->uri; ?>'>
+                View page
+              </a>
+              <a class='list-group-item' href='pages.php?delete=<?php print $page->id; ?>'>
+                Delete Page
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class='panel panel-default'>
           <div class='panel-heading'>Feature Image</div>
           <div class='panel-body'>
             <div class='form-group'>
