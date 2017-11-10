@@ -41,3 +41,16 @@
     </div>
   </div>
 </div>
+
+<!-- The homepage testimonials section -->
+<div class='homepage-second-banner'>
+  <div class='overlay'>
+    <br><br><br>
+    <br><br><br>
+    <br>
+    <div class='container'>
+      <h1 class='text-center'><?php print get_theme_option('homepage:second-banner:title'); ?><h1>
+      <h2 class='text-center'><?php print get_theme_option('homepage:second-banner:line2'); ?></h2>
+    </div>
+  </div>
+</div>

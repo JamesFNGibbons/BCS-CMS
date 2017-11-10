@@ -26,6 +26,12 @@
       "Type" => 'static-item'
     ),
     array(
+      "Title" => 'Blog Posts',
+      "Link" => 'blog.php',
+      "Icon" => 'fa fa-pencil',
+      "Type" => 'static-item'
+    ),
+    array(
       "Title" => 'Navbar Menu',
       "Link" => 'navigation.php',
       "Icon" => 'fa fa-bars',

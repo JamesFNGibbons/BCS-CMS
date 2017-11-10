@@ -121,3 +121,34 @@
       "Section" => $about
     )
   );
+
+  // The homepage testimonials section
+  $clients = Customizer::create_section('homepage:second-banner', 'Homepage Clients');
+  new Option(
+    array(
+      "Name" => 'homepage:second-banner:bgimage',
+      'Label' => 'Background Image',
+      "Default" => '',
+      "Type" => 'image',
+      "Section" => $clients
+    )
+  );
+  new Option(
+    array(
+      "Name" => 'homepage:second-banner:title',
+      'Label' => 'Title',
+      "Default" => 'Easy to use, and update',
+      "Type" => 'text',
+      "Section" => $clients
+    )
+  );
+
+  new Option(
+    array(
+      "Name" => 'homepage:second-banner:line2',
+      'Label' => 'Subtitle',
+      "Default" => 'Easily update your website with our customizer',
+      "Type" => 'text',
+      "Section" => $clients
+    )
+  );

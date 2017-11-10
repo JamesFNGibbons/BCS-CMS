@@ -80,4 +80,21 @@
     font-weight: normal;
     color: white;
   }
+
+  div.homepage-second-banner {
+    width: 100%;
+    height: 500px;
+
+    <?php if(get_theme_option('homepage:second-banner:bgimage')): ?>
+      background-image: url(<?php print get_theme_option('homepage:second-banner:bgimage'); ?>);
+    <?php else: ?>
+      background-image: url('template/img/banner2.jpeg');
+    <?php endif; ?>
+
+    color: white;
+  }
+
+  div.homepage-second-banner h1 {
+    font-size: 70px;
+  }
 </style>
