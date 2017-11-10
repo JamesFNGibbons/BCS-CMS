@@ -15,6 +15,11 @@
 	session_start();
 
 	/**
+	  * Include the config file.
+	*/
+	require_once "config/config.php";
+
+	/**
 	  * Include any of the standalone helpers.
 	*/
 	require_once "auth-helpers.php";
