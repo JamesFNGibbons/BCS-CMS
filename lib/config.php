@@ -16,14 +16,22 @@
 			if(isset($key)){
 				/* Load up the config.php file */
 				require_once('config/config.php');
-				$config_file = new ConfigFile();
-				$value = $config_file->get()[$key];
 
-				if(isset($value)){
-					return $value;
+				if(Install::is_complete()){
+					$config_file = new ConfigFile();
+					$value = $config_file->get()[$key];
+
+					if(isset($value)){
+						return $value;
+					}
+					else{
+						return false;
+					}
 				}
 				else{
-					return false;
+					if($key == 'install_status'){
+						return false;
+					}
 				}
 			}
 		}

@@ -48,8 +48,17 @@
 	*/
 	function __autoload($className){
 		if(!class_exists($className)){
-			$className = strtolower($className);
-			include_once($className . '.php');
+			// Include the configFile class only if the install is complete.
+			if(strtolower($className) == 'configfile'){
+				if(Install::is_complete()){
+					$className = strtolower($className);
+					include_once($className . '.php');
+				}
+			}
+			else{
+				$className = strtolower($className);
+				include_once($className . '.php');
+			}
 		}
 	}
 

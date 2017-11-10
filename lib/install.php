@@ -21,7 +21,7 @@
 				}
 			}
 			else{
-				if(empty(@file_get_contents('config/config.php'))){
+				if(empty(file_get_contents('../config/config.php'))){
 					return false;
 				}
 				else{
