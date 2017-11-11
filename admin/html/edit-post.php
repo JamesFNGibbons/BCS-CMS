@@ -4,11 +4,11 @@
       <h2>Edit Post <i>'<font color='white'><?php print $post->title; ?></font>'</i></h2>
     </div>
   </div>
-  <form method='post' action='edit-page.php'>
+  <form method='post' action='edit-post.php'>
     <input type='hidden' name='id' value='<?php print $post->id; ?>'>
     <input type='hidden' name='action' value='update'>
     <div class='page-header'>
-      <a onclick='window.location.assign("pages.php")' class='btn btn-primary'>
+      <a onclick='window.location.assign("blog.php")' class='btn btn-primary'>
         <i class='fa fa-chevron-left'></i>
         Go Back
       </a>
@@ -30,11 +30,8 @@
           </div>
           <div class='panel-body'>
             <div class='list-group'>
-              <a class='list-group-item' target='_blank' href='../<?php print $post->uri; ?>'>
-                View page
-              </a>
-              <a class='list-group-item' href='pages.php?delete=<?php print $post->id; ?>'>
-                Delete Page
+              <a class='list-group-item' href='blog.php?delete=<?php print $post->id; ?>'>
+                Delete Post
               </a>
             </div>
           </div>
@@ -43,7 +40,7 @@
           <div class='panel-heading'>Feature Image</div>
           <div class='panel-body'>
             <div class='form-group'>
-              <lable>Site Logo</lable>
+              <lable>Select Image</lable>
               <div class='form-control' style='height: 43px;'>
                 <span style='line-height: 30px;' class='pull-left'>
                   <?php if(!$no_feature_image): ?>

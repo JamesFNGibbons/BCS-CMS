@@ -14,9 +14,22 @@
             <table class='table table-stripped'>
               <th>Post Title</th>
               <th>Published By</th>
+              <th></th>
+              <th></th>
               <?php foreach($published_posts as $post): ?>
                 <tr>
                   <td><?php print $post['Title']; ?></td>
+                  <td><?php print $post['Creator']; ?></td>
+                  <td>
+                    <a href='edit-post.php?post_id=<?php print $post["ID"]; ?>'>
+                      Edit Post
+                    </a>
+                  </td>
+                  <td>
+                    <a href='blog.php?delete=<?php print $post["ID"]; ?>' class='text-danger'>
+                      Delete Post
+                    </a>
+                  </td>
                 </tr>
               <?php endforeach; ?>
             </table>

@@ -10,7 +10,6 @@ _  /_/ //  __/(__  )__  /_/ / /_/ /  ,<  /  __/     / /___  / /_/ /  / / / / /_ 
 	*/
 
 require_once "lib/bootstrap.php";
-global $the_page;
 
 // Check if the install has been completed
 if(!Install::is_complete()){
@@ -19,22 +18,23 @@ if(!Install::is_complete()){
 
 // Check if a page is requested
 if(isset($_GET['page'])){
-	// Render the correct page template.
-	PageTemplate::get_template(Page::get_id_from_uri($_GET['page']));
-	$the_page = new Page($page_id);
+	global $the_page;
+	$the_page = new Page(Page::get_id_from_uri($_GET['page']));
 }
 else{
+	global $the_page;
 	$the_page = Page::get_homepage();
 }
 
-// Render the page header
-include_once "lib/template.php";
-include "template/header.php";
+// Give the template a set of useful helpers.
+require_once "lib/template.php";
+require_once "template/header.php";
 
 // Check if we need to render the homepage view
 if($the_page->is_homepage){
 	include "template/index.php";
 }
 else{
-	include "template/page.php";
+	// Render the correct page template.
+	PageTemplate::get_template(Page::get_id_from_uri($_GET['page']));
 }

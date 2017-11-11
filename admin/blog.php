@@ -31,10 +31,11 @@
       case('create'):
         $new_post_id = Post::add_post(
           $_POST['title'],
-          $_POST['published']
+          $_POST['publish'],
+          $_SESSION['username']
         );
 
-        header("Location: editPost.php?post_id=$new_post_id");
+        header("Location: edit-post.php?post_id=$new_post_id");
       break;
     }
   }

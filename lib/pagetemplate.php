@@ -1,5 +1,7 @@
 <?php
 
+  require_once "lib/bootstrap.php";
+
   class PageTemplate {
     /**
       * Function used to get the correct template for a given page.
@@ -13,8 +15,8 @@
         // Check that the page template is not a default template.
         if(empty($template)){
           // The template file is default.
-          if(@file_exists("../template/page.php")){
-            require_once "../template/page.php";
+          if(@file_exists("template/page.php")){
+            require_once "template/page.php";
           }
           else{
             die("The page template does not exist. <br> <a href='index.php'>Go Back</a>");
@@ -22,8 +24,8 @@
         }
         else{
           // Check that the page template exists
-          if(@file_exists("../tempate/template-$template.php")){
-            require_once "../template/templae-$template.php";
+          if(@file_exists("tempate/template-$template.php")){
+            require_once "template/templae-$template.php";
           }
           else{
             die("The page template '$template' does not exist. <br> <a href='index.php'>Go Back</a>");

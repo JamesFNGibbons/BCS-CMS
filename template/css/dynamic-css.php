@@ -97,4 +97,36 @@
   div.homepage-second-banner h1 {
     font-size: 70px;
   }
+
+  div.page-header
+  {
+    margin-top: -40px;
+    height: 500px;
+    width: 100%;
+    color: white;
+    <?php if(get_theme_option('page:banner:bgimage')): ?>
+      background-image: url(<?php print get_theme_option('page:banner:bgimage'); ?>);
+    <?php endif; ?>
+    background-attachment: fixed;
+    background-size: 100% 100%;
+  }
+
+  div.page-header .overlay
+  {
+    position: absolute;
+    top: 150px;
+    left: 0;
+    width: 100%;
+    height: 500px;
+  }
+
+  div.page-header .container
+  {
+    line-height: 400px;
+  }
+
+  div.page-header h1
+  {
+    font-size: 70px;
+  }
 </style>

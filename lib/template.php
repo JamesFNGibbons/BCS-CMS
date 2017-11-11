@@ -19,11 +19,13 @@
     if(isset($the_page)){
       if(!$the_page->is_dummy){
         $seo = $the_page->get_seo_array();
-        foreach($seo as $tag){
-          $tag_name = $tag['Name'];
-          $tag_value = $tag['Value'];
+        if(!empty($seo)){
+          foreach($seo as $tag){
+            $tag_name = $tag['Name'];
+            $tag_value = $tag['Value'];
 
-          print "<meta name='$tag_name' value='$tag_value'>";
+            print "<meta name='$tag_name' value='$tag_value'>";
+          }
         }
       }
     }
@@ -64,7 +66,7 @@
       print "<img src='$logo_url' width='$width' height='$height'>";
     }
   }
-  
+
   /**
     * Function used to get the logo URL
     * @return $logo_url The logo URL
@@ -102,7 +104,7 @@
       print $the_page->title;
     }
   }
-  
+
   /**
    * Function used to display the pages content
    * @return $the_page->content The page content.
@@ -110,38 +112,38 @@
   function the_content(){
     global $the_page;
     if(isset($the_page)){
-      print $the_page->content; 
+      print $the_page->content;
     }
   }
-  
+
   /**
    * Function used to render the navigation items for a bootstrap navbar.
   */
   function the_bootstrap_nav($open_tag = '<ul class="nav navbar-nav">', $close_tag = "</ul>"){
     global $the_page;
-    
+
     // Render the container open tag.
     print $open_tag;
-      
+
     $nav_items = Nav::get_nav_items();
     foreach($nav_items as $item){
       // Do not render the item if it has a parent
       if(empty($item['Parent']) && empty($item['Sub_Items'])){
         // Check if the navbar item should be active
         print "<li>";
-        
+
         // Render the link tag.
         $link = $item['Link'];
         print "<a href='$link '>";
         print $item['Title'];
         print "</a>";
-        
+
         // Close the tag
-        print "</li>"; 
+        print "</li>";
       }
-      
+
       else if(isset($item['Sub_Items'])){
-       ?> 
+       ?>
        <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href='<?php print $item["Link"]; ?>'><?php print $item['Title']; ?>
           <span class="caret"></span></a>
@@ -158,7 +160,7 @@
       <?php
       }
     }
-    
+
     // Render the container closing tag.
     print $close_tag;
   }

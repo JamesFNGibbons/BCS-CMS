@@ -8,6 +8,7 @@
     public $content;
     public $feature_image;
     public $creator;
+    public $id;
 
     /**
       * Constructor used to load up the post
@@ -33,8 +34,24 @@
         $this->content = $post['Content'];
         $this->feature_image = $post['Feature_Image'];
         $this->creator = $post['Creator'];
+        $this->id = $post_id;
       }
       $db = null;
+    }
+
+    /**
+      * Function used to update the post in the
+      * database.
+    */
+    public function update(){
+      $db = new Db();
+      $db = $db->get();
+      try{
+        $db->exec("UPDATE Blog_Posts SET Title = '$this->title', Content = '$this->content', Feature_Image = '$this->feature_image'");
+      }
+      catch(PDOException $e){
+        die($e->getMessage());
+      }
     }
 
     /**
@@ -44,7 +61,7 @@
       $db = new Db();
       $db = $db->get();
       try{
-        $db->exec("DELETE FROM Posts WHERE ID = $post_id");
+        $db->exec("DELETE FROM Blog_Posts WHERE ID = $this->id");
       }
       catch(PDOException $e){
         die($e->getMessage());
@@ -57,13 +74,14 @@
       * @param $published The published status.
       * @return $post_id The new post ID.
     */
-    public static function add_post($title, $published){
+    public static function add_post($title, $published, $creator){
       $db = new Db();
       $db = $db->get();
       try{
-        $query = $db->prepare("INSERT INTO Blog_Posts (Title, Published) VALUES (
+        $query = $db->prepare("INSERT INTO Blog_Posts (Title, Published, Creator) VALUES (
           '$title',
-          '$published'
+          '$published',
+          '$creator'
         )");
         $query->execute();
       }
@@ -74,15 +92,20 @@
       // Get the post ID
       try{
         $query = $db->prepare("SELECT * FROM Blog_Posts WHERE Title = '$title'");
-        $query->fetchAll();
+        $query->execute();
         $result = $query->fetchAll();
-        $post_id = $result[0]['ID'];
       }
       catch(PDOException $e){
         die($e->getMessage());
       }
 
-      return $post_id;
+      if(count($result) > 0){
+        $post_id = $result[0]['ID'];
+        return $post_id;
+      }
+      else{
+        die('Invalid Post Title');
+      }
     }
 
     /**
@@ -105,4 +128,11 @@
       $posts = $result;
       return $posts;
     }
+
+    /**
+      * Function used to render the blog view and post
+      * template.
+      * @param $post_uri The post ID.
+    */
+
   }

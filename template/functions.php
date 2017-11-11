@@ -152,3 +152,15 @@
       "Section" => $clients
     )
   );
+
+  // The page options
+  $page = Customizer::create_section('page', 'Page Options');
+  new Option(
+    array(
+      "Name" => 'page:banner:bgimage',
+      'Label' => 'Title Background Image',
+      "Default" => '',
+      "Type" => 'image',
+      "Section" => $page
+    )
+  );
