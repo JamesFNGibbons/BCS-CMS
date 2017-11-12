@@ -1,4 +1,10 @@
 <?php
+
+  // Make sure that the contact-form plugin is enabled.
+  if(!PluginManager::is_loaded('contact-form')){
+    die('Please install or enable the `contact-form` Plugin.');
+  }
+
   //
   $nav = Customizer::create_section('nav', 'Navigation Bar');
   new Option(

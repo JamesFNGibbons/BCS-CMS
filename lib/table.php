@@ -6,6 +6,7 @@
 
     public $name;
     public $columns = array();
+    public $exists = true;
 
     /**
       * Function used to set the table name.
@@ -13,6 +14,37 @@
     */
     public function __construct($name){
       $this->name = $name;
+
+      // Check if the table exists
+      $db = new Db();
+      $db = $db->get();
+      try{
+          $db->query("SELECT * FROM $name");
+      }
+      catch(PDOException $e){
+          // The table does not exist.
+          $this->exists = false;
+      }
+    }
+    
+    /**
+      * Function used to get all the rows in the database.
+      * @return $rows The rows found.
+    */
+    public function fetch_all(){
+        $db = new Db();
+        $db = $db->get();
+        try{
+            $query = $db->prepare("SELECT * FROM $this->name");
+            $query->execute();
+            $result = $query->fetchAll();
+        }
+        catch(PDOException $e){
+            die($e->getMessage());
+        }
+
+        $rows = $result;
+        return $rows;
     }
 
     /**
@@ -21,17 +53,18 @@
       * @param $arrtibutes The attributes of the column.
     */
     public function add_column($name, $type, $attributes = array()){
-      if(isset($name) && isset($type)){
-        array_push($this->columns, array(
-          "Name" => $name,
-          "Type" => $type,
-          "Attributes" => $attributes
-        ));
-      }
-      else{
-        die("Cannot add a new column. The name and type must be set.");
-      }
-    }
+      if(!$this->exists){}
+        if(isset($name) && isset($type)){
+            array_push($this->columns, array(
+                "Name" => $name,
+                "Type" => $type,
+                "Attributes" => $attributes
+            ));
+        }
+        else{
+            die("Cannot add a new column. The name and type must be set.");
+        }
+     }
 
     /**
       * Function used to save the new table to the db.
