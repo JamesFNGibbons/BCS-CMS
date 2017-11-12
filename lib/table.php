@@ -5,7 +5,7 @@
   class Table {
 
     public $name;
-    public $columns;
+    public $columns = array();
 
     /**
       * Function used to set the table name.
@@ -39,23 +39,24 @@
     public function create(){
       if(!empty($this->columns)){
         $db_string = "CREATE TABLE IF NOT EXISTS $this->name (";
-        $db_string .= "ID INT AUTO_INCREMENT";
+        $db_string .= "ID INT AUTO_INCREMENT, ";
 
         foreach($this->columns as $col){
-          $db_string .= $col['name'];
-          strpad($db_string, 1, ' ');
-          $db_string .= $col['Type'];
-          strpad($db_string, 1, ' ');
+          $db_string .= $col['Name'] . " ";
+          $db_string .= $col['Type'] . " ";
 
+          // Addd the column attributes if they are there.
           if(!empty($col['Attributes'])){
             foreach($col['Attributes'] as $attr){
-              $db_string .= $attr;
-              strpad($db_string, 1, ' ');
+              $db_string .= $attr . ' ';
             }
           }
-        }
 
-        strpad($db_string, 1, ' ');
+          // Add the commer to seperate this col
+          $db_string .= ',';
+        }
+        
+        // Assign the primary key of the table.
         $db_string .= "PRIMARY KEY(ID)";
         $db_string .= ');';
 
