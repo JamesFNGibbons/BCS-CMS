@@ -271,8 +271,14 @@
       $db = new Db();
       $db = $db->get();
       try{
-        $db->exec("UPDATE Pages SET Title = '$this->title', Content = '$this->content', Template = '$this->template', Updated = now()
+        $query = $db->prepare("UPDATE Pages SET Title = :title, Content = :content, Template = :template, Updated = :updated
         WHERE ID = '$this->id'; ");
+        $query->execute(array(
+          ':title' => $this->title,
+          ':content' => $this->content,
+          ':template' => $this->template,
+          ':updated' => 'now()'
+        ));
       }
       catch(PDOException $e){
         die($e->getMessage());
@@ -362,22 +368,42 @@
 
     /**
       * Function used to get the pages in the database.
+      * @param $limit The number of pages to fetch.
       * @return $pages The pages in an array.
       * @return false If no pages are in the database.
     */
-    public static function get_pages(){
-      $db = new Db();
-      $db = $db->get();
+    public static function get_pages($limit = 0){
+      if(isset($limit) && $limit !== 0){
+          $db = new Db();
+          $db = $db->get();
+          try{
+              $query = $db->prepare("SELECT * FROM Pages LIMIT $limit");
+              $query->execute();
+          }
+          catch(PDOException $e){
+              die($e->getMessage());
+          }
+          $db = null;
 
-      try{
-        $query = $db->prepare("SELECT * FROM Pages");
-        $query->execute();
+          $result = $query->fetchAll();
+          return $result;
       }
-      catch(PDOException $e){
-        die($e->getMessage());
-      }
+      else{
+      // Find and return an unlimited number.
+        $db = new Db();
+        $db = $db->get();
 
-      $result = $query->fetchAll();
-      return $result;
-    }
-  }
+        try{
+          $query = $db->prepare("SELECT * FROM Pages");
+          $query->execute();
+        }
+        catch(PDOException $e){
+         die($e->getMessage());
+        }
+
+        $result = $query->fetchAll();
+        return $result;
+     }
+
+   }
+}

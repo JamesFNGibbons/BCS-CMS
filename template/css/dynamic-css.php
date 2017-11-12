@@ -23,6 +23,15 @@
     background-color: rgba(0,0,0,0.7);
   }
 
+  /* The footer section */
+  div.footer
+  {
+      width: 100%;
+      height: 250px;
+      background-color: #1e1c1c;
+      color: white;
+  }
+
   /* The homepage banner */
   div.homepage-banner {
     width: 100%;
@@ -101,7 +110,7 @@
   div.page-header
   {
     margin-top: -40px;
-    height: 500px;
+    height: 400px;
     width: 100%;
     color: white;
     <?php if(get_theme_option('page:banner:bgimage')): ?>
@@ -117,12 +126,12 @@
     top: 150px;
     left: 0;
     width: 100%;
-    height: 500px;
+    height: 400px;
   }
 
   div.page-header .container
   {
-    line-height: 400px;
+    line-height: 300px;
   }
 
   div.page-header h1

@@ -32,6 +32,7 @@
         $new_post_id = Post::add_post(
           $_POST['title'],
           $_POST['publish'],
+          $_POST['uri'],
           $_SESSION['username']
         );
 

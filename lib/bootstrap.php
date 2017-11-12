@@ -31,6 +31,23 @@
 	ini_set('memory_limit', '-1');
 
 	/**
+	  * Function used to include a javascript file
+		* that is stored in the js sub dir in the lib
+		* folder. This should only be used to include
+		* a code that is essential to the core, not the
+		* template.
+	*/
+	function get_core_js($file){
+		if(file_exists("../lib/js/$file")){
+			$inc = "<script src='../lib/js/$file'></script>";
+			print $inc;
+		}
+		else{
+			die("Cannot include js file $file");
+		}
+	}
+
+	/**
 	  * Setup error reporting
 	*/
 	if(Install::is_complete()){

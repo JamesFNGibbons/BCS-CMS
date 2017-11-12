@@ -18,8 +18,15 @@ if(!Install::is_complete()){
 
 // Check if a page is requested
 if(isset($_GET['page'])){
-	global $the_page;
-	$the_page = new Page(Page::get_id_from_uri($_GET['page']));
+	// Check that the page is not a post.
+	if($_GET['page'] !== 'blog'){
+		global $the_page;
+		$the_page = new Page(Page::get_id_from_uri($_GET['page']));
+	}
+	else{
+		global $the_post;
+		$the_post = new Post(Post::get_id_from_uri($_GET['post']));
+	}
 }
 else{
 	global $the_page;
@@ -35,6 +42,18 @@ if($the_page->is_homepage){
 	include "template/index.php";
 }
 else{
-	// Render the correct page template.
-	PageTemplate::get_template(Page::get_id_from_uri($_GET['page']));
+	// Decide if the request is a page or post.
+	if($_GET['page'] == 'blog'){
+		// Render the correct page template.
+		Post::get_template(Page::get_id_from_uri($_GET['page']));
+	}
+	else{
+		// Render the correct page template.
+		PageTemplate::get_template(Page::get_id_from_uri($_GET['page']));
+	}
+}
+
+// Render the page footer
+if(file_exists("template/footer.php")){
+    require_once "template/footer.php";
 }

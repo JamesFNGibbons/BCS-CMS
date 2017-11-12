@@ -164,3 +164,15 @@
       "Section" => $page
     )
   );
+
+  // The page footer
+  $footer = Customizer::create_section('footer', 'Footer Section');
+  new Option(
+    array(
+      "Name" => 'footer:about',
+      'Label' => 'About Content',
+      "Default" => "",
+      "Type" => 'textarea',
+      "Section" => $footer
+    )
+  );

@@ -2,7 +2,7 @@ create table if not exists Blog_Posts (
   ID INT AUTO_INCREMENT,
   Title TEXT,
   Content TEXT,
-  Published DATE,
+  Published TEXT,
   Feature_Image TEXT,
   Creator TEXT,
   Uri TEXT,

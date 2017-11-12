@@ -71,7 +71,11 @@
             <input type='hidden' name='action' value='create'>
             <div class='form-group'>
               <lable>Post Title</lable>
-              <input class='form-control' name='title'>
+              <input class='form-control' name='title' required>
+            </div>
+            <div class='form-group'>
+              <lable>Post URI</lable>
+              <input class='form-control' name='uri' required>
             </div>
             <div class='form-group'>
               <lable>Publish Status</lable>
