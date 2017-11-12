@@ -347,10 +347,10 @@
         }
 
         // Set the default SEO tags of the page
-        $title = Settings::get('title');
+        $site_title = Settings::get('title');
         $page = new Page($id);
         $page->set_seo('title', $page->title);
-        $page->set_seo('description', "$page->title - $title");
+        $page->set_seo('description', "$page->title - $site_title");
         $page->set_seo('keywords', '');
         $page->set_seo('og:type', 'article');
         $page->set_seo('og:title', $page->title);
@@ -361,6 +361,19 @@
         $page->set_seo('og:image', '');
         $page->set_seo('og:image:width', '310');
         $page->set_seo('og:image:height', '310');
+        
+        // Check if we should add the new page to the navbar.
+        if(Settings::get('navbar-auto-add-pages') == 'true'){
+            Nav::add_item(
+                array(
+                    "Type" => 'page',
+                    "Page_ID" => $id
+                ),
+                $title,
+                $uri,
+                ''
+            );
+        }
 
         // Return the page ID
         return $id;
