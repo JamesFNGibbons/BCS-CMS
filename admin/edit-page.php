@@ -22,16 +22,16 @@
     // Load up the possible page templates
     $templates = array();
     foreach(glob("../template/*") as $file){
-      if(is_dir($file)) break;
-
-      // Remove the directory name, and Check if the file is a page templae.
-      $file = explode('../template/', $file)[1];
-      if(substr($file, 0, 8) == 'template'){
-        $template_name_file = explode('template-', $file)[1];
-        $template_name = explode('.php', $template_name_file)[0];
-        array_push($templates, $template_name);
+      if(!is_dir($file)){
+        // Check if the file is a template
+        $file = explode('../template/', $file)[1];
+        if(substr($file, 0, 8) == 'template'){
+            $template_name_file = explode('template-', $file)[1];
+            $template_name = explode('.php', $template_name_file)[0];
+            array_push($templates, $template_name);
+        } 
       }
-    }
+   }
 
     // Check if there is any custom page templates.
     if(count($templates) > 0) $has_templates = true;
