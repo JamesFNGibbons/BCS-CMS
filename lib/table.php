@@ -14,16 +14,18 @@
     */
     public function __construct($name){
       $this->name = $name;
-
-      // Check if the table exists
-      $db = new Db();
-      $db = $db->get();
-      try{
-          $db->query("SELECT * FROM $name");
-      }
-      catch(PDOException $e){
-          // The table does not exist.
-          $this->exists = false;
+  
+      if(defined('CONF-init') && constant('CONF-init')){
+        // Check if the table exists
+        $db = new Db();
+        $db = $db->get();
+        try{
+            $db->query("SELECT * FROM $name");
+        }
+        catch(PDOException $e){
+            // The table does not exist.
+            $this->exists = false;
+        } 
       }
     }
     
