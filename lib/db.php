@@ -14,18 +14,16 @@
 		  * @return $db The database PDO object.
 		*/
 		public function __construct(){
-			if(defined("CONF-init") && constant('CONF-init')){
-				// Get the mysql config from the config file.
-				$user = Config::get('db_username');
-				$password = Config::get('db_password');
-				$host = Config::get('db_hostname');
-				$database = Config::get('db_database');
+			// Get the mysql config from the config file.
+			$user = Config::get('db_username');
+			$password = Config::get('db_password');
+			$host = Config::get('db_hostname');
+			$database = Config::get('db_database');
 	
-				$this->db = new PDO("mysql:host=$host;dbname=$database", $user, $password);
-				$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$this->db = new PDO("mysql:host=$host;dbname=$database", $user, $password);
+			$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	
-				return $this->db;	
-			}
+			return $this->db;
 		}
 
 		/**

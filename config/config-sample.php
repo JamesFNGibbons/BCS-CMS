@@ -4,4 +4,4 @@
 	define("CONF-db_username", '%username%');
 	define("CONF-db_password", '%password%');
 	define("CONF-db_database", '%database%');
-	define("CONF-init", true);
+	define("CONF-init", false);

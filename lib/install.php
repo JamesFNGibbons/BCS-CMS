@@ -12,7 +12,7 @@
 		  * @return $completed Boolean if the install has been completed.
 		*/
 		public static function is_complete(){
-			if(!defined('CONF-init')){
+			if(!defined('CONF-init') && constant('CONF-init')){
 				return false;
 			}
 			else{

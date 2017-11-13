@@ -68,10 +68,14 @@
 				$conf = str_replace('%password%', $password, $conf);
 				$conf = str_replace('%hostname%', $hostname, $conf);
 				$conf = str_replace('%database%', $database, $conf);
+				
+				// Update the value of the CONF-init constant.
+				$conf = str_replace('false', 'true');
 
-				// Write to the real config file.
+				// Write to the real config file, adn then load it up.
 				file_put_contents('../config/config.php', $conf);
-
+				require_once "../config/config.php";
+				
 				/**
 				  * Loop through the models in the models
 				  * directory. And then close the db connection.
