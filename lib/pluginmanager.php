@@ -50,6 +50,7 @@
       * @return $loaded
     */
     public static function is_loaded($plugin_name){
+      global $plugin_manager;
       $loaded = true;
       foreach($plugin_manager->active_plugins as $plugin){
         if($plugin['Info']->Name == $plugin_name){

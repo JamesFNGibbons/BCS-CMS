@@ -36,6 +36,9 @@
     )
   );
 
+  // A simple sub menu item.
+  Customizer::create_section('test:item', 'Test Sub Item', 'homepage:banner');
+
   // The homepage banner section
   $banner = Customizer::create_section('homepage::banner', 'Homepage Banner');
   new Option(

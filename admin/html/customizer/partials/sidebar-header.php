@@ -12,9 +12,15 @@
 
   <span class='pull-left'>
     <?php if(isset($_GET['section'])): ?>
-      <a href='theme-customizer.php'>
-        <i class='fa fa-arrow-left'></i> Go Back
-      </a>
+        <?php if(!isset($_GET['return'])): ?>
+            <a href='theme-customizer.php'>
+                <i class='fa fa-arrow-left'></i> Go Back
+            </a>
+        <?php else: ?>
+            <a href="theme-customizer.php?section=<?php print $return; ?>">
+                <i class='fa fa-arrow-left'></i> Go Back
+            </a>
+        <?php endif; ?>
       <br><br>
     <?php endif; ?>
   </span>

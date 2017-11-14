@@ -1,6 +1,6 @@
 <div class='list-group'>
   <?php foreach($sub_sections as $sect): ?>
-    <a href='theme-customizer.php?section=<?php print $sect["Name"]; ?>' class='list-group-item'>
+    <a href='theme-customizer.php?section=<?php print $sect["Name"]; ?>&return=<?php print $section["ID"]; ?>' class='list-group-item'>
       <?php print $sect['Title']; ?>
     </a>
   <?php endforeach; ?>
