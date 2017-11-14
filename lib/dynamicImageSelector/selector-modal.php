@@ -1,4 +1,4 @@
-<div class='modal fade select_media'>
+<div class='modal fade select_media <?php print $this->option["Modal-ID"]; ?>'>
   <div class='modal-dialog'>
     <div class='modal-content'>
       <div class='modal-header'>
