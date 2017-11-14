@@ -20,7 +20,7 @@
       <div class='container'>
         <a class='navbar-brand'>
           <?php print Settings::get('title'); ?>
-           :: <font color='white'>BCS Website Studio</font>
+           :: <font color='white'>Website Studio</font>
         </a>
         <ul class='nav navbar-nav pull-right'>
           <li>

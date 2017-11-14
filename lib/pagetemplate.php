@@ -24,7 +24,7 @@
         }
         else{
           // Check that the page template exists
-          if(@file_exists("tempate/template-$template.php")){
+          if(file_exists("tempate/template-$template.php")){
             require_once "template/templae-$template.php";
           }
           else{
