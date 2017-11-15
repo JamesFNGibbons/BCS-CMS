@@ -172,6 +172,20 @@
   }
 
   /**
+    * Function used to get the pages.
+    * @return $the_pages
+  */
+  function get_pages(){
+    $the_pages = Page::get_pages();
+    if(count($the_pages) > 0){
+      return $the_pages;
+    }
+    else {
+      return array();
+    }
+  }
+
+  /**
    * Function used to render the navigation items for a bootstrap navbar.
   */
   function the_bootstrap_nav($open_tag = '<ul class="nav navbar-nav">', $close_tag = "</ul>"){
