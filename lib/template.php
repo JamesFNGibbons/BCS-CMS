@@ -136,6 +136,36 @@
   }
 
   /**
+    * Function used to check if there are any posts.
+    * @return $have_posts;
+  */
+  function has_posts(){
+    $posts = Posts::get_posts();
+    if(count($posts) > 0){
+      $have_posts = true;
+    }
+    else{
+      $have_posts = false;
+    }
+
+    return $have_posts;
+  }
+
+  /**
+    * Function used to get the posts.
+    * @return $the_posts
+  */
+  function get_posts(){
+    if(have_posts()){
+      $the_posts = Post::get_posts();
+      return $the_posts;
+    }
+    else{
+      return array();
+    }
+  }
+
+  /**
    * Function used to render the navigation items for a bootstrap navbar.
   */
   function the_bootstrap_nav($open_tag = '<ul class="nav navbar-nav">', $close_tag = "</ul>"){
