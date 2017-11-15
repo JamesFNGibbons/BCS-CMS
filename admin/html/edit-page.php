@@ -17,9 +17,22 @@
     </div>
     <div class='row'>
       <div class='col-md-9'>
-        <input class='form-control input-lg' name='title' value='<?php print $page->title; ?>'>
+        <div class='row'>
+          <div class='col-md-6'>
+              <div class='form-group'>
+                  <lable>Page Title</lable>
+                  <input class='form-control input-lg' name='title' value='<?php print $page->title; ?>'>
+              </div>
+          </div>
+          <div class='col-md-6'>
+              <div class='form-group'>
+                  <lable>Page Subtitle</lable>
+                  <input class='form-control input-lg' name='subtitle' value='<?php print $page->subtitle; ?>'>
+              </div>
+          </div>
+        </div>
         <br>
-        <textarea style='height: 300px;' name='content' class='form-control editor'>
+        <textarea style='min-height: 300px;' name='content' class='form-control editor'>
           <?php print $page->content; ?>
         </textarea>
       </div>

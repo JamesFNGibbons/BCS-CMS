@@ -1,4 +1,4 @@
-<html ng-app='admin-core-app'>
+<html>
   <head>
     <link rel='stylesheet' type='text/css' href='../dist/bootstrap/bootstrap.min.css'>
     <!-- <link rel='stylesheet' type='text/css' href='../dist/bootstrap/bootstrap-theme.min.css'> -->
@@ -11,9 +11,17 @@
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js'></script>
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
     <script src='../dist/bootstrap/bootstrap.min.js'></script>
-    <?php get_core_js('adminCoreApp.js'); ?>
+    <script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-alpha.2/classic/ckeditor.js"></script>
+    <script>
+      $(function(){
+        var editor = ClassicEditor
+          .create( document.querySelector( 'textarea' ))
+          .catch( error => {
+              console.error( error );
+          });
+      });
+    </script>
   </head>
   <body>
     <nav class='navbar navbar-custom'>

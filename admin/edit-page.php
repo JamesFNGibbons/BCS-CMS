@@ -29,7 +29,7 @@
             $template_name_file = explode('template-', $file)[1];
             $template_name = explode('.php', $template_name_file)[0];
             array_push($templates, $template_name);
-        } 
+        }
       }
    }
 
@@ -58,6 +58,7 @@
       $page->title = $_POST['title'];
       $page->content = $_POST['content'];
       $page->template = $_POST['template'];
+      $page->subtitle = $_POST['subtitle'];
       $page->update();
 
       header("Location: edit-page.php?id=$page->id");

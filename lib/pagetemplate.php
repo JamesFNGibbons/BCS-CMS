@@ -13,7 +13,7 @@
         $template = $page->template;
 
         // Check that the page template is not a default template.
-        if(empty($template)){
+        if(empty($template) || $template == 'null'){
           // The template file is default.
           if(@file_exists("template/page.php")){
             require_once "template/page.php";

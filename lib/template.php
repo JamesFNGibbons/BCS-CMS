@@ -96,7 +96,17 @@
   }
 
   /**
-    * Function used to display the site title
+    * Function used to display the page subtitle.
+  */
+  function the_subtitle(){
+    global $the_page;
+    if(isset($the_page)){
+      print $the_page->subtitle;
+    }
+  }
+
+  /**
+    * Function used to display the page title
   */
   function the_title(){
     global $the_page;

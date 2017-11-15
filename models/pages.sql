@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS Pages (
   ID INT AUTO_INCREMENT,
   Title TEXT,
+  Subtitle TEXT,
   Content TEXT,
   Created DATE,
   Updated DATE,

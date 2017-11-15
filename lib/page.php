@@ -18,6 +18,7 @@
     public $id;
     public $exists;
     public $is_homepage;
+    public $subtitle;
     public $is_dummy = false;
     public $feature_image;
     public $template;
@@ -53,6 +54,7 @@
             $this->created = $result['Created'];
             $this->uri = $result['URI'];
             $this->updated = $result['Updated'];
+            $this->subtitle = $result['Subtitle'];
             $this->id = $id;
             $this->exists = true;
             $this->feature_image = $result['Feature_Image'];
@@ -272,12 +274,13 @@
       $db = $db->get();
       try{
         $query = $db->prepare("UPDATE Pages SET Title = :title, Content = :content, Template = :template, Updated = :updated
-        WHERE ID = '$this->id'; ");
+        ,Subtitle = :subtitle WHERE ID = '$this->id'; ");
         $query->execute(array(
           ':title' => $this->title,
           ':content' => $this->content,
           ':template' => $this->template,
-          ':updated' => 'now()'
+          ':updated' => 'now()',
+          ':subtitle' => $this->subtitle
         ));
       }
       catch(PDOException $e){
@@ -361,7 +364,7 @@
         $page->set_seo('og:image', '');
         $page->set_seo('og:image:width', '310');
         $page->set_seo('og:image:height', '310');
-        
+
         // Check if we should add the new page to the navbar.
         if(Settings::get('navbar-auto-add-pages') == 'true'){
             Nav::add_item(
