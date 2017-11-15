@@ -35,6 +35,7 @@
                       <?php print $post["Title"]; ?>
                   </a>
             <?php endforeach; ?>
+            <?php has_posts(); ?>
           </div>
         </div>
       </div>

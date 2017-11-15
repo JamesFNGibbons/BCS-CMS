@@ -140,15 +140,21 @@
     * @return $have_posts;
   */
   function has_posts(){
-    $posts = Posts::get_posts();
-    if(count($posts) > 0){
-      $have_posts = true;
+    if(count(Post::get_posts()) > 0){
+      return true;
     }
     else{
-      $have_posts = false;
+      return false;
     }
 
     return $have_posts;
+  }
+
+  /**
+    * Alias function to allow wp themes to work.
+  */
+  function have_posts(){
+    return has_posts();
   }
 
   /**
