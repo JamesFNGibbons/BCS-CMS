@@ -19,7 +19,7 @@
       <div class='col-md-9'>
         <input class='form-control input-lg' name='title' value='<?php print $post->title; ?>'>
         <br>
-        <textarea style='height: 300px;' name='content' class='form-control editor'>
+        <textarea style='height: 300px;' name='content' id='editor' class='form-control editor'>
           <?php print $post->content; ?>
         </textarea>
       </div>

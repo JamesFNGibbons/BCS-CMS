@@ -32,7 +32,7 @@
           </div>
         </div>
         <br>
-        <textarea style='min-height: 300px;' name='content' class='form-control editor'>
+        <textarea style='min-height: 300px;' name='content' class='form-control editor' id='editor'>
           <?php print $page->content; ?>
         </textarea>
       </div>

@@ -5,23 +5,11 @@
     <link rel='stylesheet' type='text/css' href='../dist/font-awesome/css/font-awesome.min.css'>
     <link rel='stylesheet' type='text/css' href='css/admin-branding.css'>
 
-    <!-- Include the summernote text editor -->
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js'></script>
     <script src='../dist/bootstrap/bootstrap.min.js'></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-alpha.2/classic/ckeditor.js"></script>
-    <script>
-      $(function(){
-        var editor = ClassicEditor
-          .create( document.querySelector( 'textarea' ))
-          .catch( error => {
-              console.error( error );
-          });
-      });
-    </script>
+    <script src="../dist/ckeditor/ckeditor.js"></script>
+    <?php get_core_js('ckeditor.js'); ?>
   </head>
   <body>
     <nav class='navbar navbar-custom'>
