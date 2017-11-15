@@ -17,6 +17,14 @@
   else{
     $has_pages = false;
   }
+  
+  // Check if the page will be auto added to the nav
+  if(Settings::get('navbar-auto-add-pages') == 'true'){
+      $nav_auto_add = true;
+  }
+  else{
+      $nav_auto_add = false;
+  }
 
   // Check if we are to delete a page
   if(isset($_GET['delete'])){

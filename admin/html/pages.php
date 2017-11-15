@@ -73,6 +73,11 @@
                 <input type='submit' class='btn btn-primary form-control' value='Save Page'>
               </div>
             </form>
+            <?php if($nav_auto_add): ?>
+                <p><i>This page will be added to the navbar automatically.</i> 
+                 <a href='navigation.php'>Change</a>
+                </p>
+            <?php endif; ?>
           </div>
         </div>
       </div>
