@@ -127,6 +127,15 @@
   }
 
   /**
+    * Function used to return the latest post.
+    * @return $post
+  */
+  function get_latest_post(){
+    $post = Post::get_latest_post();
+    return $post;
+  }
+
+  /**
    * Function used to render the navigation items for a bootstrap navbar.
   */
   function the_bootstrap_nav($open_tag = '<ul class="nav navbar-nav">', $close_tag = "</ul>"){
