@@ -12,7 +12,7 @@
   // Check if we need to delete a file
   if(isset($_POST['action']) && $_POST['action'] == 'delete'){
     Media::delete_file($_POST['file_id']);
-    header('Location: media.php');
+    redirect('media.php');
   }
 
   // Check if we need to upload a file
@@ -23,10 +23,10 @@
       // Check if a return path was sent
       if(isset($_POST['return'])){
         $return = $_POST['return'];
-        header("Location: $return");
+        redirect("$return");
       }
       else{
-        header('Location: media.php');
+        redirect('media.php');
       }
     }
     else{

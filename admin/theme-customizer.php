@@ -35,7 +35,7 @@ if(isset($_GET['section'])){
     if(isset($_POST['action']) && $_POST['action'] == 'update'){
       $title = $_POST['title'];
       Settings::set('title', $title);
-      header('Location: theme-customizer.php?saved');
+      redirect('theme-customizer.php?saved');
     }
 
     /**
@@ -51,7 +51,7 @@ if(isset($_GET['section'])){
     // Update the logo if it is changed by the customizer
     if(isset($_GET['selected_media'])){
       Settings::set('branding-logo', $_GET['selected_media']);
-      header('Location: theme-customizer.php?section=branding');
+      redirect('theme-customizer.php?section=branding');
     }
 
     $section_title = 'Website Branding';
@@ -96,13 +96,13 @@ if(isset($_GET['section'])){
       }
 
       // Redirect the user back to the options page
-      header("Location: theme-customizer.php?section=$section&saved");
+      redirect("theme-customizer.php?section=$section&saved");
     }
 
     // Handle an image control being submitted
     if(isset($_GET['selected_media']) && isset($_GET['option'])){
       Customizer::update_option($_GET['option'], $_GET['selected_media']);
-      header("Location: theme-customizer.php?section=$section");
+      redirect("theme-customizer.php?section=$section");
     }
   }
 }

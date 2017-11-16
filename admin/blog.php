@@ -23,7 +23,7 @@
     $post->delete();
 
     // Redirect the user back to the blog posts page.
-    header('Location: blog.php');
+    redirect('blog.php');
   }
 
   else if(isset($_POST['action'])){
@@ -36,7 +36,7 @@
           $_SESSION['username']
         );
 
-        header("Location: edit-post.php?post_id=$new_post_id");
+        redirect("edit-post.php?post_id=$new_post_id");
       break;
     }
   }

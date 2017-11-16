@@ -16,7 +16,7 @@
   if(is_loggedin()){
     // Check if a forced update is required
     if(Settings::get('force-update') == 'true'){
-      header('Location: update.php');
+      redirect('update.php');
     }
 
     // Check if the version has recently been updated
@@ -67,7 +67,7 @@
       if($user->login_is_valid){
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $user->get_username();
-        header('Location: index.php');
+        redirect('index.php');
       }
       else{
         $login_error = true;

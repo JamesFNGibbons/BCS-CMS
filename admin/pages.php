@@ -17,7 +17,7 @@
   else{
     $has_pages = false;
   }
-  
+
   // Check if the page will be auto added to the nav
   if(Settings::get('navbar-auto-add-pages') == 'true'){
       $nav_auto_add = true;
@@ -32,7 +32,7 @@
     $page = new Page($page_id);
     if($page->exists){
       $page->delete();
-      header('Location: pages.php');
+      redirect('pages.php');
     }
     else{
       die('Error. The page does not exist.');
@@ -63,10 +63,10 @@
 
     // Redirect the user to the page editor or display the error.
     if($created !== false){
-      header('Location: edit-page.php?id=' . $created);
+      redirect('edit-page.php?id=' . $created);
     }
     else{
-      header('Location: pages.php?create_error');
+      redirect('pages.php?create_error');
     }
   }
   else{

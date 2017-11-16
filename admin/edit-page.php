@@ -23,7 +23,7 @@
       $page->feature_image = $_GET['selected_media'];
       $page->update();
       $id = $_GET['id'];
-      header("Location: edit-page.php?id=$id");
+      redirect("edit-page.php?id=$id");
     }
     else {
       include("html/modals/select-media.php");
@@ -65,9 +65,9 @@
       $page->subtitle = $_POST['subtitle'];
       $page->update();
 
-      header("Location: edit-page.php?id=$page->id");
+      redirect("edit-page.php?id=$page->id");
     }
     else{
-      header('Location: index.php');
+      redirect('index.php');
     }
   }

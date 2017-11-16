@@ -8,5 +8,5 @@
  if(is_loggedin()){
    $_SESSION['username'] = null;
    $_SESSION['loggedin'] = false;
-   header('Location: index.php');
+   redirect('index.php');
  }

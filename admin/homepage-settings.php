@@ -48,7 +48,7 @@
 
       Settings::set("display-homepage-section-$value_name", $value_value);
       Settings::set("homepage-last-updated", date());
-      header('Location: homepage-settings.php');
+      redirect('homepage-settings.php');
     }
   }
   else{

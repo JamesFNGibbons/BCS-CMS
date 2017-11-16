@@ -43,7 +43,7 @@
         $_POST['password']
       );
       // Reload the page
-      header('Location: users.php');
+      redirect('users.php');
     }
   }
 

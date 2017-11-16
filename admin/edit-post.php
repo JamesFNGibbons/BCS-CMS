@@ -12,7 +12,7 @@
     $post->update();
 
     // Reload the post editor.
-    header("Location: edit-post.php?post_id=$post->id");
+    redirect("edit-post.php?post_id=$post->id");
   }
 
   if(isset($_POST['action']) && $_POST['action'] == 'update'){
@@ -21,7 +21,7 @@
     $post->content = $_POST['content'];
     $post->update();
 
-    header('Location: blog.php');
+    redirect('blog.php');
   }
   else{
     if(isset($_GET['post_id'])){
@@ -35,6 +35,6 @@
       require_once "html/edit-post.php";
     }
     else{
-      header('Location: blog.php?no_id_given');
+      redirect('blog.php?no_id_given');
     }
   }

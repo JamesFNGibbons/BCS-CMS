@@ -62,7 +62,7 @@
           $parent = null;
         }
         Nav::add_item(array("Type" => 'link'), $_POST['title'], $_POST['link'], $parent);
-        header('Location: navigation.php');
+        redirect('navigation.php');
       break;
       case('update'):
         if(isset($_POST['title']) && isset($_POST['link']) && isset($_POST['id'])){
@@ -72,7 +72,7 @@
             $_POST['link'],
             $_POST['parent']
           );
-          header('Location: navigation.php');
+          redirect('navigation.php');
         }
         else{
           die('Invalid request to update nav item.');
@@ -81,7 +81,7 @@
       case('delete'):
         if(isset($_POST['id'])){
           Nav::remove_item($_POST['id']);
-          header('Location: navigation.php');
+          redirect('navigation.php');
         }
         else{
           die('Invalid ID submitted.');
@@ -100,20 +100,20 @@
             $page->uri,
             null
           );
-          header('Location: navigation.php');
+          redirect('navigation.php');
         }
       break;
       case('update_priority'):
         if(isset($_POST['id']) && isset($_POST['priority'])){
           Nav::set_item_priority($_POST['id'], $_POST['priority']);
-          header('Location: navigation.php');
+          redirect('navigation.php');
         }
       break;
       case('update-autoadd-setting'):
         if(isset($_POST['auto_add_pages'])){
           Settings::set('navbar-auto-add-pages', $_POST['auto_add_pages']);
         }
-        header('Location: navigation.php');
+        redirect('navigation.php');
       break;
       default:
         die('Unknown request - ' . $_POST['action']);

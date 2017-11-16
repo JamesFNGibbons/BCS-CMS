@@ -11,6 +11,16 @@
 		$_software_version = file_get_contents('../.version');
 	}
 
+	/**
+	  * Function used to redirect the user.
+		* @param $url The URL to redirect to.
+	*/
+	function redirect($url){
+		if(!empty($url)){
+			print "<script>window.location.assign('$url');</script>";
+		}
+	}
+
 	/** Start the session */
 	session_start();
 
@@ -95,14 +105,14 @@
 			Settings::set('force-update', 'true');
 		}
 	}
-	
+
 	if(Install::is_complete()){
 		// Load the plugins
 		global $plugin_manager;
 		$plugin_manager = new PluginManager();
 		$plugin_manager->load_plugins();
-	
+
 		// Load the option manager
 		global $option_manager;
-		$option_manager = new OptionManager();	
+		$option_manager = new OptionManager();
 	}

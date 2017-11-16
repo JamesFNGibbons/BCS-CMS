@@ -28,7 +28,7 @@
     }
 
     // Redirect the user back to the settings page
-    header('Location: setting.php');
+    redirect('setting.php');
   }
   else{
     // Check if any logo is selected
@@ -46,7 +46,7 @@
     if(isset($_GET['selected_media'])){
       $logo = $_GET['selected_media'];
       Settings::set('branding-logo', $logo);
-      header('Location: setting.php');
+      redirect('setting.php');
     }
 
     $select_media_action = 'setting.php';
