@@ -10,7 +10,6 @@
     foreach ($arr as $key=> $row) {
         $sort_col[$key] = $row[$col];
     }
-
     array_multisort($sort_col, $dir, $arr);
   }
 
@@ -34,8 +33,7 @@
       $db = null;
 
       // Sort the items based on their priority
-      array_sort_by_column($result, 'priority');
-
+      //array_sort_by_column($result, 'priority');
       return $result;
     }
 
@@ -47,23 +45,33 @@
     public static function get_nav_items(){
       // Get the navbar items.
       $items = array();
+      $child_items = array();
+
+      // Get the parent items.
       foreach(self::get_items() as $item){
-        if(empty($item['Parent'])){
+        if($item['Parent'] == '0'){
           array_push($items, $item);
         }
         else{
-          // Check if the parent item exists in the items array.
-          foreach($items as $parent_item){
-            if($item['Parent'] == $parent_item['ID']){
-              // Get the index of the item in the nav items array
-              $index = array_search($item, $items);
+          array_push($child_items, $item);
+        }
+      }
 
+      // Get the child items, and add them to the parents.\
+      foreach($items as $parent){
+        foreach($child_items as $child){
+          if(!empty($child['Parent']) && $child['Parent'] == $parent['ID']){
+            // Get the index of the item in the nav items array
+            $index = array_search($parent, $items);
+
+            if($index !== false){
               // Define the sub items array if is null
               if(empty($items[$index]['Sub_Items'])){
                 $items[$index]['Sub_Items'] = array();
               }
-              // Add the new item to the sub array.
-              array_push($items[$index]['Sub_Items'], $item);
+
+              // Add the child item to the sub array.
+              array_push($items[$index]['Sub_Items'], $child);
             }
           }
         }
