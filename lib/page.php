@@ -274,13 +274,14 @@
       $db = $db->get();
       try{
         $query = $db->prepare("UPDATE Pages SET Title = :title, Content = :content, Template = :template, Updated = :updated
-        ,Subtitle = :subtitle WHERE ID = '$this->id'; ");
+        ,Subtitle = :subtitle, Feature_Image = :feature_image WHERE ID = '$this->id'; ");
         $query->execute(array(
           ':title' => $this->title,
           ':content' => $this->content,
           ':template' => $this->template,
           ':updated' => 'now()',
-          ':subtitle' => $this->subtitle
+          ':subtitle' => $this->subtitle,
+          ':feature_image' => $this->feature_image
         ));
       }
       catch(PDOException $e){

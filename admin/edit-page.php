@@ -17,7 +17,17 @@
     // Load the media selector for the feature image.
     $select_media_action = 'edit-page.php';
     $select_media_param = 'id=' . $_GET['id'];
-    include("html/modals/select-media.php");
+
+    // Update the pages feature image if it is selected.
+    if(isset($_GET['selected_media'])){
+      $page->feature_image = $_GET['selected_media'];
+      $page->update();
+      $id = $_GET['id'];
+      header("Location: edit-page.php?id=$id");
+    }
+    else {
+      include("html/modals/select-media.php");
+    }
 
     // Load up the possible page templates
     $templates = array();
@@ -40,12 +50,6 @@
     // Check if there is a valid feature image
     if(empty($page->feature_image)){
       $no_feature_image = true;
-    }
-
-    // Update the pages feature image if it is selected.
-    if(isset($_GET['selected_media'])){
-      $page->feature_image = $_GET['selected_media'];
-      $page->update();
     }
 
     // Render the view
