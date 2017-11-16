@@ -161,6 +161,27 @@ $('.priotiry').change(function() {
                         <input type='text' name='link' value='<?php print $item["Link"]; ?>' class='form-control'>
                       </div>
                       <div class='form-group'>
+                        <lable>Parent Item</lable>
+                        <select name='parent' class='form-control'>
+                          <?php foreach($parent_items as $parent_item): ?>
+                            <?php if($item['Parent'] == $parent_item['ID']): ?>
+                              <option value='<?php print $parent_item["ID"]; ?>' selected>
+                                <?php print $parent_item["Title"]; ?>
+                              </option>
+                            <?php else: ?>
+                              <option value='<?php print $parent_item["ID"]; ?>'>
+                                <?php print $parent_item["Title"]; ?>
+                              </option>
+                            <?php endif; ?>
+                          <?php endforeach; ?>
+                          <?php if($parent_item['Parent'] == '0'): ?>
+                            <option value='0' selected='selected'>No Parent</option>
+                          <?php else: ?>
+                            <option value='0'>No Parent</option>
+                          <?php endif; ?>
+                        </select>
+                      </div>
+                      <div class='form-group'>
                         <input type='submit' class='btn btn-primary btn-sm pull-right' value='Save Changes'>
                       </div>
                     </form>
@@ -198,6 +219,27 @@ $('.priotiry').change(function() {
                             <div class='form-group'>
                               <lable>Link Href</lable>
                               <input type='text' name='link' value='<?php print $sub_item["Link"]; ?>' class='form-control'>
+                            </div>
+                            <div class='form-group'>
+                              <lable>Parent Item</lable>
+                              <select name='parent' class='form-control'>
+                                <?php foreach($parent_items as $parent_item): ?>
+                                  <?php if($sub_item['Parent'] == $parent_item['ID']): ?>
+                                    <option value='<?php print $parent_item["ID"]; ?>' selected>
+                                      <?php print $parent_item["Title"]; ?>
+                                    </option>
+                                  <?php else: ?>
+                                    <option value='<?php print $parent_item["ID"]; ?>'>
+                                      <?php print $parent_item["Title"]; ?>
+                                    </option>
+                                  <?php endif; ?>
+                                  <?php if($sub_item['Parent'] == '0'): ?>
+                                    <option value='0' selected='selected'>No Parent</option>
+                                  <?php else: ?>
+                                    <option value='0'>No Parent</option>
+                                  <?php endif; ?>
+                                <?php endforeach; ?>
+                              </select>
                             </div>
                             <div class='form-group'>
                               <input type='submit' class='btn btn-primary btn-sm pull-right' value='Save Changes'>

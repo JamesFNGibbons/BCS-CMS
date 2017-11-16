@@ -66,7 +66,12 @@
       break;
       case('update'):
         if(isset($_POST['title']) && isset($_POST['link']) && isset($_POST['id'])){
-          Nav::update_item($_POST['id'], $_POST['title'], $_POST['link']);
+          Nav::update_item(
+            $_POST['id'],
+            $_POST['title'],
+            $_POST['link'],
+            $_POST['parent']
+          );
           header('Location: navigation.php');
         }
         else{
