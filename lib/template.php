@@ -96,6 +96,16 @@
   }
 
   /**
+    * Function used to get the feature image of a page.
+  */
+  function the_feature_image(){
+    global $the_page;
+    if(isset($the_page)){
+      print $the_page->feature_image;
+    }
+  }
+
+  /**
     * Function used to display the page subtitle.
   */
   function the_subtitle(){
@@ -175,14 +185,9 @@
     * Function used to get the pages.
     * @return $the_pages
   */
-  function get_pages(){
-    $the_pages = Page::get_pages();
-    if(count($the_pages) > 0){
-      return $the_pages;
-    }
-    else {
-      return array();
-    }
+  function get_pages($limit = 0){
+    $the_pages = Page::get_pages($limit);
+    return $the_pages;
   }
 
   /**
