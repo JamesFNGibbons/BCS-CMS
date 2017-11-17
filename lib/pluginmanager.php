@@ -24,7 +24,10 @@
     */
     public static function get_plugin($plugin_name){
       if(self::is_loaded($plugin_name)){
+        global $plugin_manager;
         $the_plugin = null;
+
+        // Loop through the active plugins, and check if it is active.
         foreach($plugin_manager->active_plugins as $plugin){
           if($plugin['Info']->Name == $plugin_name){
             $the_plugin = $plugin['Plugin'];
@@ -65,20 +68,30 @@
       * Function used to load and activate the plugins.
     */
     public function load_plugins(){
+      // Load correct plugin directory
+      if(count(glob('../plugins/*')) > 0){
+        $plugin_dir = '../plugins/*';
+      }
+      else if(count(glob('plugins/*'))){
+        $plugin_dir = 'plugins/*';
+      }
+
       // Loop through the files in the plugin directory
-      foreach(glob('../plugins/*') as $file){
+      foreach(glob($plugin_dir) as $file){
         if(is_dir($file)){
+          // Remove the astricks from the plugin dir.
+          $plugin_dir = str_replace('*', '', $plugin_dir);
           $filename = basename($file);
 
           // Check if the plugin.php file exists;
-          if(file_exists('../plugins/' .$filename . "/plugin.php")){
-            if(file_exists("../plugins/$filename/plugin.json")){
+          if(file_exists($plugin_dir .$filename . "/plugin.php")){
+            if(file_exists($plugin_dir ."$filename/plugin.json")){
               // Get the main plugin className
-              $pluginInfo = file_get_contents("../plugins/$filename/plugin.json");
+              $pluginInfo = file_get_contents($plugin_dir ."$filename/plugin.json");
               $pluginInfo = json_decode($pluginInfo);
               $class_name = $pluginInfo->Main_Class;
 
-              require '../plugins/' .$filename . "/plugin.php";
+              require_once $plugin_dir .$filename . "/plugin.php";
 
               $plugin = new $class_name();
               if($plugin instanceof Plugin){

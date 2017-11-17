@@ -9,7 +9,7 @@
 <div class='container'>
   <div class='row'>
     <div class='col-md-7'>
-      <?php PluginManager::get_plugin('contact-form')->get_form(); ?>
+      <?php PluginManager::get_plugin('Contact Form Plugin')->get_form(); ?>
     </div>
     <div class='col-md-5'>
       <div class='panel panel-default'>

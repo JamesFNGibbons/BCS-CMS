@@ -23,13 +23,7 @@
           }
         }
         else{
-          // Check that the page template exists
-          if(file_exists("tempate/template-$template.php")){
-            require_once "template/templae-$template.php";
-          }
-          else{
-            die("The page template '$template' does not exist. <br> <a href='index.php'>Go Back</a>");
-          }
+          require_once "template/template-$template.php";
         }
       }
     }
