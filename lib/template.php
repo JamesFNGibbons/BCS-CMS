@@ -24,6 +24,11 @@
             $tag_name = $tag['Name'];
             $tag_value = $tag['Value'];
 
+            // Append the URL to the og:image
+            if($tag_name == 'og:image' && !empty($tag_value)){
+              $tag_value = Settings::get('url') . '/' . $tag_value;
+            }
+
             print "<meta name='$tag_name' value='$tag_value'>";
           }
         }
