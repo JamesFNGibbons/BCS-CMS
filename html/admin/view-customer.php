@@ -1,4 +1,4 @@
-<div class='col-md-9'>
+<div class='col-md-9' ng-app='app' ng-controller='view-customer'>
 	<div class='jumbotron'>
 		<div class='container'>
 			<h2>
@@ -41,26 +41,14 @@
 			</div>
 				<div class='panel panel-default'>
 				<div class='panel-heading'>
-					Customer information
+					Customer Statistics
 				</div>
 				<div class='panel-body'>
-					<form>
-						<div class='form-group'>
-							<lable>Name</lable>
-							<input class='form-control' value='<?php print $customer["Name"]; ?>' name='name'>
+					<div class='row'>
+						<div class='col-md-12'>
+							<div id="active_past" style="width: 100%;"></div>
 						</div>
-						<div class='form-group'>
-							<lable>Email</lable>
-							<input type='email' class='form-control' value='<?php print $customer["Email"]; ?>' name='email'>
-						</div>
-						<div class='form-group'>
-							<lable>Phone</lable>
-							<input type='phone' class='form-control' value='<?php print $customer["Phone"]; ?>' name='phone'>
-						</div>
-						<div class='form-group'>
-							<input type='submit' class='btn btn-primary pull-right' value='Save Changes'>
-						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -80,7 +68,8 @@
 										</div>
 										<div class='col-md-6'>
 											<br>
-											<button class='btn btn-primary btn-lg pull-right'>
+											<?php $id = $order['ID']; ?>
+											<button onclick='window.location.assign("plugin-view.php?action_id=devrepairs&p=view_order&id=<?php print $id; ?>")' class='btn btn-primary btn-lg pull-right'>
 												View Order
 												<i class='fa fa-search'></i>
 											</button>

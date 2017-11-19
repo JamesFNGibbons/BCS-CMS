@@ -224,6 +224,37 @@
           break;
 
           /**
+            * Used to get the customers orders.
+          */
+          case('get_customer_orders'):
+            if(isset($_GET['type'])){
+              $type = $_GET['type'];
+            }
+            else{
+              $type = 'active';
+            }
+            $customer = $_GET['customer'];
+
+            $db = new Db();
+            $db = $db->get();
+            try{
+              if($type == 'active'){
+                $query = $db->prepare("SELECT * FROM DR_Active_Orders WHERE Customer = $customer");
+              }
+              else{
+                $query = $db->prepare("SELECT * FROM DR_Past_Orders WHERE Customer = $customer");
+              }
+              $query->execute();
+              $result = $query->fetchAll();
+            }
+            catch(PDOException $e){
+              die($e->getMessage());
+            }
+
+            return json_encode($resuslt);
+          break;
+
+          /**
             * Used to delete a customer from the database.
           */
           case('delete_customer'):
@@ -253,6 +284,110 @@
     public function admin_view(){
       if(isset($_GET['p'])){
         switch($_GET['p']){
+          case('complete_order'):
+            $order_id = $_GET['id'];
+            $db = new Db();
+            $db = $db->get();
+            try{
+              // Get the order info.
+              $query = $db->prepare("SELECT * FROM DR_Active_Orders WHERE ID = $order_id");
+              $query->execute();
+              $result = $query->fetchAll();
+
+              if(count($result) > 0){
+                // Get the old order.
+                $order = $result[0];
+                $customer = $order['Customer'];
+                $make = $order['Make'];
+                $model = $order['Model'];
+                $item_desc = $oder['Item_Desc'];
+                $serial = $order['Serial_No'];
+                $password = $order['Password'];
+                $job_desc = $order['Job_Desc'];
+                $price_quoted = $order['Price_Quoted'];
+                $created = $order['Created'];
+
+                // Add the order back to the database.
+                $db->exec("INSERT INTO DR_Past_Orders (
+                  Customer,
+                  Make, 
+                  Model,
+                  Item_Desc,
+                  Serial_No,
+                  Password,
+                  Job_Desc,
+                  Price_Quoted,
+                  Created
+                ) VALUES (
+                  '$customer',
+                  '$make',
+                  '$model',
+                  '$item_desc',
+                  '$serial',
+                  '$password',
+                  '$job_desc',
+                  '$price_quoted',
+                  '$created'
+                );");
+
+                // Delete the old order from the database.
+                $db->exec("DELETE FROM DR_Past_Orders WHERE ID = $order_id");
+
+                // Redirect the user back home.
+                redirect('plugin-view.php?action_id=devrepairs');
+              }
+            }
+            catch(PDOException $e){
+              die($e->getMessage());
+            }
+          break;
+
+          case('delete_order'):
+            $id = $_GET['id'];
+            $db = new Db();
+            $db = $db->get();
+            try{
+              $db->exec("DELETE FROM DR_Active_Orders WHERE ID = $id");
+            }
+            catch(PDOException $e){
+              die($e->getMessage());
+            }
+
+            // Take the user back to the home screen.
+            redirect('plugin-view.php?action_id=devrepairs');
+          break;
+
+          case('view_order'):
+            if(isset($_GET['id'])){
+              // Get the order info from the database.
+              $id = $_GET['id'];
+
+              $db = new Db();
+              $db = $db->get();
+              try{
+                $query = $db->prepare("SELECT * FROM DR_Active_Orders WHERE ID = $id");
+                $query->execute();
+                $result = $query->fetchAll();
+
+                if(count($result) > 0){
+                  $order = $result[0];
+                }
+                else{
+                  die("Invalud order ID.");
+                }
+              }
+              catch(PDOException $e){
+                die($e->getMessage());
+              }
+
+              // Render the view.
+              $render = 'html/admin/view-order.php';
+            }
+            else{
+              die("Invalid ID.");
+            }
+          break;
+
           case('view_customer'):
             if(isset($_GET['id'])){
               $cust_id = $_GET['id'];

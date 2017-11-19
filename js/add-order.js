@@ -1,6 +1,6 @@
 angular.module('app').controller('add-order', function($scope, $http){
 	// Define the inital step
-	$scope.step = 3;
+	$scope.step = 1;
 	$scope.order = {};
 
 	$scope.next_step = function(){
@@ -22,8 +22,6 @@ angular.module('app').controller('add-order', function($scope, $http){
 							$scope.customer_added = false;
 						})
 					}, 3000);
-
-					$scope.step++;
 				}
 			});
 		}
@@ -34,19 +32,18 @@ angular.module('app').controller('add-order', function($scope, $http){
 				data = data.data;
 				if(data == '1'){
 					// Display the added customer alert.
-					$scope.device_added = true;
+					// Edit. Don't do this, for now.
+					$scope.device_added = false;
 					setTimeout(function(){
 						$scope.$apply(function(){
 							$scope.device_added = false;
 						})
 					}, 3000);
 				}
-			});
 
-			// Add the order to the database.
-			$http.get('plugin-api.php?api=add-order&plugin=Device Repair Order Manager&order=' + JSON.stringify($scope.order)).then(function(data){
-				data = data.data;
-				$scope.step++;
+				// Add the order to the database.
+				$http.get('plugin-api.php?api=add-order&plugin=Device Repair Order Manager&order=' + JSON.stringify($scope.order)).then(function(data){
+				});
 			});
 		}
 
