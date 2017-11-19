@@ -20,48 +20,57 @@
     </div>
   <?php endif; ?>
   <div class='row' ng-app='app' ng-controller='overview'>
-  <div class='col-md-4'>
-    <div class='well'>
-      <div class='row'>
-        <div class='col-md-12'>
-          <h1 style='margin: 0; padding: 0;'class='pull-left'><i class='fa fa-users'></i></h1>
-          <span class='pull-right'>
-            <h2 class='text-right' style='margin: 0; padding: 0;'>{{customers}}</h2>
-            <h4>Total Customers</h4>
-          </span>
+    <div class='col-md-4'>
+      <div class='well'>
+        <div class='row'>
+          <div class='col-md-12'>
+            <h1 style='margin: 0; padding: 0;'class='pull-left'><i class='fa fa-users'></i></h1>
+            <span class='pull-right'>
+              <h2 class='text-right' style='margin: 0; padding: 0;'>{{customers}}</h2>
+              <h4>Total Customers</h4>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='col-md-4'>
+      <div class='well'>
+        <div class='row'>
+          <div class='col-md-12'>
+            <h1 style='margin: 0; padding: 0;'class='pull-left'><i class='fa fa-mobile'></i></h1>
+            <span class='pull-right'>
+              <h2 class='text-right' style='margin: 0; padding: 0;'>{{customers}}</h2>
+              <h4>Devices Being Repaired</h4>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='col-md-4'>
+      <div class='well'>
+        <div class='row'>
+          <div class='col-md-12'>
+            <h1 style='margin: 0; padding: 0;'class='pull-left'><i class='fa fa-check'></i></h1>
+            <span class='pull-right'>
+              <h2 class='text-right' style='margin: 0; padding: 0;'>{{customers}}</h2>
+              <h4>Devices Repaired</h4>
+            </span>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class='col-md-4'>
-    <div class='well'>
-      <div class='row'>
-        <div class='col-md-12'>
-          <h1 style='margin: 0; padding: 0;'class='pull-left'><i class='fa fa-mobile'></i></h1>
-          <span class='pull-right'>
-            <h2 class='text-right' style='margin: 0; padding: 0;'>{{customers}}</h2>
-            <h4>Devices Being Repaired</h4>
-          </span>
-        </div>
-      </div>
-    </div>
+  <div class='well'>
+    <h3>
+      Book a new device in for repair
+      <a class='btn btn-primary pull-right' href='plugin-view.php?action_id=devrepairs&p=add-order'>
+        <i class='fa fa-plus'></i>
+        Add Order
+      </a>
+    </h3>
   </div>
-  <div class='col-md-4'>
-    <div class='well'>
-      <div class='row'>
-        <div class='col-md-12'>
-          <h1 style='margin: 0; padding: 0;'class='pull-left'><i class='fa fa-check'></i></h1>
-          <span class='pull-right'>
-            <h2 class='text-right' style='margin: 0; padding: 0;'>{{customers}}</h2>
-            <h4>Devices Repaired</h4>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
   <div class='row'>
-    <div class='col-md-7'>
+    <div class='col-md-8'>
       <div class='panel panel-default'>
         <div class='panel-heading'>Customers</div>
         <div class='panel-body'>
@@ -99,11 +108,25 @@
         </div>
       </div>
     </div>
-    <div class='col-md-5'>
+    <div class='col-md-4'>
       <div class='panel panel-default'>
         <div class='panel-heading'>Devices In For Repair</div>
         <div class='panel-body'>
-          
+          <table class='table table-default'>
+            <th>Device</th>
+            <th>Customer</th>
+            <th></th>
+            <tr ng-repeat='order in active_orders'>
+              <td>{{order.Make}} {{order.Model}}</td>
+              <td>{{get_customer(order.Customer).Name}}</td>
+              <td>
+                <a ng-href='plugin-view.php?action_id=devrepairs&p=view_order&id={{order.ID}}'>
+                  View
+                  <i class='fa fa-search'></i>
+                </a>
+              </td>
+            </tr>
+          </table>
         </div>
         <div class='panel-footer'>
           <div class='row'>

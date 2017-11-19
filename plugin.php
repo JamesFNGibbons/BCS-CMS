@@ -93,6 +93,24 @@
       if(isset($request)){
         switch($request){
           /**
+            * Function used to get the active orders from the db.
+          */
+          case('get-active-orders'):
+            $db = new Db();
+            $db = $db->get();
+            try{
+              $query = $db->prepare("SELECT * FROM DR_Active_Orders");
+              $query->execute();
+              $active_orders = $query->fetchAll();
+            }
+            catch(PDOException $e){
+              die($e->getMessage());
+            }
+
+            return json_encode($active_orders);
+          break; 
+
+          /**
             * Function used to add the order to the database.
           */
           case('add-order'):
@@ -284,6 +302,52 @@
     public function admin_view(){
       if(isset($_GET['p'])){
         switch($_GET['p']){
+          case('save_order'):
+            // Make sure all the params are sent.
+            $required = array(
+              "id",
+              "make",
+              "model",
+              "serial_no",
+              "password",
+              "job_desc",
+              "price_quoted"
+            );
+            foreach($required as $require){
+              if(!isset($_GET[$require])){
+                die("Error $require is not sent.");
+              }
+            }
+
+            $id = $_GET['id'];
+            $make = $_GET['make'];
+            $model = $_GET['model'];
+            $serial_no = $_GET['serial_no'];
+            $password = $_GET['password'];
+            $job_desc = $_GET['job_desc'];
+            $price_quoted = $_GET['price_quoted'];
+
+            // Update the values in the database.
+            $db = new Db();
+            $db = $db->get();
+            try{
+              $db->exec("UPDATE DR_Active_Orders SET
+                Make = '$make',
+                Model = '$model',
+                Serial_No = '$serial_no',
+                Password = '$password',
+                Job_Desc = '$job_desc',
+                Price_Quoted = '$price_quoted'
+              WHERE ID = $id;");
+            }
+            catch(PDOException $e){
+              die($e->getMessage());
+            }
+
+            // Redirect the user
+            redirect('plugin-view.php?action_id=devrepairs');
+          break;
+
           case('complete_order'):
             $order_id = $_GET['id'];
             $db = new Db();

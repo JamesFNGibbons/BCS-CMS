@@ -6,6 +6,12 @@
 				<p>Book a new device in for repair</p>
 			</div>
 		</div>
+		<div class='page-header'>
+			<a href='plugin-view.php?action_id=devrepairs'>
+				<i class='fa fa-arrow-left'></i>
+				Go Back
+			</a>
+		</div>
 		<?php if(isset($_GET['customer_exists'])): ?>
 			<div class='alert alert-warning'>
 				<b>Could not add customer</b>
