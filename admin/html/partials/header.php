@@ -10,6 +10,7 @@
     <script src='../dist/bootstrap/bootstrap.min.js'></script>
     <script src="../dist/ckeditor/ckeditor.js"></script>
     <?php get_core_js('ckeditor.js'); ?>
+    <?php the_plugin_js(); ?>
   </head>
   <body>
     <nav class='navbar navbar-custom'>

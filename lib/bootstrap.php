@@ -34,6 +34,8 @@
 	*/
 	require_once "auth-helpers.php";
 	require_once "adminsidebar.php";
+	require_once "dashwidgets.php";
+	require_once "jsloader.php";
 
 	/**
 	  * Allow php to use more memory

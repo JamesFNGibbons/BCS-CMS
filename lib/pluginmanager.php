@@ -103,6 +103,7 @@
                 ));
 
                 // Run the plugin
+                $plugin->plugin_dir = $plugin_dir.$filename."/";
                 $plugin->Run();
               }
               else{

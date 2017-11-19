@@ -23,6 +23,8 @@
       </div>
     </div>
   </div>
+  <!-- The plugin dashboard widgets -->
+  <?php the_dash_widgets(); ?>
   <div class='panel panel-default'>
     <div class='panel-heading'>Tools</div>
     <div class='panel-body'>
