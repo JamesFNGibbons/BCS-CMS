@@ -2,7 +2,7 @@
 
 require_once "../lib/bootstrap.php";
 require_once "html/partials/header.php";
-require_login();
+User::require_login();
 
 // Array of views to Render
 $to_render = array();

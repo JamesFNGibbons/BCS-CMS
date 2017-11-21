@@ -6,7 +6,7 @@
   */
 
   require_once '../lib/bootstrap.php';
-  require_login();
+  User::require_login();
 
   // Set the default software version if not set
   if(!Settings::get('software_version')){

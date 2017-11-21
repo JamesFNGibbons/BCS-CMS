@@ -8,7 +8,7 @@
   require_once '../lib/bootstrap.php';
   require_once 'html/partials/header.php';
   require_once 'html/partials/sidebar.php';
-  require_login();
+  User::require_login();
 
   // Check if the page is valid and get the data.
   if(isset($_GET['id'])){

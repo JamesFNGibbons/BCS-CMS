@@ -19,15 +19,20 @@
           <?php print Settings::get('title'); ?>
            :: <font color='white'>Website Studio</font>
         </a>
-        <?php if(is_loggedin()): ?>
-          <ul class='nav navbar-nav pull-right'>
-            <li>
-              <a href='logout.php'>
-                Logout
-                <i class='fa fa-exit'></i>
+        <ul class='nav navbar-nav pull-right'>
+          <?php if(is_loggedin()): ?>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle='dropdown' href="#">
+                <?php $user = new User($_SESSION['username']); ?>
+                <?php print $user->name; ?>
               </a>
+              <ul style="right:auto; left: auto;" class="dropdown-menu dropdown-menu-right">
+                 <li><a href='account.php'>Your Account</a></li>
+                 <li><a href='logout.php'>Logout</a></li>
+              </ul>
             </li>
-          </ul>
-        <?php endif; ?>
+          <?php endif; ?>
+        </ul>
+        </div>
       </div>
     </nav>

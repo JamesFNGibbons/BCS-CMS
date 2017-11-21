@@ -3,7 +3,7 @@
   require_once "../lib/bootstrap.php";
   require_once "html/partials/header.php";
   require_once "html/partials/sidebar.php";
-  require_login();
+  User::require_login();
 
   // Get the last time the homepage was updats
   $last_updated = Settings::get('homepage-last-updated');

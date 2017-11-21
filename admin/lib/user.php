@@ -10,10 +10,11 @@
 	class User {
 		public $login_is_valid;
 
-		private $name;
-		private $email;
-		private $username;
-		private $id;
+		public $name;
+		public $email;
+		public $username;
+		public $id;
+		public $password;
 
 		/**
 		  * Constructor used to setup the user object. It
@@ -49,6 +50,7 @@
 					$this->email = $result['Email'];
 					$this->username = $result['Username'];
 					$this->id = $result['ID'];
+					$this->password = $result['Password'];
 				}
 			}
 			else{
@@ -122,6 +124,32 @@
 				return false;
 			}
 		}
+
+		/**
+		 * Function used to require a login
+		*/
+		public static function require_login(){
+			if(empty($_SESSION['loggedin']) or $_SESSION['loggedin']){
+				redirect('index.php');
+			}
+		}
+
+		/**
+		 * Function used to update the user object in
+		 * the database.
+		*/
+		public function update(){
+			die('hello');
+			$db = new Db();
+			$db = $db->get();
+			try{
+				$db->exec("UPDATE Users SET Name = '$this->name', Email = '$this->email', Password = '$this->passwordd'");
+			}
+			catch(PDOException $e){
+				die($e->getMessage());
+			}
+		}
+
 
 		/**
 		  * Function used to get all the users

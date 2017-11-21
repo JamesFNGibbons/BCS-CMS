@@ -4,7 +4,7 @@
   require_once "../lib/media.php";
   require_once "html/partials/header.php";
   require_once "html/partials/sidebar.php";
-  require_login();
+  User::require_login();
 
   // Get the files stored in the database.
   $files = Media::get_files();

@@ -3,7 +3,7 @@
   require_once "../lib/bootstrap.php";
   require_once "html/partials/header.php";
   require_once "html/partials/sidebar.php";
-  require_login();
+  User::require_login();
 
   // Check if a page feature image has been selected.
   if(isset($_GET['selected_media'])){

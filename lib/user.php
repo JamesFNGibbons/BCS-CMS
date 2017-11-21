@@ -10,10 +10,10 @@
 	class User {
 		public $login_is_valid;
 
-		private $name;
-		private $email;
-		private $username;
-		private $id;
+		public $name;
+		public $email;
+		public $username;
+		public $id;
 
 		/**
 		  * Constructor used to setup the user object. It
@@ -26,6 +26,9 @@
 			if($password !== false){
 				$db = new Db();
 				$db = $db->get();
+
+				// Change the password to md5
+				$password = md5($password);
 
 				try{
 					$query = $db->prepare("SELECT * FROM Users WHERE Username = '$username' and Password = '$password'");
@@ -70,6 +73,7 @@
 					$this->name = $result['Name'];
 					$this->email = $result['Email'];
 					$this->username = $result['Username'];
+					$this->password = $result['Password'];
 					$this->id = $result['ID'];
 				}
 				else{
@@ -77,6 +81,22 @@
 				}
 			}
 		}
+
+      /**
+        * Function used to update the users info in the
+        * database.
+      */
+      public function update(){
+          $db = new Db();
+          $db = $db->get();
+          try{
+              $db->exec("UPDATE Users SET Name = '$this->name', Email = '$this->email', Password = '$this->password' WHERE ID = $this->id");
+          }
+          catch(PDOException $e){
+              die($e->getMessage());
+          }
+          $db = null;
+      }
 
 		/**
 		  * Function used to check if any given
@@ -122,6 +142,15 @@
 				return false;
 			}
 		}
+
+        /**
+          * Function used to redirect an unloggedin user.
+        */
+        public static function require_login(){
+            if(empty($_SESSION['loggedin']) || !$_SESSION['loggedin']){
+                redirect('index.php');
+            }
+        }
 
 		/**
 		  * Function used to get all the users

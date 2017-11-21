@@ -8,6 +8,12 @@
       "Type" => 'static-item'
     ),
     array(
+      "Title" => 'Your Account',
+      "Link" => 'account.php',
+      "Icon" => 'fa fa-user',
+      "Type" => 'static-item'
+    ),
+    array(
       "Title" => 'Media Center',
       "Link" => 'media.php',
       "Icon" => 'fa fa-file',

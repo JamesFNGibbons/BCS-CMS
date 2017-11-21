@@ -3,7 +3,7 @@
   require_once "../lib/bootstrap.php";
   require_once "html/partials/header.php";
   require_once "html/partials/sidebar.php";
-  require_login();
+  User::require_login();
 
   // Check if we need to update any of the settings.
   if(isset($_POST['action']) && $_POST['action'] = 'update'){

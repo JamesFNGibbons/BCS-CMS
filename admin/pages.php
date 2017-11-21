@@ -7,7 +7,7 @@
   require_once "../lib/bootstrap.php";
   require_once "html/partials/header.php";
   require_once "html/partials/sidebar.php";
-  require_login();
+  User::require_login();
 
   // Get the pages
   $pages = Page::get_pages();
