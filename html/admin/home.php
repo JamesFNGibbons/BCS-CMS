@@ -39,7 +39,7 @@
           <div class='col-md-12'>
             <h1 style='margin: 0; padding: 0;'class='pull-left'><i class='fa fa-mobile'></i></h1>
             <span class='pull-right'>
-              <h2 class='text-right' style='margin: 0; padding: 0;'>{{customers}}</h2>
+              <h2 class='text-right' style='margin: 0; padding: 0;'>{{active_orders_count}}</h2>
               <h4>Devices Being Repaired</h4>
             </span>
           </div>
@@ -63,11 +63,38 @@
   <div class='well'>
     <h3>
       Book a new device in for repair
-      <a class='btn btn-primary pull-right' href='plugin-view.php?action_id=devrepairs&p=add-order'>
+      <a class='btn btn-primary pull-right' href='plugin-view.php?action_id=devrepairs&p=add_order'>
         <i class='fa fa-plus'></i>
         Add Order
       </a>
     </h3>
+  </div>
+  <div class='well'>
+    <div class='row'>
+      <div class='col-md-1'>
+        <img width='100%
+        ' src='../plugins/device-tracker/img/scan.png'>
+      </div>
+      <div class='col-md-11'>
+        <div class='form-group'>
+          <h2 style='margin: 0; padding: 0;'>Scan barcode to get order</h2>
+          <form action='plugin-view.php'>
+            <input type='hidden' name='action_id' value='devrepairs'>
+            <input type='hidden' name='p' value='do_lookup'>
+            <input name='barcode' class='form-control input-lg' onchange='if(this.value != 0) { this.form.submit(); }' autofocus>
+          </form>
+        </div>
+      </div>
+      <?php if(isset($_GET['barcode-error'])): ?>
+        <div class='col-md-12'>
+          <div class='alert alert-danger'>
+            <i class='fa fa-times'></i>
+            No order with that barcode exists.
+            <a class='close' href='plugin-view.php?action_id=devrepairs'>&times;</a>
+          </div>
+        </div>
+      <?php endif; ?>
+    </div>
   </div>
   <div class='row'>
     <div class='col-md-8'>
@@ -91,7 +118,7 @@
               </td>
               <td>
                 <a ng-href='plugin-view.php?action_id=devrepairs&p=view_customer&id={{customer.ID}}'>
-                  View 
+                  View
                   <i class='fa fa-search'></i>
                 </a>
               </td>

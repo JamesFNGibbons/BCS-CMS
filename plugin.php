@@ -40,6 +40,7 @@
      $active_orders->add_column('Job_Desc', 'text');
      $active_orders->add_column('Price_Quoted', 'text');
      $active_orders->add_column('Created', 'date');
+     $active_orders->add_column('Barcode', 'text');
      $active_orders->create();
      $this->active_orders_table = $active_orders;
 
@@ -55,6 +56,7 @@
      $past_orders->add_column('Price_Quoted', 'text');
      $past_orders->add_column('Created', 'date');
      $past_orders->add_column('Completed', 'date');
+     $active_orders->add_column('Barcode', 'text');
      $past_orders->create();
      $this->active_orders_table = $past_orders;
 
@@ -72,6 +74,7 @@
      add_js('js/home.js', $this);
      add_js('js/add-order.js', $this);
      add_js('js/view-customer.js', $this);
+     add_js('js/view-order.js', $this);
 
      // Add the google charts libary.
      add_external_js('https://www.gstatic.com/charts/loader.js');
@@ -108,7 +111,7 @@
             }
 
             return json_encode($active_orders);
-          break; 
+          break;
 
           /**
             * Function used to add the order to the database.
@@ -123,6 +126,9 @@
             $description = $order->device->description;
             $price_quoted = $order->device->price_quoted;
 
+            // Generate the barcode
+            $barcode = str_pad(rand(0,'45'.round(microtime(true))),11, "0", STR_PAD_LEFT); ;
+
             // Add the new order to the database.
             $db = new Db();
             $db = $db->get();
@@ -135,7 +141,8 @@
                 Password,
                 Job_Desc,
                 Price_Quoted,
-                Created
+                Created,
+                Barcode
               ) VALUES (
                 '$order->customer',
                 '$serial',
@@ -144,7 +151,8 @@
                 '$passcode',
                 '$description',
                 '$price_quoted',
-                now()
+                now(),
+                '$barcode'
               );");
             }
             catch(PDOException $e){
@@ -207,7 +215,7 @@
             if(count($result) > 0){
               return "Email-Used";
             }
-            
+
             // Add the new customer to the database.
             try{
               $db->exec("INSERT INTO DR_Customers (Name, Email, Phone) VALUES (
@@ -302,6 +310,62 @@
     public function admin_view(){
       if(isset($_GET['p'])){
         switch($_GET['p']){
+          case('do_print_barcode'):
+            $id = $_GET['id'];
+
+            // Get the order information.
+            $db = new Db();
+            $db = $db->get();
+            try{
+              $query = $db->prepare("SELECT * FROM DR_Active_Orders WHERE ID = $id");
+              $query->execute();
+              $result = $query->fetchAll();
+            }
+            catch(PDOException $e){
+              die($e->getMessage());
+            }
+
+            // Check that the given ID is valid.
+            if(!count($result) > 0){
+              die('Invalid order ID given');
+            }
+
+            // Get the order iteself.
+            $the_order = $result[0];
+            $barcode = $the_order['Barcode'];
+
+            // Render the view (For the printer.)
+            $render = 'html/printable-barcode.php';
+          break;
+
+          case('do_lookup'):
+            if(isset($_GET['barcode'])){
+              $barcode = $_GET['barcode'];
+
+              // Check that the barcode exists
+              $db = new Db();
+              $db = $db->get();
+              try{
+                $query = $db->prepare("SELECT * FROM DR_Active_Orders WHERE Barcode = '$barcode'");
+                $query->execute();
+                $result = $query->fetchAll();
+              }
+              catch(PDOException $e){
+                die($e->getMessage());
+              }
+
+              if(count($result) > 0){
+                // Exists - take the user to the view order screen.
+                $order = $result[0];
+                redirect('plugin-view.php?action_id=devrepairs&p=view_order&id=' . $order["ID"]);
+              }
+              else{
+                // Does not exist.
+                redirect('plugin-view.php?action_id=devrepairs&barcode-error');
+              }
+            }
+          break;
+
           case('save_order'):
             // Make sure all the params are sent.
             $required = array(
@@ -374,7 +438,7 @@
                 // Add the order back to the database.
                 $db->exec("INSERT INTO DR_Past_Orders (
                   Customer,
-                  Make, 
+                  Make,
                   Model,
                   Item_Desc,
                   Serial_No,
@@ -572,7 +636,7 @@
         }
       }
       else{
-          $render = "html/admin/home.php";
+        $render = "html/admin/home.php";
       }
 
       // Render the view

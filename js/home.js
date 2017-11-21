@@ -7,7 +7,7 @@ angular.module('app').controller('home', function($scope, $http){
     });
 
     // Load the active orders.
-    $http.get('http://localhost/jas-cms/admin/plugin-api.php?api=get-active-orders&plugin=Device%20Repair%20Order%20Manager').then(function(data){
+    $http.get('plugin-api.php?api=get-active-orders&plugin=Device%20Repair%20Order%20Manager').then(function(data){
       data = data.data;
       $scope.active_orders = data;
     });
