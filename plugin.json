@@ -1,0 +1,7 @@
+{
+  "Name": "Device Repair Order Manager",
+  "Author": "Bespoke Computer Software",
+  "Author_Url": "http://bespokecomputersoftware.co.uk",
+  "Description": "Created For JAS Communications.",
+  "Main_Class": "Order_Tracker"
+}
