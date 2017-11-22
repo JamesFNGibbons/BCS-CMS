@@ -147,7 +147,7 @@
 					$_GET['name'],
 					$_GET['email'],
 					$_GET['username'],
-					$_GET['password']
+					md5($_GET['password'])
 				);
 
 				// Install Complete
