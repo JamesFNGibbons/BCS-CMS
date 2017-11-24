@@ -14,7 +14,7 @@
   </head>
   <body>
     <nav class='navbar navbar-custom'>
-      <div class='container'>
+      <div class='col-md-9 col-md-offset-2'>
         <a class='navbar-brand'>
           <?php print Settings::get('title'); ?>
            :: <font color='white'>Website Studio</font>

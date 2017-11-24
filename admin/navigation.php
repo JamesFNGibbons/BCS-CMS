@@ -7,23 +7,31 @@
 
   // Get the navbar items.
   $items = array();
-  foreach(Nav::get_items() as $item){
+  $nav_items = Nav::get_items();
+
+  for($i = 0; $i < count($nav_items); $i++){
+    global $item;
+    $item = $nav_items[$i];
+
     if(empty($item['Parent'])){
       array_push($items, $item);
     }
     else{
-      // Check if the parent item exists in the items array.
-      foreach($items as $parent_item){
-        if($item['Parent'] == $parent_item['ID']){
-          // Get the index of the item in the nav items array
-          $index = array_search($item, $items);
+      /**
+        * Check that the parent item exists in the array
+        * and add the child_item to the items Sub_Items array
+        * $x is the index of the item.
+      */
+      for($x = 0; $x < count($items); $x++){
+        $parent_item = $items[$x];
 
+        if($item['Parent'] == $parent_item['ID']){
           // Define the sub items array if is null
-          if(empty($items[$index]['Sub_Items'])){
-            $items[$index]['Sub_Items'] = array();
+          if(empty($items[$x]['Sub_Items'])){
+            $items[$x]['Sub_Items'] = array();
           }
           // Add the new item to the sub array.
-          array_push($items[$index]['Sub_Items'], $item);
+          array_push($items[$x]['Sub_Items'], $item);
         }
       }
     }
