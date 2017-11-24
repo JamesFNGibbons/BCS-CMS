@@ -131,6 +131,7 @@ $('.priotiry').change(function() {
                   <?php endif; ?>
                   <b><?php print $item['Title']; ?></b>
                   </span>
+                  <i class='fa fa-chevron-down pull-right'></i>
                 </div>
                 <div class='panel-body collapse <?php print $item["ID"]; ?>'>
                   <div class='row'>
@@ -206,6 +207,7 @@ $('.priotiry').change(function() {
                           Sub Item:
                           <b><?php print $sub_item['Title']; ?></b>
                         </span>
+                        <i class='fa fa-chevron-down pull-right'></i>
                       </div>
                       <div class='panel-body collapse <?php print $sub_item["ID"]; ?>'>
                         <div class='form-group'>
