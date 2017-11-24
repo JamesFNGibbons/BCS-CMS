@@ -23,7 +23,7 @@
       $db = new Db();
       $db = $db->get();
       try{
-        $query = $db->prepare("SELECT * FROM Nav_Items");
+        $query = $db->prepare("SELECT * FROM Nav_Items ORDER BY Priority");
         $query->execute();
         $result = $query->fetchAll();
       }
@@ -164,7 +164,7 @@
         $db = new Db();
         $db = $db->get();
         try{
-          $db->exec("UPDATE Nav_Items SET Priority = '$priority' WHERE ID = $item_id");
+          $db->exec("UPDATE Nav_Items SET Priority = $priority WHERE ID = $item_id");
         }
         catch(PDOException $e){
           die($e->getMessage());
