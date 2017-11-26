@@ -54,6 +54,17 @@
       return false;
     }
   }
+    
+  /**
+    * Function used to get a plugin class.
+    * @return $the_plugin The plugin's class.
+  */
+  function get_plugin($plugin_name){
+      $the_plugin = PluginManager::get_plugin($plugin_name);
+      if(!empty($the_plugin)){
+        return $the_plugin;
+      }    
+  }
 
   /**
     * Function used to render the logo

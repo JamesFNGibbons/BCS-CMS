@@ -143,14 +143,14 @@
 			}
 		}
 
-        /**
-          * Function used to redirect an unloggedin user.
-        */
-        public static function require_login(){
-            if(empty($_SESSION['loggedin']) || !$_SESSION['loggedin']){
-                redirect('index.php');
-            }
-        }
+    /**
+      * Function used to redirect an unloggedin user.
+    */
+    public static function require_login(){
+      if(empty($_SESSION['loggedin']) || !$_SESSION['loggedin']){
+          redirect('index.php');
+      }
+    }
 
 		/**
 		  * Function used to get all the users
@@ -248,6 +248,11 @@
 
 			if(count($query->fetchAll()) > 0){
 				return false;
+			}
+
+			// Check if the password is encrtypted
+			if(!strlen($password) == 32 && !ctype_xdigit($password)){
+				$password = md5($password);
 			}
 
 			// Add the new user to the database.
