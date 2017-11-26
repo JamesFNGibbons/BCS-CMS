@@ -54,7 +54,23 @@
       return false;
     }
   }
-    
+
+  /**
+    * Function used to check if a the current page
+    * is the homepage.
+  */
+  function is_home(){
+    global $the_page;
+    if(isset($the_page)){
+      if($the_page->is_dummy){
+          return true;
+      }
+      else{
+          return false;
+      }
+    }
+  }
+
   /**
     * Function used to get a plugin class.
     * @return $the_plugin The plugin's class.
