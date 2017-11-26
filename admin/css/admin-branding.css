@@ -16,9 +16,27 @@ html, body
   text-decoration: none;
 }
 
+/** 
+  * Prevent the content of a select media
+  * form group from spilling out if the file
+  * name is too large to fit.
+*/
+div.form-control span
+{
+    overflow: hidden;
+    max-width: calc(100% - 115px);
+    height: 100%;
+}
+
+
 .btn.btn-primary:hover {
   transition: all .3s linear;
   border-bottom: 5px solid;
+}
+
+.btn.btn-primary:focus
+{
+    border-style: none;
 }
 
 nav.navbar.navbar-custom

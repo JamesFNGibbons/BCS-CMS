@@ -1,4 +1,4 @@
-<div class='col-md-2 sidebar' ng-app='sidebar'>
+<div class='col-md-2 sidebar'>
   <div class='thumbnail'>
     <div class='list-group'>
       <?php foreach($admin_sidebar_items as $item): ?>
