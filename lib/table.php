@@ -67,6 +67,72 @@
             die("Cannot add a new column. The name and type must be set.");
         }
      }
+    
+    /**
+      * Function used to insert data into the table.
+      * @param $the_data The array of data to be inserted.
+    */
+    public function insert($the_data){
+      if(isset($the_data)){
+        die(var_dump($the_data));
+
+        // Only insert data for the rows that have been given.
+        $to_insert = array();
+        foreach($this->columns as $col){
+          if(isset($the_data[$col])){
+            array_push($to_insert, array(
+              "Name" => $col,
+              "Value" => $the_data[$col]
+            ));
+          }
+        }
+
+        // Generate the sql statment
+        $i = 0;
+        $sql = "INSERT INTO $this->name (";
+        foreach($to_insert as $col){
+          $col_name = $col['Name'];
+          $i++;
+
+          // Only add a comma to the end if not the last
+          if($i == (count($to_insert) - 1)){
+              $sql .= "$col_name"; 
+          }
+          else{
+            $sql .= "$col_name,";  
+          }
+        }
+       
+       // Add the values to the SQL statment.
+       $x = 0;
+       $sql .= ") VALUES (";
+       foreach($to_insert as $col){
+         $col_value = $col['Value'];
+         $x++;
+
+         // Add a comma to the end if not last
+         if($x == (count($to_insert) - 1)){
+           $sql .= "'$col_value'";
+         }
+         else{
+           $sql .= "'$col_value',";
+         }
+       }
+
+       // End the SQL statment
+       $sql .= ");";
+
+        // Run the SQL query to insert the data
+        $db = new Db();
+        $db = $db->get();
+        try{
+          $db->exec($sql);
+        }
+        catch(PDOException $e){
+          die($e->getMessage());
+        }
+      }
+    }
 
     /**
       * Function used to save the new table to the db.
