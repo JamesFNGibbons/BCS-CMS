@@ -18,11 +18,6 @@
        $table->add_column("Phone", 'text');
        $table->add_column("Website", 'text');
        $table->create();
-
-       $table->insert(array(
-        "Name" => "James Gibbons",
-        "Email" => 'jgibbons@icloud.com'
-       ));
     }
 
     /**
