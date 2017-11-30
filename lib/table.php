@@ -74,15 +74,13 @@
     */
     public function insert($the_data){
       if(isset($the_data)){
-        die(var_dump($the_data));
-
         // Only insert data for the rows that have been given.
         $to_insert = array();
         foreach($this->columns as $col){
-          if(isset($the_data[$col])){
+          if(isset($the_data[$col['Name']])){
             array_push($to_insert, array(
-              "Name" => $col,
-              "Value" => $the_data[$col]
+              "Name" => $col['Name'],
+              "Value" => $the_data[$col['Name']]
             ));
           }
         }
@@ -111,11 +109,11 @@
          $x++;
 
          // Add a comma to the end if not last
-         if($x == (count($to_insert) - 1)){
-           $sql .= "'$col_value'";
+         if($x == count($to_insert) - 1){
+           $sql .= "'$col_value',";
          }
          else{
-           $sql .= "'$col_value',";
+           $sql .= "'$col_value'";
          }
        }
 

@@ -3,7 +3,6 @@
     <div class='list-group'>
       <?php foreach($admin_sidebar_items as $item): ?>
         <?php if($item['Type'] == 'static-item'): ?>
-          <span ng-init='title = <?php print $item["Title"]; ?>'></span>
           <a href='<?php print $item ["Link"]; ?>' class='list-group-item'>
             <i class='<?php print $item["Icon"]; ?>'></i>
             <?php print $item['Title']; ?>

@@ -56,7 +56,10 @@
           <div class='panel-heading'>Feature Image</div>
           <div class='panel-body'>
             <div class='form-group'>
-              <lable>Site Logo</lable>
+              <?php if(!$no_feature_image): ?>
+                <img src='../<?php print $page->feature_image; ?>' width='100%'>
+              <?php endif; ?>
+              <lable>Select Media</lable>
               <div class='form-control' style='height: 43px;'>
                 <span style='line-height: 30px;' class='pull-left'>
                   <?php if(!$no_feature_image): ?>
