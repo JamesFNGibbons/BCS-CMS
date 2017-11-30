@@ -25,14 +25,16 @@ $('.priotiry').change(function() {
               <div class='panel-body'>
                 <table class='table'>
                   <?php foreach($unadded_pages as $page): ?>
-                    <td><?php print $page['Title']; ?></td>
-                    <td>
-                      <form method='post'>
-                        <input type='hidden' name='action' value='add_page'>
-                        <input type='hidden' name='id' value='<?php print $page["ID"]; ?>'>
-                        <input type='submit' class='btn btn-primary btn-sm pull-right' value='Add'>
-                      </form>
-                    </td>
+                    <tr>
+                      <td><?php print $page['Title']; ?></td>
+                      <td>
+                        <form method='post'>
+                          <input type='hidden' name='action' value='add_page'>
+                          <input type='hidden' name='id' value='<?php print $page["ID"]; ?>'>
+                          <input type='submit' class='btn btn-primary btn-sm pull-right' value='Add'>
+                        </form>
+                      </td>
+                    </tr>
                   <?php endforeach; ?>
                 </table>
                 <?php if(Settings::get('navbar-auto-add-pages')): ?>

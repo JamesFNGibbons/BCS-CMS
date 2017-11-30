@@ -44,9 +44,11 @@
           <div class='panel-body'>
             <div class='list-group'>
               <a class='list-group-item' target='_blank' href='../<?php print $page->uri; ?>'>
+                <i class='fa fa-mobile'></i>
                 View page
               </a>
               <a class='list-group-item' href='pages.php?delete=<?php print $page->id; ?>'>
+                <i class='fa fa-trash'></i> 
                 Delete Page
               </a>
             </div>
