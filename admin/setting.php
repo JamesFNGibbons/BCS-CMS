@@ -5,21 +5,23 @@
   require_once "html/partials/sidebar.php";
   User::require_login();
 
+  // Check if the website features have been disabled.
+  $disable_site = false;
+  if(Settings::get('site-disabled') == 'true'){
+    $disable_site = true;
+  }
+
   // Check if we need to update any of the settings.
   if(isset($_POST['action']) && $_POST['action'] = 'update'){
     // Check if all the required setting keys are present.
     $required = array(
       'title',
       'subtitle',
-      'logo'
+      'url',
+      'disable-website'
     );
     foreach($required as $require){
-      if(empty($_POST[$require])) die('Setting KEY ' . $required . 'Not Present');
-    }
-
-    // Check and update the logo
-    if(!$_POST['logo'] == 'No Image Selected'){
-      Settings::set('branding-logo', $_POST['Logo_Name']);
+      if(empty($_POST[$require])) die('Setting KEY ' . $require . 'Not Present');
     }
 
     // Update the database.

@@ -9,7 +9,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js'></script>
     <script src='../dist/bootstrap/bootstrap.min.js'></script>
     <script src="../dist/ckeditor/ckeditor.js"></script>
-    
+
     <?php get_core_js('ckeditor.js'); ?>
     <?php get_core_js('master.js'); ?>
     <?php get_core_js('add-page.js'); ?>
@@ -19,8 +19,9 @@
     <nav class='navbar navbar-custom'>
       <div class='col-md-9 col-md-offset-2'>
         <a class='navbar-brand'>
-          <?php print Settings::get('title'); ?>
-           :: <font color='white'>Website Studio</font>
+          <span class='pull-left'>
+            <img src='img/cp-logo.png' height='100%'>
+          </span>
         </a>
         <ul class='nav navbar-nav pull-right'>
           <?php if(is_loggedin()): ?>
