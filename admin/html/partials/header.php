@@ -9,6 +9,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js'></script>
     <script src='../dist/bootstrap/bootstrap.min.js'></script>
     <script src="../dist/ckeditor/ckeditor.js"></script>
+    
     <?php get_core_js('ckeditor.js'); ?>
     <?php get_core_js('master.js'); ?>
     <?php get_core_js('add-page.js'); ?>

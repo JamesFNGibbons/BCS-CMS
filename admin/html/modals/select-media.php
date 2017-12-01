@@ -6,7 +6,7 @@
       </div>
       <div class='modal-body'>
         <ul class="nav nav-tabs">
-          <?php if(!count(MediaFiles::get_files()) > 0): ?>
+          <?php if(count(MediaFiles::get_files()) > 0): ?>
             <li><a data-toggle="tab" href="#menu1">Upload Media</a></li>
             <li class='active'><a data-toggle="tab" href="#menu2">Select Media</a></li>
           <?php else: ?>
@@ -15,7 +15,11 @@
           <?php endif; ?>
         </ul>
         <div class="tab-content">
-          <div id="menu1" class="tab-pane fade">
+          <?php if(count(MediaFiles::get_files()) > 0): ?>
+            <div id="menu1" class="tab-pane fade">
+          <?php else: ?>
+            <div id="menu1" class="tab-pane fade in active">
+          <?php endif; ?>
             <div class='row'>
               <div class='col-md-6 col-md-offset-3'>
                 <div class='thumbnail'>
@@ -29,7 +33,11 @@
               </div>
             </div>
           </div>
-          <div id="menu2" class="tab-pane fade">
+          <?php if(count(MediaFiles::get_files()) > 0): ?>
+            <div id="menu2" class="tab-pane fade in active">
+          <?php else: ?>
+            <div id="menu2" class="tab-pane fade">
+          <?php endif; ?>
             <div class='row'>
               <?php foreach(MediaFiles::get_files() as $file): ?>
                 <?php if(isset($select_media_param)): ?>

@@ -43,9 +43,13 @@
           </div>
           <div class='panel-body'>
             <div class='list-group'>
+              <a class='list-group-item' href='preview.php?return=edit-page.php?id=<?php print $page->id; ?>&page=<?php print $page->id; ?>'>
+                <i class='fa fa-desktop'></i>
+                Preview Page
+              </a>
               <a class='list-group-item' target='_blank' href='../<?php print $page->uri; ?>'>
-                <i class='fa fa-mobile'></i>
-                View page
+                <i class='fa fa-arrows-alt'></i>
+                Visit page
               </a>
               <a class='list-group-item' href='pages.php?delete=<?php print $page->id; ?>'>
                 <i class='fa fa-trash'></i> 
