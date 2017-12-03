@@ -67,6 +67,8 @@
       if($user->login_is_valid){
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $user->get_username();
+        $user->record_login();
+
         redirect('index.php');
       }
       else{

@@ -6,10 +6,10 @@
   User::require_login();
 
   // Check if the website features have been disabled.
-  $disable_site = false;
   if(Settings::get('site-disabled') == 'true'){
     $disable_site = true;
   }
+  else $disable_site = false;
 
   // Check if we need to update any of the settings.
   if(isset($_POST['action']) && $_POST['action'] = 'update'){

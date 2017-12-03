@@ -60,6 +60,12 @@
       "Link" => 'setting.php',
       "Icon" => 'fa fa-gear',
       "Type" => 'static-item'
+    ),
+    array(
+      "Title" => 'License Info',
+      "Link" => 'license.php',
+      "Icon" => 'fa fa-pencil-square-o',
+      "Type" => 'static-item'
     )
   );
 

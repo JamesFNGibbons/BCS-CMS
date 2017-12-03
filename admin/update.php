@@ -14,6 +14,16 @@
   }
 
   /**
+    * Add the root user to the database,
+    * if there is none.
+  */
+  if(Settings::get('root-user') == false){
+    if(!empty($_SESSION['username'])){
+      Settings::set('root-user', $_SESSION['username']);
+    }
+  }
+
+  /**
 	  * Setup the default error reporting, if
 		* it has not already been set.
 	*/

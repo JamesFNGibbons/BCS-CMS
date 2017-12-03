@@ -7,6 +7,22 @@
       </span>
     </div>
   </div>
+  <?php if($access_denied): ?>
+    <div class='alert alert-danger'>
+      <i class='fa fa-times-circle'></i>
+      You cannot edit users. Only root user '<?php print $root_user; ?>'
+      can edit accounts.
+    </div>
+  <?php endif; ?>
+  <?php if($user_invalid): ?>
+    <div class='alert alert-danger'>
+      <i class='fa fa-times-circle'></i>
+      Could not edit user. Invalid request.
+      <a data-dismiss='alert' class='close'>
+        &times;
+      </a>
+    </div>
+  <?php endif; ?>
   <div class='row'>
     <div class='col-md-9'>
       <div class='panel panel-default'>
@@ -23,6 +39,17 @@
                 <td><?php print $user['Name']; ?></td>
                 <td><?php print $user['Username']; ?></td>
                 <td><?php print $user['Email']; ?></td>
+                <td>
+                  <?php if($user['Username'] == $_SESSION['username']): ?>
+                    <a href='account.php'>
+                      Your Account
+                    </a>
+                  <?php else: ?>
+                    <a href='edit-user.php?username=<?php print $user["Username"]; ?>'>
+                      Edit Account
+                    </a>
+                  <?php endif; ?>
+                </td>
               </tr>
             <?php endforeach; ?>
           </table>

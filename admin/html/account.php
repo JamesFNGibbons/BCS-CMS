@@ -5,6 +5,16 @@
             <p>Update / Change your account information.</p>
         </div>
     </div>
+    <?php if($user_edit_redirect): ?>
+      <div class='alert alert-warning'>
+        <i class='fa fa-info-circle'></i>
+        You have been redirected from the Users page, as you
+        own the account that you were trying to edit.
+        <a href='users.php'>
+          Go back
+        </a>
+      </div>
+    <?php endif; ?>
     <?php if($account_updated): ?>
       <div class='alert alert-success'>
         <i class='fa fa-check'></i>

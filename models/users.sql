@@ -7,3 +7,8 @@ CREATE TABLE IF NOT EXISTS Users (
 
 	PRIMARY KEY(ID)
 );
+
+/**
+  * Add the Last_Login column to the table.
+*/
+ALTER TABLE Users ADD Last_Login DATE; 

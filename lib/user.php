@@ -14,6 +14,8 @@
 		public $email;
 		public $username;
 		public $id;
+		public $exists;
+		public $last_login;
 
 		/**
 		  * Constructor used to setup the user object. It
@@ -52,6 +54,8 @@
 					$this->email = $result['Email'];
 					$this->username = $result['Username'];
 					$this->id = $result['ID'];
+					$this->exists = true;
+					$this->last_login = $result['Last_Login'];
 				}
 			}
 			else{
@@ -75,6 +79,8 @@
 					$this->username = $result['Username'];
 					$this->password = $result['Password'];
 					$this->id = $result['ID'];
+					$this->exists = true;
+					$this->last_login = $result['Last_Login'];
 				}
 				else{
 					die("Invalid user with username '$username'");
@@ -98,88 +104,112 @@
           $db = null;
       }
 
-		/**
-		  * Function used to check if any given
-			* usernames or emails are in use.
-			* @param $email The email
-			* @param $password The password;
-			* @return false - If not in use.
-			* @return 'email' if the email is in use;
-			* @return 'username' if the username is in use;
-		*/
-		public static function email_or_username_in_use($email, $username){
-			if(isset($email) && isset($username)){
-				$db = new Db();
-				$db = $db->get();
+      /**
+        * Function used to delete the user.
+      */
+      public function delete(){
+      	$db = new Db();
+      	$db = $db->get();
 
-				// Check if the email is in use.
-				try{
-					$query = $db->prepare("SELECT * FROM Users WHERE Email = '$email'");
-					$query->execute();
-				}
-				catch(PDOException $e){
-					die($e->getMessage());
-				}
-				$results = $query->fetchAll();
-				if(count($results) > 0){
-					return 'email';
-				}
+      }
 
-				// Check if the username is in use
-				try{
-					$query = $db->prepare("SELECT * FROM Users WHERE Username = '$username'");
-					$query->execute();
-				}
-				catch(PDOException $e){
-					die($e->getMessage());
-				}
-				$results = $query->fetchAll();
-				if(count($results) > 0){
-					return 'username';
-				}
-
-				// All is good. Return the default value.
-				return false;
-			}
+   	/**
+   	  * Register a new login session.
+   	*/
+   	public function record_login(){
+		$db = new Db();
+		$db = $db->get();
+		try{
+			$db->exec("UPDATE Users SET Last_Login = now() WHERE Username = '$this->username'");
 		}
+		catch(PDOException $e){
+			die($e->getMessage());
+		}
+   	}
+
+	/**
+	  * Function used to check if any given
+		* usernames or emails are in use.
+		* @param $email The email
+		* @param $password The password;
+		* @return false - If not in use.
+		* @return 'email' if the email is in use;
+		* @return 'username' if the username is in use;
+	*/
+	public static function email_or_username_in_use($email, $username){
+		if(isset($email) && isset($username)){
+			$db = new Db();
+			$db = $db->get();
+
+			// Check if the email is in use.
+			try{
+				$query = $db->prepare("SELECT * FROM Users WHERE Email = '$email'");
+				$query->execute();
+			}
+			catch(PDOException $e){
+				die($e->getMessage());
+			}
+			$results = $query->fetchAll();
+			if(count($results) > 0){
+				return 'email';
+			}
+
+			// Check if the username is in use
+			try{
+				$query = $db->prepare("SELECT * FROM Users WHERE Username = '$username'");
+				$query->execute();
+			}
+			catch(PDOException $e){
+				die($e->getMessage());
+			}
+			$results = $query->fetchAll();
+			if(count($results) > 0){
+				return 'username';
+			}
+
+			// All is good. Return the default value.
+			return false;
+		}
+	}
 
     /**
       * Function used to redirect an unloggedin user.
     */
     public static function require_login(){
       if(empty($_SESSION['loggedin']) || !$_SESSION['loggedin']){
-          redirect('index.php');
+      	redirect('index.php');
+      	exit;
       }
     }
 
-		/**
-		  * Function used to get all the users
-			* that have been created from the
-			* database, or it will return false if
-			* no users where found.
-		*/
-		public static function get_users(){
-			$db = new Db();
-			$db = $db->get();
+	/**
+	  * Function used to get all the users
+		* that have been created from the
+		* database, or it will return false if
+		* no users where found.
+	*/
+	public static function get_users(){
+		$db = new Db();
+		$db = $db->get();
 
-			try{
-				$query = $db->prepare("SELECT * FROM Users");
-				$query->execute();
-			}
-			catch(PDOException $e){
-				die($e->getMessage());
-			}
-
-			$result = $query->fetchAll();
-			if(count($result) > 0){
-				return $result;
-			}
-			else{
-				return false;
-			}
+		try{
+			$query = $db->prepare("SELECT * FROM Users");
+			$query->execute();
+		}
+		catch(PDOException $e){
+			die($e->getMessage());
 		}
 
-		/**
+		$result = $query->fetchAll();
+		if(count($result) > 0){
+			return $result;
+		}
+		else{
+			return false;
+		}
+	}
+
+	/**
       * Function used to get the ID of the user
 			* @return the users ID;
 		*/

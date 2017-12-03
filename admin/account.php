@@ -12,6 +12,7 @@
     $password_updated = isset($_GET['password-saved']);
     $account_updated = isset($_GET['changes-saved']);
     $password_error = isset($_GET['password-error']);
+    $user_edit_redirect = isset($_GET['user_edit_redirect']);
 
     // Check if there is an action to be completed.
     if(isset($_POST['action'])){

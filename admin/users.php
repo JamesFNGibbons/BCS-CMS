@@ -9,6 +9,10 @@
   require_once 'html/partials/sidebar.php';
   User::require_login();
 
+  // Check if there is an invalid_user error
+  $user_invalid = isset($_GET['user_invalid']);
+  $access_denied = isset($_GET['access_denied']);
+
   // Get the existing users
   $users = User::get_users();
   if($users){
